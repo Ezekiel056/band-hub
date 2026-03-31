@@ -18,10 +18,10 @@ services:
     image: mysql:8.0
     container_name: ${COMPOSE_PROJECT_NAME}_database
     environment:
-      MYSQL_DATABASE: appdata
-      MYSQL_USER: user
-      MYSQL_PASSWORD: userpassword
-      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
     volumes:
       - ./database/mysql:/var/lib/mysql
     healthcheck:
@@ -57,10 +57,10 @@ services:
     ports:
       - "8081:80"
     environment:
-      PMA_HOST: database
+      PMA_HOST: ${DB_HOST}
       PMA_PORT: 3306
-      PMA_USER: user
-      PMA_PASSWORD: userpassword
-      MYSQL_ROOT_PASSWORD: rootpassword
+      PMA_USER: ${DB_USER}
+      PMA_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
     depends_on:
       - database

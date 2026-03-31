@@ -7,6 +7,8 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: BackingTrackRepository::class)]
+#[ORM\Table(name: 'backing_tracks')]
+
 class BackingTrack
 {
     #[ORM\Id]

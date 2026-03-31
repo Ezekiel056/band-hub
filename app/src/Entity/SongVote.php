@@ -6,6 +6,7 @@ use App\Repository\SongVoteRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: SongVoteRepository::class)]
+#[ORM\Table(name: 'songs_votes')]
 class SongVote
 {
     #[ORM\Id]

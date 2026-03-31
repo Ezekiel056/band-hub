@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: SetlistModelRepository::class)]
+#[ORM\Table(name: 'setlists_models')]
 class SetlistModel
 {
     #[ORM\Id]

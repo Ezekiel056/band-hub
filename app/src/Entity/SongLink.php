@@ -6,6 +6,7 @@ use App\Repository\SongLinkRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: SongLinkRepository::class)]
+#[ORM\Table(name: 'songs_links')]
 class SongLink
 {
     #[ORM\Id]

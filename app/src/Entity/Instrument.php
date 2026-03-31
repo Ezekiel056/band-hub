@@ -6,6 +6,7 @@ use App\Repository\InstrumentRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: InstrumentRepository::class)]
+#[ORM\Table(name: 'instruments')]
 class Instrument
 {
     #[ORM\Id]

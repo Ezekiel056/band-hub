@@ -6,6 +6,7 @@ use App\Repository\IconRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: IconRepository::class)]
+#[ORM\Table(name: 'icons')]
 class Icon
 {
     #[ORM\Id]

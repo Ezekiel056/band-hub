@@ -6,6 +6,7 @@ use App\Repository\EventTypeRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: EventTypeRepository::class)]
+#[ORM\Table(name: 'events_types')]
 class EventType
 {
     #[ORM\Id]

@@ -6,6 +6,7 @@ use App\Repository\SongStatusRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: SongStatusRepository::class)]
+#[ORM\Table(name: 'songs_status')]
 class SongStatus
 {
     #[ORM\Id]

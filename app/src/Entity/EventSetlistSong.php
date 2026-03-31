@@ -7,6 +7,8 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: EventSetlistSongRepository::class)]
+#[ORM\Table(name: 'events_setlists_songs')]
+
 class EventSetlistSong
 {
     #[ORM\Id]
@@ -19,6 +21,7 @@ class EventSetlistSong
 
     #[ORM\ManyToOne(inversedBy: 'eventSetlistSongs')]
     #[ORM\JoinColumn(nullable: false)]
+
     private ?Song $song = null;
 
     #[ORM\ManyToOne(inversedBy: 'eventSetlistSongs')]

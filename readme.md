@@ -1,2 +1,10 @@
-## .env configuration : 
-DATABASE_URL="mysql://symfony:azerty@database/mabase?serverVersion=8.0.45&charset=utf8mb4"
+## Configuration du .env
+DB_HOST
+DB_USER
+DB_PASSWORD
+DB_ROOT_PASSWORD
+DB_NAME
+DB_VERSION
+
+DEFAULT_URI
+MAILER_DSN

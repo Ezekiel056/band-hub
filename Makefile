@@ -11,7 +11,7 @@ logs:
 	docker compose logs -f
 
 migration:
-	docker compose exec php bash -c "php bin/console make:migration"
+	docker compose --env-file app/.env.local exec php bash -c "php bin/console make:migration"
 
 migrate:
-	docker compose exec php bash -c "php bin/console doctrine:migrations:migrate --no-interaction"
+	docker compose --env-file app/.env.local exec php bash -c "php bin/console doctrine:migrations:migrate --no-interaction"

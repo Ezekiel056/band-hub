@@ -10,7 +10,6 @@ use App\Entity\Instrument;
 use App\Entity\Song;
 use App\Entity\SongStatus;
 use App\Entity\User;
-use App\Repository\SongStatusRepository;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -71,10 +70,6 @@ class AppFixtures extends Fixture
         }
 
 
-
-
-
-
         $song = new Song();
         $song->setArtist($artist);
         $song->setTitle('Time is running out');
@@ -84,7 +79,6 @@ class AppFixtures extends Fixture
         $song->setLyrics(simplexml_load_file('http://www.lipsum.com/feed/xml?amount=8&what=paras&start=0')->lipsum);
 
         $manager->persist($song);
-
 
 
         $insturmentsMap = [

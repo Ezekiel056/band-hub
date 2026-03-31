@@ -1,0 +1,76 @@
+:root {
+    --color-primary: #7650B3;
+    --color-primary-hover: #5A4CE0;
+    --color-primary-active: #4B3FD9;
+    --color-accent: #F06292;
+
+    --color-success: #4CAF50;
+    --color-info: #AAA0FF;
+    --color-warning: #FFC107;
+    --color-error: #F44336;
+
+    --color-background: #F5F6FA;
+    --color-surface: #DCD8EE;
+    --color-surface-alt: #FFFFFF;
+    --color-border: #C9C4E6;
+    --color-divider: #D6D1EC;
+
+    --color-text-primary: #29282F;
+    --color-text-secondary: #5D5982;
+    --color-text-muted: #B2AED4;
+    --color-text-inverse: #FFFFFF;
+    --color-text-emphasis: #FFFFFF;
+
+
+      /* Layout */
+      --background-color: var(--color-background);
+
+      /* Textes */
+      --label-color: var(--color-text-primary);
+      --text-color: var(--color-text-secondary);
+      --text-helpers-color: var(--color-text-muted);
+
+      /* Inputs */
+      --input-background-color: var(--color-surface-alt);
+      --input-border-color: var(--color-border);
+
+      /* Cards */
+      --card-background-color: var(--color-surface-alt);
+
+      /* Bouton primaire */
+      --button-background-color: var(--color-primary);
+      --button-text-color: var(--color-text-inverse);
+
+      /* Bouton secondaire */
+      --button-secondary-background-color: var(--color-surface-alt);
+      --button-secondary-color: var(--color-text-secondary);
+      --button-secondary-border-color: var(--color-border);
+
+}
+
+
+.dark {
+  /* Layout */
+  --background-color: #1A1829;
+
+  /* Textes */
+  --label-color: #FFFFFF;
+  --text-color: #B2AED4;
+  --text-helpers-color: #5D5982;
+
+  /* Inputs */
+  --input-background-color: #2A2640;
+  --input-border-color: #3D3860;
+
+  /* Cards */
+  --card-background-color: #231F38;
+
+  /* Bouton primaire */
+  --button-background-color: #7650B3;
+  --button-text-color: #FFFFFF;
+
+  /* Bouton secondaire */
+  --button-secondary-background-color: #2A2640;
+  --button-secondary-color: #B2AED4;
+  --button-secondary-border-color: #3D3860;
+}

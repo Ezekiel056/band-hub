@@ -30,6 +30,8 @@
 
 # database
 /database/
+# on autorise le dossier merise.
+!/database/merise/
 
 
 # PHPUnit

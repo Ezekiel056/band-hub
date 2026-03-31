@@ -73,6 +73,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->bandMembers = new ArrayCollection();
         $this->songVotes = new ArrayCollection();
         $this->transactions = new ArrayCollection();
+        $this->createdAt = new \DateTimeImmutable();
+        $this->is_active = true;
+
     }
 
     public function getId(): ?int

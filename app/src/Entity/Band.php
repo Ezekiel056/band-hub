@@ -59,6 +59,9 @@ class Band
         $this->artists = new ArrayCollection();
         $this->setlistModels = new ArrayCollection();
         $this->events = new ArrayCollection();
+
+        $this->createdAt = new \DateTimeImmutable();
+        $this->is_active = true;
     }
 
     public function getId(): ?int

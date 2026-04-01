@@ -14,33 +14,35 @@
   {% endblock %}
 
 </head>
-<body class="grid gap-5">
-  <header class="flex flex-col gap-5 h-auto p-8 items-center page-header">
-    <div class="flex flex-col gap-5 items-center max-w-3/4 text-center md:max-w-2xs" >
+<body >
+
+  <header class="flex flex-col gap-5 h-auto p-8 items-center page-header xl:col-span-2">
+    <div class="flex flex-col gap-5 items-center max-w-3/4 text-center md:max-w-2xs xl:w-6xl" >
       <img src="{{ asset('/images/brand-logo.png') }}" alt="BandHub logo" class="w-[94px]">
+      <p class="text-4xl text-white font-extrabold">Band <span class="font-light">Hub</span></p>
       <h1 class="text-white text-4xl">Gérez votre groupe simplement</h1>
       <p class="text-white text-2xl ">
         L'outil tout-en-un conçu pour les musiciens
       </p>
-
     </div>
-    <a class="button w-full my-20 md:w-3/4">
+    <a class="button w-full mt-28 mb-4 md:w-3/4 xl:w-xl">
       Commencez dès maintenant !
     </a>
   </header>
 
-  <section class="grid gap-8 px-4 md:grid-cols-2 md:px-10 md:mt-10">
+<main class="grid xl:grid-cols-[1fr_600px_600px_1fr] xl:my-5 xl:gap-x-5 xl:gap-y-10">
+  <section class="grid gap-8 px-4 md:grid-cols-2 md:px-10 md:mt-10 xl:mt-0 xl:gap-4 xl:px-0  xl:col-start-2 xl:col-end-3">
     {% for feature in features %}
       {{ include('home/_feature.html.twig') }}
     {% endfor %}
   </section>
 
-  <article class="flex flex-col gap-12 md:mt-10">
+  <article class="flex flex-col gap-12 md:mt-10 xl:col-span-4  xl:flex-col-reverse">
     <header class="h-[250px] p-5 flex flex-col justify-between items-center">
       <h2 class="text-white text-3xl text-center">Prêt à <br>nous rejoindre ?</h2>
-      <a class="button w-xl"  href="">Explorez les possibilités de Band Hub</a>
+      <a class="button w-full md:w-[320px]"  href="">Explorez les possibilités de Band Hub</a>
     </header>
-    <div class="flex flex-col gap-20 text-center pb-20">
+    <div class="flex flex-col gap-20 text-center pb-20 px-4">
       <p class="text-4xl text-black font-medium">Centralisez la gestion de votre groupe</p>
       <div class="flex flex-col gap-0.5 text-xl font-light">
         <p>Band Hub simplifie tout</p>
@@ -49,22 +51,23 @@
     </div>
   </article>
 
-  <section class="bg-white flex flex-col gap-20 p-12">
+  <section class="bg-white flex flex-col gap-20 p-4 md:p-12 xl:row-start-2 xl:col-span-4">
     <h2 class="text-black text-4xl font-medium text-center">Une communauté à nos cotés</h2>
-    <div class="flex flex-col gap-9">
+    <div class="flex flex-col gap-9 xl:flex-row xl:gap-5 xl:w-[1200px] xl:self-center">
       {% for testimonial in testimonials %}
         {{ include('home/_testimonial.html.twig') }}
       {% endfor %}
     </div>
   </section>
 
-  <article class="flex flex-col items-center gap-5 p-6 mx-4 rounded-3xl bg-(--color-primary) text-center md:gap-10">
-    <h2 class="text-white text-3xl font-medium md:max-w-1/2">Gérez votre groupe simplement, dès ajourd'hui</h2>
+  <article class="flex flex-col items-center gap-5 p-6 mx-4 rounded-3xl bg-(--color-primary) text-center md:gap-10 md:mx-12 xl:col-start-3 xl:col-end-4 xl:row-start-1 xl:mx-0 xl:gap-20">
+    <h2 class="text-white text-3xl font-medium md:max-w-1/2 xl:text-4xl xl:py-10">Gérez votre groupe simplement, dès ajourd'hui</h2>
     <p class="text-white font-light text-xl">
       Des centaines de groupes utilisent déjà Band HUB pour gagner du temps et mieux s’organiser au quotidien.
     </p>
-    <a class="button large w-full md:w-1/2" href="">Nous rejoindre</a>
+    <a class="button large w-full md:w-1/2 xl:!py-6 xl:!text-2xl" href="">Nous rejoindre</a>
   </article>
+</main>
 
 <footer class="px-2 mt-15">
   <h2 class="text-2xl mb-10 font-bold">Band Hub</h2>

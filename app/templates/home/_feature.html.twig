@@ -7,7 +7,7 @@
 {#</div>#}
 
 
-  <article class="card flex flex-col gap-3.5 items-center text-center {{ loop.last ? 'md:col-span-full' : '' }}">
+  <article class="card flex flex-col gap-3.5 items-center text-center {{ loop.last ? 'md:col-span-full' : '' }} xl:gap-0">
     <img class="w-16" src="{{ asset('/images/icons/' ~ feature.icon) }}" alt="logo">
     <h2 class="text-2xl">{{ feature.title }}</h2>
     <p class="text-lg font-light leading-tight">{{ feature.text}}</p>

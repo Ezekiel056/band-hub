@@ -1,1 +1,47 @@
 @import './globals.css';
+
+header {
+  background-image: url('../images/header.png');
+  background-position: center;
+  background-size: cover;
+}
+
+.button {
+  padding: 14px;
+  background-color: #fff;
+  color: var(--text-color);
+  border-radius: 24px;
+  text-align: center;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &.large {
+    font-size: 18px;
+    font-weight: 500;
+    padding: 10px;
+  }
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.25), 0 8px 24px 0 rgba(0, 0, 0, 0.22);
+  }
+
+  &:active {
+    transform: translateY(0px);
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.15), 0 3px 10px 0 rgba(0, 0, 0, 0.12);
+  }
+}
+
+
+.card {
+  background-color: var(--card-background-color);
+  border-radius: 16px;
+  padding: 10px;
+
+  width: 100%;
+  box-shadow: rgba(17, 17, 26, 0.15) 0px 6px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+}
+
+

@@ -1,0 +1,15 @@
+{#<div class="grid gap-7 px-6">#}
+{#  <article class="card flex flex-col gap-3.5 items-center text-center">#}
+{#    <img class="w-16" src="{{ asset('/images/icons/organisez.png') }}" alt="logo">#}
+{#    <h2 class="text-2xl">Organisez</h2>#}
+{#    <p class="text-lg font-light">Créez et partagez votre répertoire avec tous les moembres de votre groupe. Soyez toujours prêt à jouer, en toutes circonstances</p>#}
+{#  </article>#}
+{#</div>#}
+
+
+  <article class="card flex flex-col gap-3.5 items-center text-center">
+    <img class="w-16" src="{{ asset('/images/icons/' ~ feature.icon) }}" alt="logo">
+    <h2 class="text-2xl">{{ feature.title }}</h2>
+    <p class="text-lg font-light leading-tight">{{ feature.text}}</p>
+  </article>
+

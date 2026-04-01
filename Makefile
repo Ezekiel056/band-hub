@@ -15,3 +15,6 @@ migration:
 
 migrate:
 	docker compose --env-file app/.env.local exec php bash -c "php bin/console doctrine:migrations:migrate --no-interaction"
+
+tailwind:
+	docker compose --env-file app/.env.local exec php bash -c "php bin/console tailwind:build --watch"

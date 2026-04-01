@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
 :root {
     --color-primary: #7650B3;
     --color-primary-hover: #5A4CE0;
@@ -47,6 +49,13 @@
       --button-secondary-border-color: var(--color-border);
 
 }
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 
 
 .dark {

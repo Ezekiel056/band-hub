@@ -16,21 +16,22 @@
 </head>
 <body >
 
-  <header class="flex flex-col gap-5 h-auto p-8 items-center page-header xl:col-span-2">
-    <div class="flex flex-col gap-5 items-center max-w-3/4 text-center md:max-w-2xs xl:w-6xl" >
+  <header class="grid p-8 text-center xl:grid-cols-[1fr_590px_590px_1fr]">
+    <div class="flex flex-col gap-5 items-center xl:col-start-2 xl:col-span-1" >
       <img src="{{ asset('/images/brand-logo.png') }}" alt="BandHub logo" class="w-[94px]">
       <p class="text-4xl text-white font-extrabold">Band <span class="font-light">Hub</span></p>
       <h1 class="text-white text-4xl">Gérez votre groupe simplement</h1>
       <p class="text-white text-2xl ">
         L'outil tout-en-un conçu pour les musiciens
       </p>
+      <a class="button w-full mt-28 mb-4 md:w-3/4 xl:w-xl">
+        Commencez dès maintenant !
+      </a>
     </div>
-    <a class="button w-full mt-28 mb-4 md:w-3/4 xl:w-xl">
-      Commencez dès maintenant !
-    </a>
+
   </header>
 
-<main class="grid xl:grid-cols-[1fr_600px_600px_1fr] xl:my-5 xl:gap-x-5 xl:gap-y-10">
+<main class="grid my-10 gap-y-10 xl:grid-cols-[1fr_590px_590px_1fr]  xl:gap-x-5 xl:gap-y-10">
   <section class="grid gap-8 px-4 md:grid-cols-2 md:px-10 md:mt-10 xl:mt-0 xl:gap-4 xl:px-0  xl:col-start-2 xl:col-end-3">
     {% for feature in features %}
       {{ include('home/_feature.html.twig') }}
@@ -38,22 +39,22 @@
   </section>
 
   <article class="flex flex-col gap-12 md:mt-10 xl:col-span-4  xl:flex-col-reverse">
-    <header class="h-[250px] p-5 flex flex-col justify-between items-center">
+    <header class="flex flex-col justify-between items-center gap-20 px-5 py-10">
       <h2 class="text-white text-3xl text-center">Prêt à <br>nous rejoindre ?</h2>
       <a class="button w-full md:w-[320px]"  href="">Explorez les possibilités de Band Hub</a>
     </header>
-    <div class="flex flex-col gap-20 text-center pb-20 px-4">
+    <div class="flex flex-col gap-20 text-center py-10 px-4">
       <p class="text-4xl text-black font-medium">Centralisez la gestion de votre groupe</p>
-      <div class="flex flex-col gap-0.5 text-xl font-light">
+      <div class="flex flex-col gap-0.5 text-xl font-light xl:text-3xl">
         <p>Band Hub simplifie tout</p>
         <p>En un seul outil</p>
       </div>
     </div>
   </article>
 
-  <section class="bg-white flex flex-col gap-20 p-4 md:p-12 xl:row-start-2 xl:col-span-4">
+  <section class="bg-white flex flex-col items-center gap-20 p-4 md:p-12 xl:p-20 xl:row-start-2 xl:col-span-4">
     <h2 class="text-black text-4xl font-medium text-center">Une communauté à nos cotés</h2>
-    <div class="flex flex-col gap-9 xl:flex-row xl:gap-5 xl:w-[1200px] xl:self-center">
+    <div class="flex flex-col gap-9 w-full xl:flex-row xl:justify-between xl:w-[1200px] xl:self-center xl:w-[1200]">
       {% for testimonial in testimonials %}
         {{ include('home/_testimonial.html.twig') }}
       {% endfor %}
@@ -69,10 +70,10 @@
   </article>
 </main>
 
-<footer class="px-2 mt-15">
+<footer class="px-2 my-15 md:px-12">
   <h2 class="text-2xl mb-10 font-bold">Band Hub</h2>
   <nav class="mb-5">
-    <ul class="text-2xl font-light md:flex md:gap-10">
+    <ul class="flex flex-col gap-2 text-2xl font-light md:flex-row md:gap-10">
       <li><a href="">Fonctionnalités</a></li>
       <li><a href="">Tarifs</a></li>
       <li><a href="">Vie privées</a></li>
@@ -80,12 +81,12 @@
     </ul>
   </nav>
 
-  <nav>
+  <nav class="mb-10">
     <ul class="flex gap-10 justify-center items-center text-gray-500 text-4xl">
-      <li title="Youtube"><a href=""><i class="fa-brands fa-youtube"></i></a></li>
-      <li title="Facebook"><a href=""><i class="fa-brands fa-square-facebook"></i></a></li>
-      <li title="discord"><a href=""><i class="fa-brands fa-discord"></i></a></li>
-      <li title="X - tweeter"><a href=""><i class="fa-brands fa-x-twitter"></i></a></li>
+      <li title="Youtube"><a href="#"><i class="fa-brands fa-youtube"></i></a></li>
+      <li title="Facebook"><a href="#"><i class="fa-brands fa-square-facebook"></i></a></li>
+      <li title="discord"><a href="#"><i class="fa-brands fa-discord"></i></a></li>
+      <li title="X - tweeter"><a href="#"><i class="fa-brands fa-x-twitter"></i></a></li>
     </ul>
   </nav>
 </footer>

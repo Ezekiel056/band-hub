@@ -14,7 +14,7 @@
     --color-background: #F5F6FA;
     --color-surface: #DCD8EE;
     --color-surface-alt: #FFFFFF;
-    --color-border: #C9C4E6;
+    --color-border: #D6CFE6;
     --color-divider: #D6D1EC;
 
     --color-text-primary: #29282F;
@@ -47,6 +47,9 @@
       --button-secondary-background-color: var(--color-surface-alt);
       --button-secondary-color: var(--color-text-secondary);
       --button-secondary-border-color: var(--color-border);
+
+      --link-color: var(--color-text-secondary);
+      font-size: 14px;
 
 }
 

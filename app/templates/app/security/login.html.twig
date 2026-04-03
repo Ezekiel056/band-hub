@@ -1,3 +1,13 @@
+{#            {% if error %}#}
+{#              <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>#}
+{#            {% endif %}#}
+
+{#            {% if app.user %}#}
+{#              <div class="mb-3">#}
+{#                You are logged in as {{ app.user.userIdentifier }}, <a href="{{ logout_path() }}">Logout</a>#}
+{#              </div>#}
+{#            {% endif %}#}
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -6,53 +16,75 @@
   <title>BandHub - Connexion</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
   {% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('styles/login.css') }}">
   {% endblock %}
 
   {% block javascripts %}
     {% block importmap %}{{ importmap('app') }}{% endblock %}
   {% endblock %}
-
 </head>
+
 <body>
-  <div class="w-full flex flex-col items-center">
-    <header class="w-full">
-      <p>coucou</p>
+  <div class="flex flex-col w-full gap-7 md:h-dvh md:justify-center md:items-center" >
+
+    <header class="flex flex-col items-center justify-center gap-3 w-full text-center py-18 md:hidden">
+      <img src="{{ asset('/images/brand-logo.png') }}" alt="BandHub logo" class="w-[94px]">
+      <p class="text-4xl text-white font-extrabold">Band <span class="font-light">Hub</span></p>
+      <h1 class="text-white text-xl">Make it simple</h1>
     </header>
-  </div>
-</body>
-</html>
 
+    <main class="flex-1 md:self-center md:flex md:items-center md:w-auto">
+      <div class="px-6 w-full md:rounded-2xl md:shadow-2xl md:bg-white md:grid md:!grid-cols-[215px_450px] md:gap-5 md:overflow-hidden md:p-0">
 
-<form method="post">
-        {% if error %}
-            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-        {% endif %}
+        <div class="login-box-image hidden md:flex gap-2 flex-col justify-center items-center ">
+          <img src="{{ asset('/images/brand-logo.png') }}" alt="BandHub logo" class="w-[94px]">
+          <p class="text-4xl text-white font-extrabold">Band <span class="font-light">Hub</span></p>
+          <p class="text-2xl text-white">Make it simple</p>
+        </div>
 
-        {% if app.user %}
-            <div class="mb-3">
-                You are logged in as {{ app.user.userIdentifier }}, <a href="{{ logout_path() }}">Logout</a>
+        <div class="p-6">
+          <h1 class="text-3xl hidden md:mb-5 md:block xl:mb-10 xl:text-4xl">Se connecter</h1>
+          <form method="post" class="flex flex-col gap-6 md:gap-2 xl:gap-6">
+
+            <div class="labeled-input">
+              <label class="input-label" for="username">Nom d'utilisateur</label>
+              <input type="text" value="{{ last_username }}" name="_username" id="username" class="form-control" autocomplete="username" required autofocus>
             </div>
-        {% endif %}
 
-        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+            <div class="labeled-input">
+              <label class="input-label" for="password">Mot de passe</label>
+              <input type="password" name="_password" id="password" class="form-control" autocomplete="current-password" required>
+            </div>
 
-        <label for="username">Username</label>
-        <input type="text" value="{{ last_username }}" name="_username" id="username" class="form-control" autocomplete="username" required autofocus>
-        <label for="password">Password</label>
-        <input type="password" name="_password" id="password" class="form-control" autocomplete="current-password" required>
-        <input type="hidden" name="_csrf_token" data-controller="csrf-protection" value="{{ csrf_token('authenticate') }}">
+            <input type="hidden" name="_csrf_token" data-controller="csrf-protection" value="{{ csrf_token('authenticate') }}">
 
-        {#
-            Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-            See https://symfony.com/doc/current/security/remember_me.html
+            {#
+              Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+              See https://symfony.com/doc/current/security/remember_me.html
+            #}
 
             <div class="checkbox mb-3">
                 <input type="checkbox" name="_remember_me" id="_remember_me">
                 <label for="_remember_me">Remember me</label>
             </div>
-        #}
 
-        <button class="btn btn-lg btn-primary" type="submit">
-            Sign in
-        </button>
-    </form>
+            <div class="flex flex-col gap-4 py-4 text-center">
+              <button class="btn btn-primary w-full" type="submit">
+                Se connecter
+              </button>
+              <a href="#" class="link text-center">Mot de passe perdu ?</a>
+            </div>
+            <div class="py-4 flex flex-col gap-1 text-center border-t  border-t-(--color-border) text-(--color-text-secondary)">
+              <p class="">Vous n'avez pas de compte ?</p>
+              <a href="" class="link font-extrabold text-xl">Inscrivez-vous</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>
+
+
+

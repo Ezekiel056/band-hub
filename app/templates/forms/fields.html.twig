@@ -1,0 +1,31 @@
+
+{# Defintion de de chaque element d'un formulaire #}
+
+{% use 'form_div_layout.html.twig' %}
+
+{% block form_start %}
+    {% set attr = attr|merge({'class': (attr.class|default('') ~ ' flex flex-col gap-6 md:gap-10')|trim}) %}
+    {{ parent() }}
+{% endblock %}
+
+{% block form_row %}
+  {% if form.vars.block_prefixes|first == 'hidden' %}
+    {{ form_widget(form) }}
+  {% else %}
+    <div class="labeled-input">
+      {{ form_label(form) }}
+      {{ form_widget(form) }}
+      {{ form_errors(form) }}
+    </div>
+  {% endif %}
+{% endblock %}
+
+
+{# Defintion de la mise en forme des erreurs #}
+{% block form_errors %}
+    {% if errors|length > 0 %}
+        {% for error in errors %}
+            <p class="text-red-500 text-sm mt-1">{{ error.message }}</p>
+        {% endfor %}
+    {% endif %}
+{% endblock %}

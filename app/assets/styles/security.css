@@ -10,3 +10,10 @@ header {
   background-size: cover;
   background-position: center;
 }
+
+.toast {
+  position: absolute;
+  top: 50px;
+  right: calc(50% - 50px);
+
+}

@@ -12,7 +12,10 @@
     --color-error: #F44336;
 
     --color-background: #F5F6FA;
-    --color-surface: #DCD8EE;
+    --color-background-alt: #F0F1F3;
+    --color-surface: #F0F1F3;
+    --color-surface: #F5F4F8;
+    --color-surface: #EEEEF0;
     --color-surface-alt: #FFFFFF;
     --color-border: #D6CFE6;
     --color-divider: #D6D1EC;
@@ -38,6 +41,7 @@
 
       /* Cards */
       --card-background-color: var(--color-surface-alt);
+      --card-background-container : var(--color-surface);
 
       /* Bouton primaire */
       --button-background-color: var(--color-primary);

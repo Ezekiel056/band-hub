@@ -1,0 +1,63 @@
+
+
+
+{#            {% if error %}#}
+{#              <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>#}
+{#            {% endif %}#}
+
+{#            {% if app.user %}#}
+{#              <div class="mb-3">#}
+{#                You are logged in as {{ app.user.userIdentifier }}, <a href="{{ logout_path() }}">Logout</a>#}
+{#              </div>#}
+{#            {% endif %}#}
+
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+  <link rel="stylesheet" href="{{ asset('styles/security.css') }}">
+{% endblock %}
+{% block title %}BandHub - Creation de compte{% endblock %}
+{% block body %}
+  <div class="flex flex-col w-full gap-7 md:gap-4 md:h-dvh xl:justify-center xl:items-center" >
+
+    <header class="flex flex-col items-center justify-center gap-3 w-full text-center py-18 md:py-8 xl:hidden">
+      <img src="{{ asset('/images/brand-logo.png') }}" alt="BandHub logo" class="w-[94px]">
+      <p class="text-4xl text-white font-extrabold">Band <span class="font-light">Hub</span></p>
+      <h1 class="text-white text-xl ">Make it simple</h1>
+    </header>
+
+    <main class="flex-1 md:self-center xl:flex xl:items-center md:w-2/3 xl:w-auto">
+      <div class="px-6 w-full xl:rounded-2xl xl:shadow-2xl xl:bg-white xl:grid xl:!grid-cols-[215px_450px] md:gap-5 md:overflow-hidden md:p-0">
+
+        <div class="login-box-image hidden xl:flex gap-2 flex-col justify-center items-center ">
+          <img src="{{ asset('/images/brand-logo.png') }}" alt="BandHub logo" class="w-[94px]">
+          <p class="text-4xl text-white font-extrabold">Band <span class="font-light">Hub</span></p>
+          <p class="text-2xl text-white">Make it simple</p>
+        </div>
+
+        <div class="p-6" id="">
+          <h1 class="text-3xl hidden md:mb-5 md:block xl:mb-10 xl:text-4xl">S'enregistrer</h1>
+          {{ form_start(registrationForm, {
+            attr: {
+              class: '!gap-1 md:!gap-4',
+            }
+          }) }}
+          {{ form_row(registrationForm.email) }}
+          {{ form_row(registrationForm.username) }}
+          {{ form_row(registrationForm.plainPassword) }}
+          {{ form_row(registrationForm.confirmPassword) }}
+          {{ form_row(registrationForm.agreeTerms) }}
+
+          <button type="submit" class="btn btn-primary mb-4">Créer votre compte</button>
+          <div class="py-4 flex flex-col gap-1 text-center border-t  border-t-(--color-border) text-(--color-text-secondary)">
+          <p class="">Vous avez déjà un compte ?</p>
+          <a href="{{ path('app_login') }}" class="link font-extrabold text-xl">Connectez-vous</a>
+        </div>
+          {{ form_end(registrationForm) }}
+        </div>
+      </div>
+    </main>
+  </div>
+{% endblock %}
+
+
+

@@ -7,24 +7,12 @@
 {#                You are logged in as {{ app.user.userIdentifier }}, <a href="{{ logout_path() }}">Logout</a>#}
 {#              </div>#}
 {#            {% endif %}#}
-
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BandHub - Connexion</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
-  {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('styles/login.css') }}">
-  {% endblock %}
-
-  {% block javascripts %}
-    {% block importmap %}{{ importmap('app') }}{% endblock %}
-  {% endblock %}
-</head>
-
-<body>
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+  <link rel="stylesheet" href="{{ asset('styles/security.css') }}">
+{% endblock %}
+{% block title %}BandHub - Connexion{% endblock %}
+{% block body %}
   <div class="flex flex-col w-full gap-7 md:h-dvh md:justify-center md:items-center" >
 
     <header class="flex flex-col items-center justify-center gap-3 w-full text-center py-18 md:hidden">
@@ -69,6 +57,9 @@
             </div>
 
             <div class="flex flex-col gap-4 py-4 text-center">
+              {% if error %}
+                <div class="toast p-12 bg-red-500 text-white rounded-2xl">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+              {% endif %}
               <button class="btn btn-primary w-full" type="submit">
                 Se connecter
               </button>
@@ -76,15 +67,15 @@
             </div>
             <div class="py-4 flex flex-col gap-1 text-center border-t  border-t-(--color-border) text-(--color-text-secondary)">
               <p class="">Vous n'avez pas de compte ?</p>
-              <a href="" class="link font-extrabold text-xl">Inscrivez-vous</a>
+              <a href="{{ path('app_register') }}" class="link font-extrabold text-xl">Inscrivez-vous</a>
             </div>
           </form>
+
         </div>
       </div>
     </main>
   </div>
-</body>
-</html>
+{% endblock %}
 
 
 

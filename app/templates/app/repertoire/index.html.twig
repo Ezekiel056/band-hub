@@ -1,0 +1,35 @@
+{% extends 'app/_layout/layout.html.twig' %}
+
+
+{% block content %}
+  <div class="flex  justify-between hidden">
+    <p class="text-4xl font-semibold">{{ pageTitle }}</p>
+    <button class="btn btn-primary !px-12">Proposer un morceau</button>
+  </div>
+
+  <div>
+    selector
+  </div>
+
+  <div>
+    input
+  </div>
+
+  <div class="scrollable-container">
+    {% for i in 1..50%}
+      <div class="p2">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+      </div>
+    {% endfor %}
+  </div>
+
+  <div>
+    footer
+  </div>
+
+
+  <button class="btn btn-primary add fixed bottom-[80px] right-[10px]">
+    add
+  </button>
+
+{% endblock %}

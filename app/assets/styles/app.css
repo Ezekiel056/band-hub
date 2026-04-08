@@ -71,3 +71,8 @@ input {
   cursor: pointer;
 }
 
+.scrollable-container {
+  overflow-y: auto;
+  flex:1;
+  min-height: 0;
+}

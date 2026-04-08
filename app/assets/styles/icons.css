@@ -1,0 +1,37 @@
+
+.icon {
+  display: inline-block;
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  width: 32px;
+  height: 32px;
+  background-color: var(--label-color); /* ← la couleur */
+
+  &.icon-music-score {
+    mask-image: url('../images/icons/svg/musical-score.svg');
+  }
+
+  &.icon-music-microphone {
+    mask-image: url('../images/icons/svg/microphone-music.svg');
+  }
+
+  &.icon-play {
+    mask-image: url('../images/icons/svg/play.svg');
+  }
+
+  &.icon-success {
+    background-color: var(--color-success); /* ← la couleur */
+    mask-image: url('../images/icons/svg/success.svg');
+  }
+
+
+  &.icon-medium {
+    width: 48px;
+    height: 48px;
+  }
+  &.icon-large {
+    width: 64px;
+    height: 64px;
+  }
+}
+

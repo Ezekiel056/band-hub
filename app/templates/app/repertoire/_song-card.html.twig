@@ -1,0 +1,28 @@
+<figure class="card card-padding overflow-hidden pb-4 mr-2">
+  <img src="{{ asset('/images/artists/muse.jpg') }}" alt="Muse" class="w-full h-40 object-cover object-top">
+  <div class="flex flex-col items-stretch px-8 gap-6">
+    <div class="flex flex-col gap-2 py-4">
+      <figcpation class="text-2xl font-medium text-center w-full">
+        {{ song.title | upper }}
+      </figcpation>
+      <ul class="flex gap-2 justify-center text-(--text-color)">
+        <li>{{ song.getArtist.name }}</li>
+        <li>{{ song.duration }}</li>
+        <li>{{ song.bpm }} BPM</li>
+      </ul>
+    </div>
+    <div>
+      <nav>
+        <ul class="flex gap-4 justify-center">
+          <li><a href="#" ><i class="icon icon-music-score"></i></a></li>
+          <li><a href="#" ><i class="icon icon-music-microphone"></i></a></li>
+          <li><a href="#" ><i class="icon icon-play"></i></a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="flex gap-4 items-center justify-center">
+      <i class="icon icon-success"></i>
+      <span class="text-(--color-success) text-xl font-bold">{{ song.getStatus.label | upper }}</span>
+    </div>
+  </div>
+</figure>

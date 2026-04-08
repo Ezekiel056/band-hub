@@ -2,6 +2,7 @@
 @import './globals.css';
 @import './band-selector.css';
 @import './app-layout.css';
+@import './icons.css';
 @plugin "@tailwindcss/typography";
 
 /* ==========================================================================
@@ -30,10 +31,16 @@ input {
   background-color: var(--input-background-color);
   @apply rounded-lg;
 
+  &::placeholder{
+    color: var(--text-helpers-color);
+  }
+
   &:active, &:focus {
     box-shadow: 0 0 0 2px var(--color-border);
     @apply outline-none;
   }
+
+
 }
 
 .input-label {
@@ -75,4 +82,123 @@ input {
   overflow-y: auto;
   flex:1;
   min-height: 0;
+}
+
+
+/*
+  NAVBAR AVEC ONGLETS
+ */
+.navbar-tabs {
+  width: 100%;
+  overflow-x: auto;
+
+
+  ul {
+    display: flex;
+    gap:24px;
+    justify-content: stretch;
+    align-items: center;
+  }
+}
+
+.tab-item {
+  white-space: nowrap;
+  display: flex;
+  justify-content: stretch;
+  width: auto;
+  cursor:pointer;
+  align-items: center;
+  gap: 16px;
+  padding: 12px ;
+  font-size: 14px;
+  color: var(--text-color);
+  border: 1px solid var(--color-border);
+  border-radius: 24px;
+
+  .tag {
+    background-color: var(--tag-background-color);
+    color: var(--tag-text-color);
+    font-size: 12px;
+    padding: 2px 10px;
+    border-radius: calc(infinity * 1px);
+  }
+
+
+  &.active {
+    font-weight: bold;
+    color : var(--color-primary-active);
+    border : 2px solid var(--button-background-color);
+
+    .tag {
+      background-color: var(--tag-active-background-color);
+      color: var(--tag-active-text-color);
+    }
+  }
+
+}
+
+.search-input {
+  display: flex;
+  align-items: center;
+  gap:8px;
+  background-color: var(--input-background-color);
+  border-radius: 20px;
+  padding : 0 24px;
+  box-shadow: var(--card-shadow);
+  .search-icon {
+    color: var(--text-color);
+  }
+  input {
+    width: 100%;
+    height: 48px;
+    border: unset;
+    box-shadow: unset;
+
+    background-color: transparent;
+
+  }
+
+}
+
+
+.card {
+  background-color: var(--card-background-color);
+  filter: drop-shadow(4px 4px 4px rgba(0,0,0,0.1));
+  border-radius: 24px;
+
+}
+
+
+/*
+  MEDIA QUERIES
+ */
+
+@media (min-width:768px) {
+  .navbar-tabs {
+    display: block;
+    overflow-x: unset;
+    border-bottom: 1px solid var(--color-border);
+
+  }
+
+  .tab-item {
+    border: unset;
+    padding-left: 0;
+
+    &.active {
+      border: unset;
+      border-radius: unset;
+      border-bottom: 2px solid var(--button-background-color);
+
+
+    }
+  }
+}
+
+@media (min-width: 1280px ) {
+  .tab-item {
+    font-size: 18px;
+
+
+  }
 }

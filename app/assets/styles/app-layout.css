@@ -31,7 +31,7 @@
 .app-main {
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  overflow-x: hidden;
   min-height: 0;
   padding: 16px 4px 0 16px;
 }
@@ -106,6 +106,10 @@
 
   }
 
+  .app-main {
+    padding: 24px 4px 24px 48px;
+  }
+
   .app-header-content {
     padding: 12px 24px;
     height: auto;
@@ -142,9 +146,7 @@
     grid-template-columns: 290px 1fr;
   }
 
-  .app-main {
-    padding: 24px 4px 24px 48px;
-  }
+
 
   .app-navbar {
     width: 290px;

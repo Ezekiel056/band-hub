@@ -18,3 +18,6 @@ migrate:
 
 tailwind:
 	docker compose --env-file app/.env.local exec php bash -c "php bin/console tailwind:build --watch"
+
+fixtures:
+	docker compose --env-file app/.env.local exec php php bin/console doctrine:fixtures:load --no-interaction

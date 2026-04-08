@@ -8,6 +8,8 @@
   <div class="app-main-body">
     <header class="app-header">
       <div class="app-header-content">
+         {{ include ('app/_layout/_band-selector.html.twig') }}
+
         <img class="header-logo" src="{{ asset('/images/brand-logo.png') }}" alt="Band Hub logo">
         <h1>{{ pageTitle }}</h1>
         <button class="app-user-button">

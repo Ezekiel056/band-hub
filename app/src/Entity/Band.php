@@ -32,7 +32,7 @@ class Band
     /**
      * @var Collection<int, BandMember>
      */
-    #[ORM\OneToMany(targetEntity: BandMember::class, mappedBy: 'Band', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: BandMember::class, mappedBy: 'band', orphanRemoval: true)]
     private Collection $bandMembers;
 
     /**

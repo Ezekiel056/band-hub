@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Band;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -16,6 +17,16 @@ class BandRepository extends ServiceEntityRepository
         parent::__construct($registry, Band::class);
     }
 
+    public function findFirstByUser(User $user): ?Band
+    {
+        return $this->createQueryBuilder('b')
+            ->join('b.bandMembers', 'bm')
+            ->where('bm.user = :user')
+            ->setParameter('user', $user)
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
     //    /**
     //     * @return Band[] Returns an array of Band objects
     //     */

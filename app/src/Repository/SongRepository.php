@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Band;
 use App\Entity\Song;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -15,6 +16,18 @@ class SongRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Song::class);
     }
+
+    public function findByBand(Band $band): array
+    {
+        return $this->createQueryBuilder('s')
+            ->join('s.artist', 'a')
+            ->where('a.band = :band')
+            ->setParameter('band', $band)
+            ->orderBy('s.title', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
 
     //    /**
     //     * @return Song[] Returns an array of Song objects

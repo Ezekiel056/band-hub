@@ -1,0 +1,8 @@
+parameters:
+    band_context:
+        excluded_routes:
+            - app_login
+            - app_register
+            - app_band_create
+        redirect_to: landing
+

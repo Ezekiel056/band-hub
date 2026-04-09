@@ -66,7 +66,7 @@ class AppFixtures extends Fixture
         $user = new User();
         $user->setIsActive(true);
         $user->setEmail('user@test.com');
-        $user->setUsername('ezekiel');
+        $user->setUsername('ezekiel056');
         $user->setPassword($this->passwordHasher->hashPassword($user, '123456'));
 
         $manager->persist($user);

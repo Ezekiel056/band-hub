@@ -69,6 +69,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Transaction::class, mappedBy: 'user')]
     private Collection $transactions;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $lastBandId = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTime $lastLogin = null;
+
     public function __construct()
     {
         $this->bands = new ArrayCollection();
@@ -307,6 +313,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $transaction->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getLastBandId(): ?int
+    {
+        return $this->lastBandId;
+    }
+
+    public function setLastBandId(?int $lastBandId): static
+    {
+        $this->lastBandId = $lastBandId;
+
+        return $this;
+    }
+
+    public function getLastLogin(): ?\DateTime
+    {
+        return $this->lastLogin;
+    }
+
+    public function setLastLogin(?\DateTime $lastLogin): static
+    {
+        $this->lastLogin = $lastLogin;
 
         return $this;
     }

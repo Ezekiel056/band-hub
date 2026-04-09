@@ -12,7 +12,6 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Routing\RouterInterface;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Http\Event\LoginSuccessEvent;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -27,7 +26,6 @@ class SecuritySubscriber implements EventSubscriberInterface
         private UserRepository         $userRepository,
         private EntityManagerInterface $entityManager,
         private Security               $security,
-        private TokenStorageInterface  $tokenStorage,
         private RouterInterface        $router
     )
     {
@@ -47,17 +45,7 @@ class SecuritySubscriber implements EventSubscriberInterface
         return;
         }
 
-        // gestion de l'utilisateur : Sommes nous toujours actif ?
-        $user = $this->security->getUser();
-        if ($user instanceof User && !$user->isActive()) {
-            // Déconnecter l'user
-            $this->tokenStorage->setToken(null);
-            $event->getRequest()->getSession()->invalidate();
-
-            $event->setResponse(
-                new RedirectResponse($this->router->generate('app_login'))
-            );
-        }
+        $this->checkUser($event);
     }
     public function onLoginSuccess(LoginSuccessEvent $event): void
     {
@@ -80,5 +68,15 @@ class SecuritySubscriber implements EventSubscriberInterface
             $this->entityManager->flush();
         }
 
+    }
+
+    private function CheckUser(RequestEvent $event) {
+        // gestion de l'utilisateur : Sommes nous toujours actif ?
+        $user = $this->security->getUser();
+        if ($user instanceof User && !$user->isActive()) {
+            $event->setResponse(
+                new RedirectResponse($this->router->generate('app_logout'))
+            );
+        }
     }
 }

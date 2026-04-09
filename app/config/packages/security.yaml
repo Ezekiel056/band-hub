@@ -27,7 +27,7 @@ security:
             logout:
                 path: app_logout
                 # where to redirect after logout
-                target: landing
+                target: app_login
             user_checker: App\Security\UserChecker
 
             # Activate different ways to authenticate:

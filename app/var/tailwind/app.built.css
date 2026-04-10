@@ -4465,11 +4465,9 @@ input {
   overflow-x: auto;
   padding-bottom: 8px;
   @media (pointer: coarse) {
-    .navbar-tabs {
-      scrollbar-width: none;
-      &::-webkit-scrollbar {
-        display: none;
-      }
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
     }
   }
   ul {

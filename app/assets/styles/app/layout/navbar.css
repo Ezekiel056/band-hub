@@ -1,51 +1,15 @@
-
-.app-main-body {
-  height: 100dvh;
-  min-height: 0;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 64px 1fr 64px;
-}
-
-.app-header-content {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  height: 64px;
-  padding: 0 4px;
-  border-bottom: 1px solid var(--color-border);
-  .header-logo {
-    width: 48px;
-    height: 48px;
-  }
-  .app-user-button {
-    width: 40px;
-    height: 40px;
-  }
-  h1 {
-    font-size: 24px;
-  }
-}
-
-.app-main {
-  display: flex;
-  flex-direction: column;
-  overflow-x: hidden;
-  min-height: 0;
-  padding: 16px 4px 0 16px;
-}
-
 .app-navbar {
   padding: 0 12px ;
   color : var(--text-color);
   background-color: var(--card-background-container);
   border-top : 1px solid var(--color-border);
   .navbar-logo {
+    display: none;
     height: 64px;
     width: 64px;
   }
   .app-nav-bar-heading {
+    display: none;
     font-size: 38px;
     color : var(--label-color)
   }
@@ -67,8 +31,7 @@
       height: 48px;
       width: 48px;
       p {
-        font-size: 16px;
-
+        font-size: 1rem;
       }
     }
 
@@ -77,47 +40,20 @@
       div {
         background-color: #fff;
         border-radius: 16px;
-      }
-
-    }
-  }
-
-  .app-nav-bar-icon {
-    &.fill {
-      fill: var(--text-color);
-      li.selected & {
-        fill: var(--color-primary);
-      }
-    }
-    &.stroke {
-      stroke: var(--text-color);
-      li.selected & {
-        stroke: var(--color-primary);
+        p {
+          color : var(--color-primary)
+        }
       }
 
     }
   }
 }
 
+
+
+
+
 @media (min-width: 768px) {
-  .app-main-body {
-    grid-template-columns: 82px 1fr;
-    grid-template-rows: 73px 1fr;
-
-  }
-
-  .app-main {
-    padding: 24px 4px 24px 48px;
-  }
-
-  .app-header-content {
-    padding: 12px 24px;
-    height: auto;
-    >img,h1 {
-      display: none;
-    }
-  }
-
   .app-navbar {
     grid-row: 1 / -1;
     grid-column: 1 / 2;
@@ -136,20 +72,14 @@
       flex-direction: column;
       justify-content: start;
       align-items: stretch;
-      gap: 24px;
+      gap: 16px;
     }
   }
 }
 
 @media (min-width: 1280px) {
-  .app-main-body {
-    grid-template-columns: 290px 1fr;
-  }
-
-
-
   .app-navbar {
-    width: 290px;
+    width: 220px;
     .app-nav-bar-heading{
       display: block;
     }
@@ -158,11 +88,11 @@
 
 
       li a div {
-        padding: 32px 24px;
+        padding: 12px;
         width: 100%;
         display: flex;
         justify-content: start;
-        gap : 16px;
+        gap : 12px;
       }
       p {
         display: block;

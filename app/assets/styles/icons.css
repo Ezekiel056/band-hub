@@ -35,3 +35,48 @@
   }
 }
 
+
+
+
+/*
+  ICONES DE LA NAVBAR
+*/
+.navbar-icon {
+  display: inline-block;
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  width: 32px;
+  height: 32px;
+  background-color: var(--text-color);
+
+  li.selected & {
+    background-color: var(--color-primary);
+
+  }
+  &.dashboard {
+    mask-image: url('../images/icons/svg/app_navbar/dashboard.svg');
+  }
+
+  &.repertoire {
+    mask-image: url('../images/icons/svg/app_navbar/repertoire.svg');
+  }
+
+  &.setlists {
+    mask-image: url('../images/icons/svg/app_navbar/setlists.svg');
+  }
+
+  &.events {
+    mask-image: url('../images/icons/svg/app_navbar/events.svg');
+  }
+
+  &.finances {
+    mask-image: url('../images/icons/svg/app_navbar/finances.svg');
+  }
+
+  &.settings {
+    mask-image: url('../images/icons/svg/app_navbar/settings.svg');
+  }
+}
+
+
+

@@ -1,0 +1,64 @@
+<nav class="app-navbar">
+  <div class="flex flex-col items-center">
+    <img class="navbar-logo" src="{{ asset('/images/logo_64.png') }}" alt="Band Hub logo">
+    <p class="app-nav-bar-heading">Band Hub</p>
+  </div>
+  <ul >
+    <li {{ currentRoute == 'app_home' ? 'class="selected"' : '' }}>
+      <a href="{{ path('app_home') }}">
+        <div>
+          <i class="navbar-icon dashboard"></i>
+          <p class="hidden">Accueil</p>
+        </div>
+      </a>
+    </li>
+
+
+    <li {{ currentRoute == 'app_repertoire' ? 'class="selected"' : '' }}>
+      <a href="{{ path('app_repertoire') }}">
+        <div>
+          <i class="navbar-icon repertoire"></i>
+          <p class="hidden">Repertoire</p>
+        </div>
+      </a>
+    </li>
+
+    <li {{ currentRoute == 'app_setlists' ? 'class="selected"' : '' }}>
+      <a href="{{ path('app_home') }}">
+        <div>
+          <i class="navbar-icon setlists"></i>
+          <p class="hidden">Setlists</p>
+        </div>
+      </a>
+    </li>
+
+    <li {{ currentRoute == 'app_events' ? 'class="selected"' : '' }}>
+      <a href="{{ path('app_home') }}">
+        <div>
+          <i class="navbar-icon events"></i>
+          <p class="hidden">Agenda</p>
+        </div>
+      </a>
+    </li>
+
+    <li {{ currentRoute == 'app_finances' ? 'class="selected"' : '' }}>
+      <a href="{{ path('app_home') }}">
+        <div>
+          <i class="navbar-icon finances"></i>
+          <p class="hidden">Finances</p>
+        </div>
+      </a>
+    </li>
+
+    <li {{ currentRoute == 'app_settings' ? 'class="selected"' : '' }}>
+      <a href="{{ path('app_home') }}">
+        <div>
+          <i class="navbar-icon settings"></i>
+
+          <p class="hidden">Paramètres</p>
+        </div>
+      </a>
+    </li>
+
+  </ul>
+</nav>

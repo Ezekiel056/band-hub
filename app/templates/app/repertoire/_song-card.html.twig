@@ -1,8 +1,9 @@
-<figure class="card card-padding overflow-hidden pb-4 mr-2 xl:flex xl:gap-4 xl:overflow-visible xl:p-6 xl:items-center ">
-  <img src="{{ asset('/images/artists/muse.jpg') }}" alt="Muse" class="w-full h-40 object-cover object-top xl:w-28 h-auto xl:object-fit">
-  <div class="flex flex-col items-stretch px-8 gap-6 xl:flex-row">
-    <div class="flex flex-col gap-2 py-4">
-      <figcpation class="text-2xl font-medium text-center w-full">
+
+<figure class="card flex flex-row md:gap-10 p-6 md:overflow-hidden md:pb-4 md:mr-2 md:block md:p-0 ">
+  <img src="{{ asset('/images/artists/muse.jpg') }}" alt="Muse" class="mr-6 object-cover object-top h-16 w-16 md:w-full md:h-40  md:h-1/4 md:mr-0">
+  <div class="flex md:flex-col items-stretch md:px-8 gap-6 flex-1">
+    <div class="flex flex-col items-start flex-1 md:gap-2 md:py-4">
+      <figcpation class="text-base md:text-2xl font-medium  w-full md:text-center">
         {{ song.title | upper }}
       </figcpation>
       <ul class="flex gap-2 justify-center text-(--text-color)">
@@ -13,7 +14,7 @@
     </div>
     <div>
       <nav>
-        <ul class="flex gap-4 justify-center">
+        <ul class="hidden md:flex md:gap-4 md:justify-center">
           <li><a href="#" ><i class="icon icon-music-score"></i></a></li>
           <li><a href="#" ><i class="icon icon-music-microphone"></i></a></li>
           <li><a href="#" ><i class="icon icon-play"></i></a></li>
@@ -22,7 +23,7 @@
     </div>
     <div class="flex gap-4 items-center justify-center">
       <i class="icon icon-success"></i>
-      <span class="text-(--color-success) text-xl font-bold">{{ song.getStatus.label | upper }}</span>
+      <span class="hidden md:inline text-(--color-success) text-xl font-bold">{{ song.getStatus.label | upper }}</span>
     </div>
   </div>
 </figure>

@@ -8,14 +8,28 @@
 /* ==========================================================================
    RESET
    ========================================================================== */
+:root {
+  font-size: 12px;
+  @media (min-width : 768px) {
+    font-size: 14px;
+  }
+
+  @media (min-width : 1280px) {
+    font-size: 16px;
+  }
+}
+
+
+
 @layer base {
   * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
   }
-
 }
+
+
 
 body {
   background-color: var(--background-color);

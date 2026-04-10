@@ -4464,6 +4464,14 @@ input {
   width: 100%;
   overflow-x: auto;
   padding-bottom: 8px;
+  @media (pointer: coarse) {
+    .navbar-tabs {
+      scrollbar-width: none;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+  }
   ul {
     display: flex;
     gap: 24px;

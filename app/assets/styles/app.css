@@ -193,16 +193,18 @@ input {
     display: block;
     overflow-x: unset;
     border-bottom: 1px solid var(--color-border);
-
+    padding-bottom: 0;
   }
 
   .tab-item {
     border: unset;
     padding-left: 0;
+    border-radius: unset;
+
+
 
     &.active {
       border: unset;
-      border-radius: unset;
       border-bottom: 2px solid var(--button-background-color);
 
 

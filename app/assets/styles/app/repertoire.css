@@ -2,3 +2,9 @@
   gap : 24px;
 }
 
+.song-card{
+  .song-info span + span::before {
+    content: '•';
+    margin-right: 0.5rem;
+  }
+}

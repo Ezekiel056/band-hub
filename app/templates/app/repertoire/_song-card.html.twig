@@ -1,29 +1,51 @@
 
-<figure class="card flex flex-row md:gap-10 p-6 md:overflow-hidden md:pb-4 md:mr-2 md:block md:p-0 ">
-  <img src="{{ asset('/images/artists/muse.jpg') }}" alt="Muse" class="mr-6 object-cover object-top h-16 w-16 md:w-full md:h-40  md:h-1/4 md:mr-0">
-  <div class="flex md:flex-col items-stretch md:px-8 gap-6 flex-1">
-    <div class="flex flex-col items-start flex-1 md:gap-2 md:py-4">
-      <figcpation class="text-base md:text-2xl font-medium  w-full md:text-center">
-        {{ song.title | upper }}
-      </figcpation>
-      <ul class="flex gap-2 justify-center text-(--text-color)">
-        <li>{{ song.getArtist.name }}</li>
-        <li>{{ song.duration }}</li>
-        <li>{{ song.bpm }} BPM</li>
-      </ul>
-    </div>
-    <div>
-      <nav>
-        <ul class="hidden md:flex md:gap-4 md:justify-center">
-          <li><a href="#" ><i class="icon icon-music-score"></i></a></li>
-          <li><a href="#" ><i class="icon icon-music-microphone"></i></a></li>
-          <li><a href="#" ><i class="icon icon-play"></i></a></li>
-        </ul>
-      </nav>
-    </div>
-    <div class="flex gap-4 items-center justify-center">
-      <i class="icon icon-success"></i>
-      <span class="hidden md:inline text-(--color-success) text-xl font-bold">{{ song.getStatus.label | upper }}</span>
-    </div>
+{#<figure class="song-card card flex flex-row md:gap-10 p-6 md:overflow-hidden md:pb-4 md:mr-2 md:block md:p-0 ">#}
+{#  <img src="{{ asset('/images/artists/muse.jpg') }}" alt="Muse" class="mr-6 object-cover object-top h-16 w-16 md:w-full md:h-40  md:h-1/4 md:mr-0">#}
+{#  <div class="flex md:flex-col items-stretch md:px-8 gap-6 flex-1">#}
+{#    <div class="flex flex-col items-start flex-1 md:gap-2 md:py-4">#}
+{#      <figcpation class="text-base md:text-2xl font-medium  w-full md:text-center">#}
+{#        {{ song.title | upper }}#}
+{#      </figcpation>#}
+{#      <ul class="song-info flex gap-2 overflow-hidden justify-start text-(--text-color)">#}
+{#        <li class="flex-1">{{ song.getArtist.name }}</li>#}
+{#        <li>{{ '%02d:%02d' | format((song.duration / 60) | round(0, 'floor'), song.duration % 60) }}</li>#}
+{#        <li>{{ song.bpm }} BPM</li>#}
+{#      </ul>#}
+{#    </div>#}
+{#    <div>#}
+{#      <nav>#}
+{#        <ul class="hidden md:flex md:gap-4 md:justify-center">#}
+{#          <li><a href="#" ><i class="icon icon-music-score"></i></a></li>#}
+{#          <li><a href="#" ><i class="icon icon-music-microphone"></i></a></li>#}
+{#          <li><a href="#" ><i class="icon icon-play"></i></a></li>#}
+{#        </ul>#}
+{#      </nav>#}
+{#    </div>#}
+{#    <div class="flex gap-4 items-center justify-center">#}
+{#      <i class="icon icon-success"></i>#}
+{#      <span class="hidden md:inline text-(--color-success) text-xl font-bold">{{ song.getStatus.label | upper }}</span>#}
+{#    </div>#}
+{#  </div>#}
+{#</figure>#}
+<li class="cursor-pointer">
+
+
+  <a href="">
+
+<article class="song-card card  hover:shadow-xs hover:-translate-y-px transition-transform active:translate-y-0.5 p-4 flex gap-4 md:flex-col md:p-0 md:overflow-x-hidden md:pb-6">
+  <img src="{{ asset('/images/artists/muse.jpg') }}" alt="Muse" class="rounded-2xl aspect-square w-20 object-cover md:w-full md:aspect-auto md:rounded-none md:h-40 md:object-top">
+  <div class="flex flex-col gap-0 min-w-0 flex-1 md:items-center">
+    <h2 class="text-xl font-bold text-(--label-color) truncate">{{ song.title | upper }} </h2>
+    <p class="font-medium text-lg text-(--text-color)">{{ song.artist.name }}</p>
+    <p class="song-info text-base font-light text-(--text-color)">
+      <span>{{ song.duration }}</span>
+      <span>{{ song.bpm }} BPM</span>
+    </p>
   </div>
-</figure>
+  <div class="flex gap-4 items-center justify-center">
+    <i class="icon icon-success"></i>
+    <span class="hidden md:inline text-(--color-success) text-xl font-bold">{{ song.getStatus.label | upper }}</span>
+  </div>
+</article>
+  </a>
+</li>

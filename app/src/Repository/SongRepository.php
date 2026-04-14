@@ -34,6 +34,25 @@ class SongRepository extends ServiceEntityRepository
             return $query->getQuery()->getResult();
     }
 
+    public function countByStatus(Band $band, bool $onlyActiveStatus = true): array {
+        $query= $this->createQueryBuilder('s')
+            ->select('s.status, COUNT(s.id) as total')
+            ->join('s.artist', 'a')
+            ->where('a.band = :band')
+            ->setParameter('band', $band)
+            ->groupBy('s.status');
+            if ($onlyActiveStatus) {
+                $query->andWhere('s.status IN (:statuses)')
+                    ->setParameter('statuses', [
+                        SongStatus::Learning,
+                        SongStatus::Pending,
+                        SongStatus::Validated,
+                    ]);
+            };
+            return $query->getQuery()
+            ->getResult();
+    }
+
 
 
     //    /**

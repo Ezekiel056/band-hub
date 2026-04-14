@@ -30,6 +30,9 @@ class Artist
     #[ORM\OneToMany(targetEntity: Song::class, mappedBy: 'artist', orphanRemoval: true)]
     private Collection $songs;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $coverFileName = null;
+
     public function __construct()
     {
         $this->songs = new ArrayCollection();
@@ -90,6 +93,18 @@ class Artist
                 $song->setArtist(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCoverFileName(): ?string
+    {
+        return $this->coverFileName;
+    }
+
+    public function setCoverFileName(?string $coverFileName): static
+    {
+        $this->coverFileName = $coverFileName;
 
         return $this;
     }

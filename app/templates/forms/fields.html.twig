@@ -4,7 +4,7 @@
 {% use 'form_div_layout.html.twig' %}
 
 {% block form_start %}
-    {% set attr = attr|merge({'class': (attr.class|default('') ~ ' flex flex-col gap-6 md:gap-10')|trim}) %}
+    {% set attr = attr|merge({'class': (attr.class|default('') ~ ' flex flex-col gap-6')|trim}) %}
     {{ parent() }}
 {% endblock %}
 

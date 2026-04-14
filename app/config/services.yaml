@@ -9,7 +9,7 @@
 
 
 parameters:
-
+    artists_uploads_dir: '%kernel.project_dir%/public/uploads/artists/'
 services:
     # default configuration for services in *this* file
     _defaults:

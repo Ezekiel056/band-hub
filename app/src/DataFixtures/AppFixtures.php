@@ -78,14 +78,24 @@ class AppFixtures extends Fixture
 
         $artist = new Artist();
         $artist->setName('Muse');
+        $artist->setCoverFileName('69de5d0565a4d.jpg');
         $artist->setBand($band);
 
         $manager->persist($artist);
         $this->addReference('artist_muse',$artist);
 
+        $artist = new Artist();
+        $artist->setName('Korn');
+        $artist->setCoverFileName('69de5d34b9c2e.jpg');
+        $artist->setBand($band);
+
+        $manager->persist($artist);
+        $this->addReference('artist_korn',$artist);
+
 
         $artist = new Artist();
         $artist->setName('System of a down');
+        $artist->setCoverFileName('69de5d55ed933.jpg');
         $artist->setBand($band);
 
         $manager->persist($artist);
@@ -94,6 +104,7 @@ class AppFixtures extends Fixture
 
         $artist = new Artist();
         $artist->setName('Linking park');
+        $artist->setCoverFileName('69de5d712e3d1.jpg');
         $artist->setBand($band);
 
         $manager->persist($artist);
@@ -102,6 +113,7 @@ class AppFixtures extends Fixture
 
         $artist = new Artist();
         $artist->setName('Foo fighters');
+        $artist->setCoverFileName('69de5d8d24d52.jpg');
         $artist->setBand($band);
 
         $manager->persist($artist);
@@ -110,6 +122,7 @@ class AppFixtures extends Fixture
 
         $artist = new Artist();
         $artist->setName('Green day');
+        $artist->setCoverFileName('69de5da48eabf.jpg');
         $artist->setBand($band);
 
         $manager->persist($artist);

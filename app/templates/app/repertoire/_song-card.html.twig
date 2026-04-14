@@ -3,7 +3,7 @@
   <a href="#">
     <article class="song-card card  hover:shadow-xs hover:-translate-y-px transition-transform active:translate-y-0.5 p-4 flex justify-between">
       <div class="flex gap-4 flex-1">
-        <img src="{{ asset('/images/artists/muse.jpg') }}" alt="Muse" class="rounded-2xl aspect-square size-[64px] object-cover xl:self-center">
+        <img src="{{ asset('/uploads/artists/thumbnails/128x128_' ~ song.artist.coverFileName)  }}" alt="Muse" class="rounded-2xl aspect-square size-[64px] object-cover xl:self-center">
         <div class="grid min-w-0">
           <h2 class="text-sm font-bold text-(--label-color) truncate">{{ song.title | upper }} </h2>
           <p class="font-normal text-sm text-(--text-color)">{{ song.artist.name }}</p>

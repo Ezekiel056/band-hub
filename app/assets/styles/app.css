@@ -34,7 +34,7 @@ body {
   @apply flex flex-col gap-2.5
 }
 
-input {
+input,textarea, select {
   padding: 8px 10px;
   border: 1px solid var(--color-border);
   background-color: var(--input-background-color);
@@ -64,6 +64,10 @@ input {
 
   @apply rounded-3xl font-bold p-3;
 
+  &.btn-square {
+    @apply rounded-lg;
+  }
+
   &.btn-primary {
     background-color: var(--button-background-color);
     color: var(--color-text-inverse);
@@ -77,6 +81,23 @@ input {
   }
 
   &.btn-primary:active {
+    box-shadow: 0 1px 3px 1px var(--color-text-muted);
+    transform: translateY(0);
+  }
+
+  &.btn-secondary {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    box-shadow: 0 2px 6px 1px var(--color-text-muted);
+    transform: translateY(0);
+  }
+
+  &.btn-secondary:hover {
+    box-shadow: 0 3px 10px 1px var(--color-text-muted);
+    transform: translateY(-1px);
+  }
+
+  &.btn-secondary:active {
     box-shadow: 0 1px 3px 1px var(--color-text-muted);
     transform: translateY(0);
   }
@@ -190,8 +211,37 @@ input {
   filter: drop-shadow(4px 4px 4px rgba(0,0,0,0.1));
   border-radius: 24px;
 
+  &.card-popup {
+    display: flex;
+    flex-direction: column;
+    gap:24px;
+    width: 100%;
+    padding: 30px 20px;
+  }
 }
 
+
+.modal {
+  display: none;
+
+  z-index: 999;
+  position: absolute;
+  flex-direction: column;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100dvh;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: start;
+  align-items: center;
+
+  padding: 32px 16px 0 16px;
+
+
+  &.active {
+    display: flex;
+  }
+}
 
 /*
   MEDIA QUERIES
@@ -218,6 +268,17 @@ input {
 
 
     }
+  }
+
+  .modal {
+    justify-content: center;
+    padding: 0 30px;
+  }
+
+  .card {
+    &.card-popup {
+    padding: 40px 30px;
+  }
   }
 }
 

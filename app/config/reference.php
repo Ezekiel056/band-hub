@@ -1464,6 +1464,15 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     postcss_config_file?: scalar|Param|null, // Path to PostCSS config file which is passed to the Tailwind CLI // Default: null
  *     strict_mode?: bool|Param|null, // When enabled, an exception will be thrown if there are no built assets (default: false in `test` env, true otherwise) // Default: null
  * }
+ * @psalm-type InterventionImageConfig = array{
+ *     driver?: scalar|Param|null, // Default: "Intervention\\Image\\Drivers\\Gd\\Driver"
+ *     options?: array{
+ *         autoOrientation?: bool|Param, // Default: true
+ *         decodeAnimation?: bool|Param, // Default: true
+ *         backgroundColor?: scalar|Param|null, // Default: "ffffff"
+ *         strip?: bool|Param, // Default: false
+ *     },
+ * }
  * @psalm-type ConfigType = array{
  *     imports?: ImportsConfig,
  *     parameters?: ParametersConfig,
@@ -1478,6 +1487,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     security?: SecurityConfig,
  *     monolog?: MonologConfig,
  *     symfonycasts_tailwind?: SymfonycastsTailwindConfig,
+ *     intervention_image?: InterventionImageConfig,
  *     "when@dev"?: array{
  *         imports?: ImportsConfig,
  *         parameters?: ParametersConfig,
@@ -1495,6 +1505,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         monolog?: MonologConfig,
  *         maker?: MakerConfig,
  *         symfonycasts_tailwind?: SymfonycastsTailwindConfig,
+ *         intervention_image?: InterventionImageConfig,
  *     },
  *     "when@prod"?: array{
  *         imports?: ImportsConfig,
@@ -1510,6 +1521,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         security?: SecurityConfig,
  *         monolog?: MonologConfig,
  *         symfonycasts_tailwind?: SymfonycastsTailwindConfig,
+ *         intervention_image?: InterventionImageConfig,
  *     },
  *     "when@test"?: array{
  *         imports?: ImportsConfig,
@@ -1526,6 +1538,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         security?: SecurityConfig,
  *         monolog?: MonologConfig,
  *         symfonycasts_tailwind?: SymfonycastsTailwindConfig,
+ *         intervention_image?: InterventionImageConfig,
  *     },
  *     ...<string, ExtensionType|array{ // extra keys must follow the when@%env% pattern or match an extension alias
  *         imports?: ImportsConfig,

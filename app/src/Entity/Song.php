@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Enum\SongStatus;
 use App\Repository\SongRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -33,9 +34,8 @@ class Song
     #[ORM\JoinColumn(nullable: false)]
     private ?Artist $artist = null;
 
-    #[ORM\ManyToOne]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?SongStatus $status = null;
+    #[ORM\Column(type: 'string', enumType: SongStatus::class)]
+    private SongStatus $status = SongStatus::Pending;
 
     /**
      * @var Collection<int, BackingTrack>
@@ -143,15 +143,14 @@ class Song
         return $this;
     }
 
-    public function getStatus(): ?SongStatus
+    public function getStatus(): SongStatus
     {
         return $this->status;
     }
 
-    public function setStatus(?SongStatus $status): static
+    public function setStatus(SongStatus $status): static
     {
         $this->status = $status;
-
         return $this;
     }
 

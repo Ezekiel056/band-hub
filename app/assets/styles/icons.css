@@ -5,7 +5,7 @@
   mask-repeat: no-repeat;
   width: 32px;
   height: 32px;
-  background-color: var(--label-color); /* ← la couleur */
+  background-color: var(--label-color);
 
   &.icon-music-score {
     mask-image: url('../images/icons/svg/musical-score.svg');
@@ -20,16 +20,38 @@
   }
 
   &.icon-success {
-    background-color: var(--color-success); /* ← la couleur */
+    background-color: var(--color-success);
     mask-image: url('../images/icons/svg/success.svg');
   }
 
+  &.icon-add {
+    mask-image: url('../images/icons/svg/add.svg');
+  }
 
-  &.icon-medium {
+  &.icon-vote {
+    background-color: var(--color-primary);
+    mask-image: url('../images/icons/svg/vote.svg');
+  }
+  &.icon-flash {
+    background-color: var(--color-warning);
+    mask-image: url('../images/icons/svg/flash.svg');
+  }
+
+  &.icon-size-extra-small {
+    width: 16px;
+    height: 16px;
+  }
+
+  &.icon-size-small {
+    width: 24px;
+    height: 24px;
+  }
+
+  &.icon-size-medium {
     width: 48px;
     height: 48px;
   }
-  &.icon-large {
+  &.icon-size-large {
     width: 64px;
     height: 64px;
   }

@@ -8,11 +8,7 @@
    RESET
    ========================================================================== */
 :root {
-  font-size: 12px;
-  @media (min-width : 768px) {
-    font-size: 14px;
-  }
-
+  font-size: 14px;
   @media (min-width : 1280px) {
     font-size: 16px;
   }
@@ -102,8 +98,6 @@ input {
   NAVBAR AVEC ONGLETS
  */
 .navbar-tabs {
-
-
   width: 100%;
   overflow-x: auto;
   padding-bottom: 8px;
@@ -137,6 +131,12 @@ input {
   color: var(--text-color);
   border: 1px solid var(--color-border);
   border-radius: 24px;
+
+  span {
+    display: flex;
+    gap: 2px;
+    align-items: center;
+  }
 
   .tag {
     background-color: var(--tag-background-color);

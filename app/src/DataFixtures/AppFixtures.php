@@ -8,8 +8,8 @@ use App\Entity\Band;
 use App\Entity\BandMember;
 use App\Entity\Instrument;
 use App\Entity\Song;
-use App\Entity\SongStatus;
 use App\Entity\User;
+use App\Enum\SongStatus;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -49,19 +49,8 @@ class AppFixtures extends Fixture
             ['instrument' => 'piano', 'label' => 'Piano'],
         ];
 
-        $statusMap = [
-            'proposé' => 'propose',
-            'en cours' => 'en_cours',
-            'validé' => 'valide',
-            'refusé' => 'refuse',
-            'archivé' => 'archive',
-        ];
-        foreach ($statusMap as $label => $ref) {
-            $data = new SongStatus();
-            $data->setLabel($label);
-            $manager->persist($data);
-            $this->addReference('status_'. $ref, $data);
-        }
+
+
 
         $user = new User();
         $user->setIsActive(true);
@@ -130,29 +119,29 @@ class AppFixtures extends Fixture
 
         $songsData = [
             'artist_muse' => [
-                ['title' => 'Hysteria', 'bpm' => 100, 'duration' => 225, 'status' => 'status_valide'],
-                ['title' => 'Supermassive Black Hole', 'bpm' => 138, 'duration' => 208, 'status' => 'status_valide'],
-                ['title' => 'Time Is Running Out', 'bpm' => 145, 'duration' => 236, 'status' => 'status_en_cours'],
+                ['title' => 'Hysteria', 'bpm' => 100, 'duration' => 225, 'status' => SongStatus::Validated],
+                ['title' => 'Supermassive Black Hole', 'bpm' => 138, 'duration' => 208, 'status' => SongStatus::Validated],
+                ['title' => 'Time Is Running Out', 'bpm' => 145, 'duration' => 236, 'status' => SongStatus::Learning],
             ],
             'artist_soad' => [
-                ['title' => 'Aerials', 'bpm' => 79, 'duration' => 252, 'status' => 'status_valide'],
-                ['title' => 'Chop Suey!', 'bpm' => 214, 'duration' => 210, 'status' => 'status_propose'],
-                ['title' => 'Toxicity', 'bpm' => 126, 'duration' => 219, 'status' => 'status_en_cours'],
+                ['title' => 'Aerials', 'bpm' => 79, 'duration' => 252, 'status' => SongStatus::Validated],
+                ['title' => 'Chop Suey!', 'bpm' => 214, 'duration' => 210, 'status' => SongStatus::Pending],
+                ['title' => 'Toxicity', 'bpm' => 126, 'duration' => 219, 'status' => SongStatus::Learning],
             ],
             'artist_linkin_park' => [
-                ['title' => 'Numb', 'bpm' => 120, 'duration' => 185, 'status' => 'status_valide'],
-                ['title' => 'In the End', 'bpm' => 105, 'duration' => 216, 'status' => 'status_en_cours'],
-                ['title' => 'Crawling', 'bpm' => 116, 'duration' => 209, 'status' => 'status_propose'],
+                ['title' => 'Numb', 'bpm' => 120, 'duration' => 185, 'status' => SongStatus::Validated],
+                ['title' => 'In the End', 'bpm' => 105, 'duration' => 216, 'status' => SongStatus::Learning],
+                ['title' => 'Crawling', 'bpm' => 116, 'duration' => 209, 'status' => SongStatus::Pending],
             ],
             'artist_foo_fighters' => [
-                ['title' => 'Best of You', 'bpm' => 130, 'duration' => 256, 'status' => 'status_valide'],
-                ['title' => 'Everlong', 'bpm' => 158, 'duration' => 250, 'status' => 'status_valide'],
-                ['title' => 'The Pretender', 'bpm' => 173, 'duration' => 269, 'status' => 'status_en_cours'],
+                ['title' => 'Best of You', 'bpm' => 130, 'duration' => 256, 'status' => SongStatus::Validated],
+                ['title' => 'Everlong', 'bpm' => 158, 'duration' => 250, 'status' => SongStatus::Validated],
+                ['title' => 'The Pretender', 'bpm' => 173, 'duration' => 269, 'status' => SongStatus::Learning],
             ],
             'artist_green_day' => [
-                ['title' => 'Boulevard of Broken Dreams', 'bpm' => 85, 'duration' => 260, 'status' => 'status_valide'],
-                ['title' => 'American Idiot', 'bpm' => 176, 'duration' => 174, 'status' => 'status_propose'],
-                ['title' => 'Wake Me Up When September Ends', 'bpm' => 104, 'duration' => 285, 'status' => 'status_en_cours'],
+                ['title' => 'Boulevard of Broken Dreams', 'bpm' => 85, 'duration' => 260, 'status' => SongStatus::Validated],
+                ['title' => 'American Idiot', 'bpm' => 176, 'duration' => 174, 'status' => SongStatus::Pending],
+                ['title' => 'Wake Me Up When September Ends', 'bpm' => 104, 'duration' => 285, 'status' => SongStatus::Learning],
             ],
         ];
 
@@ -163,7 +152,7 @@ class AppFixtures extends Fixture
                 $song->setTitle($songData['title']);
                 $song->setBpm($songData['bpm']);
                 $song->setDuration($songData['duration']);
-                $song->setStatus($this->getReference($songData['status'], SongStatus::class));
+                $song->setStatus($songData['status']);
                 $song->setLyrics('Lorem ipsum dolor sit amet consectetur adipisicing elit.');
 
                 $manager->persist($song);

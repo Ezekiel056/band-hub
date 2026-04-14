@@ -18,7 +18,7 @@ class SongRepository extends ServiceEntityRepository
         parent::__construct($registry, Song::class);
     }
 
-    public function findByBand(Band $band, ?SongStatus $search = null): array
+    public function findByBand(Band $band, SongStatus $songStatus = null): array
     {
         $query = $this->createQueryBuilder('s')
             ->join('s.artist', 'a')
@@ -26,10 +26,13 @@ class SongRepository extends ServiceEntityRepository
             ->setParameter('band', $band)
             ->orderBy('s.title', 'ASC');
 
-            if ($search) {
-                $query->andWhere('s.status = :search')
-                    ->setParameter('search',  $search->value);
+            if ($songStatus) {
+
+            $query->andWhere('s.status = :search')
+                ->setParameter('search', $songStatus);
             }
+
+
 
             return $query->getQuery()->getResult();
     }

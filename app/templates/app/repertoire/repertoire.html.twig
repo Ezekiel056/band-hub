@@ -3,6 +3,11 @@
   <link rel="stylesheet" href="{{ asset('styles/app/repertoire.css') }}">
 {% endblock %}
 
+{% block javascripts %}
+  {{ parent() }}
+  <script type="module" src="{{ asset('app/repertoire.js') }}"></script>
+{% endblock %}
+
   {% block headerExtra %}
 
   {% endblock %}

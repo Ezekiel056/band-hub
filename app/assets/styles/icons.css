@@ -37,6 +37,14 @@
     mask-image: url('../images/icons/svg/flash.svg');
   }
 
+  &.icon-option-menu {
+    mask-image: url('../images/icons/svg/options-menu.svg');
+  }
+
+  &.icon-option-menu-side {
+    mask-image: url('../images/icons/svg/options-menu-side.svg');
+  }
+
   &.icon-size-extra-small {
     width: 16px;
     height: 16px;

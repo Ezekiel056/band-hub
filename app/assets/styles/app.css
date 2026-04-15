@@ -78,6 +78,44 @@ input,textarea, select {
   font-size : 1rem;
 }
 
+.btn-play-media {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--color-surface);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 10px 0 10px 16px;
+    border-color: transparent transparent transparent var(--color-primary);
+    margin-left: 3px; /* compense l'optique du triangle */
+  }
+
+  &.playing::after {
+    /* deux barres verticales */
+    width: 14px;
+    height: 16px;
+    border: none;
+    margin-left: 0;
+    background: linear-gradient(
+      to right,
+      var(--color-primary) 40%,
+      transparent 40%,
+      transparent 60%,
+      var(--color-primary) 60%
+    );
+  }
+}
+
 .btn {
   border: none;
   cursor: pointer;

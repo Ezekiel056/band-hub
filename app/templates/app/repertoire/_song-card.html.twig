@@ -1,6 +1,6 @@
 
 <li class="cursor-pointer" data-filter-song data-title="{{ song.title }}" data-artist="{{ song.artist.name }}">
-  <a href="#">
+  <a href={{ path('app_song', {id: song.id}) }}>
     <article class="song-card card  hover:shadow-xs hover:-translate-y-px transition-transform active:translate-y-0.5 p-4 flex justify-between">
       <div class="flex gap-4 flex-1">
         <img src="{{ asset('/uploads/artists/thumbnails/128x128_' ~ song.artist.coverFileName)  }}" alt="Muse" class="rounded-2xl aspect-square size-[64px] object-cover xl:self-center">

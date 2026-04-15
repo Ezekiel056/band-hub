@@ -12,16 +12,6 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class SongController extends AbstractController
 {
-
-    #[Route('app/song/{id}', name: 'app_song_index', methods: ['GET'])]
-    public function index(Song $song): Response
-    {
-        $this->denyAccessUnlessGranted('song.view', $song);
-        return $this->render('app/song/index.html.twig', [
-            'song' => $song,
-        ]);
-    }
-
     #[Route('app/song/create', name: 'app_song_create', methods: ['POST','GET'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -39,6 +29,17 @@ final class SongController extends AbstractController
 
         return $this->render('app/song/_create.html.twig', [
             'form' => $form,
+
+        ]);
+    }
+
+    #[Route('app/song/{id}', name: 'app_song', methods: ['GET'])]
+    public function view(Song $song): Response
+    {
+        $this->denyAccessUnlessGranted('song.view', $song);
+        return $this->render('app/song/song.html.twig', [
+            'song' => $song,
+            'pageTitle' => 'Fiche chanson',
         ]);
     }
 }

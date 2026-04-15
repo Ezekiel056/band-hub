@@ -15,4 +15,14 @@
 
     {{ include('/app/_layout/_navbar.html.twig') }}
   </div>
+
+  {# ==== Gestion des TOASTS ==== #}
+  {% for type, messages in app.flashes %}
+    {% for message in messages %}
+      <div class="toast toast-{{ type }}" data-controller="toast">
+        {{ message }}
+      </div>
+    {% endfor %}
+  {% endfor %}
+
 {% endblock %}

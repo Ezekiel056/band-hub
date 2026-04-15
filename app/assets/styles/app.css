@@ -30,6 +30,27 @@ body {
   background-color: var(--background-color);
 }
 
+
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  padding: 1rem 1.5rem;
+  border-radius: 0.5rem;
+  transition: opacity 0.5s, transform 0.5s;
+  z-index: 1000;
+  color : #fff;
+
+  &.toast-hidden {
+    opacity: 0;
+    transform: translateY(1rem);
+    pointer-events: none;
+  }
+
+  &.toast-success { background: var(--color-success); }
+  &.toast-error   { background: var(--color-error); }
+}
+
 .labeled-input {
   @apply flex flex-col gap-2.5
 }

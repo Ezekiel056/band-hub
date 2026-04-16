@@ -17,7 +17,7 @@
 
   <section class="p-4 flex flex-col gap-4 items-center relative">
     {# header #}
-    <img src="{{ asset('/uploads/artists/' ~ song.artist.coverFileName) }}" alt="Image du groupe {{ song.artist.name }}" class="rounded-4xl h-40 object-cover object-top w-full">
+    <img src="{{ asset('/uploads/artists/' ~ song.artist.coverFileName) }}" alt="Image du groupe {{ song.artist.name }}" class="rounded-4xl h-40 object-cover object-center w-full">
     <h2 class="text-3xl font-bold">{{ song.title | upper }}</h2>
     <p class="text-xl font-light text-(--color-text-primary)">{{ song.artist.name }}</p>
     <div class="flex justify-center gap-6">
@@ -29,7 +29,7 @@
     </div>
   </section>
 
-  <section class="scrollable-container">
+  <section class="">
     <article class="p-4 flex flex-col gap-4 ">
       {# audio #}
       <div class="flex justify-between items-center">

@@ -1,11 +1,10 @@
 {% extends 'app/_layout/layout.html.twig' %}
 {% block stylesheets %}
-  <link rel="stylesheet" href="{{ asset('styles/app/repertoire.css') }}">
+  <link rel="stylesheet" href="{{ asset('styles/app/song.css') }}">
 {% endblock %}
 
 {% block javascripts %}
   {{ parent() }}
-  <script type="module" src="{{ asset('app/repertoire.js') }}"></script>
 {% endblock %}
 
 {% block headerExtra %}
@@ -16,51 +15,85 @@
 
 {% block content %}
 
-  {# Modal popup : C'est ici que viendra s'inserer la popup d'ajout #}
-  <turbo-frame id="modal"></turbo-frame>
-  <div class="w-full">
-    <div class="p-4">
-      <figure class="overflow-hidden relative h-64">
-        <img src="{{ asset('uploads/artists/' ~ song.artist.coverFileName) }}"
-             alt="Illustration de {{ song.artist.name }}"
-             class="rounded-4xl w-full">
-        <figcaption class="absolute flex flex-col justify-end inset-0 pb-6 pl-6 bg-gradient-to-b from-transparent to-(--background-color)">
-            <h2 class="text-3xl font-extrabold text-(--label-color)">{{ song.title }}</h2>
-            <p class="text-xl font-light text-(--label-color)">{{ song.artist.name }}</p>
-        </figcaption>
-      </figure>
+  <section class="p-4 flex flex-col gap-4 items-center relative">
+    {# header #}
+    <img src="{{ asset('/uploads/artists/' ~ song.artist.coverFileName) }}" alt="Image du groupe {{ song.artist.name }}" class="rounded-4xl h-40 object-cover object-top w-full">
+    <h2 class="text-3xl font-bold">{{ song.title | upper }}</h2>
+    <p class="text-xl font-light text-(--color-text-primary)">{{ song.artist.name }}</p>
+    <div class="flex justify-center gap-6">
+      <p class="song-tag"><i class="icon icon-time icon-size-extra-small !bg-(--text-color)"></i> {{ song.duration }}</p>
+      <p class="song-tag"><i class="icon icon-metronome icon-size-extra-small !bg-(--text-color)"></i> {{ song.bpm }}</p>
     </div>
+    <div class="absolute top-8 right-8 rounded-4xl bg-green-200 text-(--color-success) p-1 px-4">
+      <p class="text-base text-center">Validé</p>
+    </div>
+  </section>
 
-    <div class="p-4">
-      <div class="scrollable-">
-        <section class="rounded-2xl bg-(--card-background-container) p-4 flex flex-col gap-4">
-          <div class="flex justify-between">
-            <h2 class="text-xl font-normal">Audio</h2>
-            <button type="button" class="cursor-pointer flex items-center" aria-label="Acceder au menu de la section audio"><i class="icon icon-option-menu"></i></button>
-          </div>
-
-          <div class="card card-flat p-6 gap-4 flex items-center">
-            <button class="btn-play-media" aria-label="Lire le morceau original"></button>
-            <p class="text-base font-bold flex-1">VERSION ORIGINALE</p>
-            <button type="button" class="cursor-pointer flex items-center" aria-label="Acceder aux options"><i class="icon icon-option-menu-side"></i></button>
-          </div>
-
-          <h3 class="text-xl font-normal">Backing tracks</h3>
-          <ul>
-            <li class="card card-flat p-6 gap-4 flex items-center">
-              <button class="btn-play-media" aria-label="Lire le morceau original"></button>
-              <div>
-                <p>GUITARE<p>
-                <p>Guitare principale - Standard E</p>
-              </div>
-            </li>
-          </ul>
-        </section>
-
-        <article></article>
-        <aside></aside>
+  <section class="scrollable-container">
+    <article class="p-4 flex flex-col gap-4 ">
+      {# audio #}
+      <div class="flex justify-between items-center">
+        <h2 class="text-xl font-light">Audio</h2>
+        <button type="button" class=" text-(--link-color) font-extralight">Ajouter un fichier</button>
       </div>
-    </div>
-  </div>
 
+      <div class="card card-flat p-4 !rounded-2xl flex gap-4 items-center" >
+        <button type="button" class="btn-play-media"></button>
+        <p class="text-sm flex-1 font-bold">VERSION ORIGINALE</p>
+        <button type="button" class="flex items-center"><i class="icon icon-option-menu-side icon-size-small !bg-(--text-color) cursor-pointer"></i></button>
+      </div>
+      <h3 class="text-xl font-light">
+        Backing Tracks
+      </h3>
+
+      <ul class="flex flex-col gap-4">
+        <li class="card card-flat p-4 !rounded-2xl flex gap-4 items-center">
+          <button type="button" class="btn-play-media"></button>
+          <div class="flex-1">
+            <p class="text-sm font-bold">GUITARE</p>
+            <p class="text-sm">Guitare principale - Standard E</p>
+          </div>
+          <button type="button" class="flex items-center"><i class="icon icon-option-menu-side icon-size-small !bg-(--text-color) cursor-pointer"></i></button>
+        </li>
+
+        <li class="card card-flat p-4 !rounded-2xl flex gap-4 items-center">
+          <button type="button" class="btn-play-media"></button>
+          <div class="flex-1">
+            <p class="text-sm font-bold">BASSE</p>
+            <p class="text-sm">Accordage DROP C</p>
+          </div>
+          <button type="button" class="flex items-center"><i class="icon icon-option-menu-side icon-size-small !bg-(--text-color) cursor-pointer"></i></button>
+        </li>
+
+        <li class="card card-flat p-4 !rounded-2xl flex gap-4 items-center">
+          <button type="button" class="btn-play-media"></button>
+          <div class="flex-1">
+            <p class="text-sm font-bold">BATTERIE</p>
+          </div>
+          <button type="button" class="flex items-center"><i class="icon icon-option-menu-side icon-size-small !bg-(--text-color) cursor-pointer"></i></button>
+        </li>
+      </ul>
+    </article>
+
+    <article class="p-4">
+      <div class="card card-flat p-4 flex flex-col gap-4 !bg-(--card-background-container)">
+        <h2 class="text-xl font-bold">Paroles (Aperçu)</h2>
+        <p class="italic text-base flex-1">
+          Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium  doloremque
+          laudantium, totam rem aperiam, eaque ipsa quae ab illo  inventer veritatis et quasi architecto beatae vitae dicta sunt  explicabo. Nemo enim ipsam voluptatem quia
+          Quis autem vel eum iure reprehenderit qui in ea voluptate
+        </p>
+        <button class="btn btn-primary">Paroles complètes →</button>
+      </div>
+    </article>
+
+    <aside>
+      {# liens externes #}
+    </aside>
+  </section>
+
+
+  {# Modal popup : C'est ici que viendra s'inserer la popup d'ajout #}
+
+  <turbo-frame id="modal"></turbo-frame>
 {% endblock %}

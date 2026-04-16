@@ -15,7 +15,7 @@
 {% block content %}
 
   {# Modal popup : C'est ici que viendra s'inserer la popup d'ajout #}
-  <turbo-frame id="modal"></turbo-frame>
+
 
 
   <nav class="navbar-tabs">
@@ -60,7 +60,7 @@
   </div>
 
   <div class="scrollable-container pr-2">
-    <div class="p-4">
+    <div>
       {{ include('/app/repertoire/_songs.html.twig') }}
     </div>
   </div>
@@ -70,5 +70,8 @@
   <a role="button" data-turbo-frame="modal" href="{{ path('app_song_create') }}" class="btn btn-primary fixed bottom-[80px] right-[10px] flex justify-center items-center md:hidden md:aria-hidden:" aria-label="Ajouter une chanson">
     <i class="icon icon-add !bg-white"></i>
   </a>
+
+  <turbo-frame id="modal">
+  </turbo-frame>
 
 {% endblock %}

@@ -34,6 +34,7 @@ final class SongController extends AbstractController
     }
 
     #[Route('app/song/{id}', name: 'app_song', methods: ['GET'])]
+
     public function view(Song $song): Response
     {
         $this->denyAccessUnlessGranted('song.view', $song);

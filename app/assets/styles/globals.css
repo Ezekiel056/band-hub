@@ -7,6 +7,7 @@
     --color-accent: #F06292;
 
     --color-success: #4CAF50;
+    --color-success-light: #CEE1D0;
     --color-info: #AAA0FF;
     --color-warning: #FFC107;
     --color-error: #F44336;
@@ -58,7 +59,7 @@
       --tag-active-text-color: var(--color-text-inverse);
       --tag-text-color: var(--text-color);
 
-      --link-color: var(--color-text-secondary);
+      --link-color: var(--color-primary);
 
 
 

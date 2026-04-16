@@ -1,0 +1,19 @@
+.app-main {
+  gap : 24px;
+}
+
+.app-main {
+  padding: 0!important;
+}
+
+.song-tag {
+  display: flex;
+  gap : 1rem;
+  align-items: center;
+  font-size: 1rem;
+  padding: .5rem 1rem;
+  border-radius: 2rem;
+  color : var(--text-color);
+  background-color: var(--card-background-container);
+
+}

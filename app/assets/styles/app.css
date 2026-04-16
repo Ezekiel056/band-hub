@@ -10,7 +10,7 @@
 :root {
   font-size: 14px;
   @media (min-width : 1280px) {
-    font-size: 16px;
+    /*font-size: 16px;*/
   }
 }
 
@@ -28,6 +28,28 @@
 
 body {
   background-color: var(--background-color);
+}
+
+button,a {
+  cursor: pointer;
+}
+
+input,textarea, select {
+  padding: 8px 10px;
+  border: 1px solid var(--color-border);
+  background-color: var(--input-background-color);
+  @apply rounded-lg;
+
+  &::placeholder{
+    color: var(--text-helpers-color);
+  }
+
+  &:active, &:focus {
+    box-shadow: 0 0 0 2px var(--color-border);
+    @apply outline-none;
+  }
+
+
 }
 
 
@@ -55,32 +77,14 @@ body {
   @apply flex flex-col gap-2.5
 }
 
-input,textarea, select {
-  padding: 8px 10px;
-  border: 1px solid var(--color-border);
-  background-color: var(--input-background-color);
-  @apply rounded-lg;
-
-  &::placeholder{
-    color: var(--text-helpers-color);
-  }
-
-  &:active, &:focus {
-    box-shadow: 0 0 0 2px var(--color-border);
-    @apply outline-none;
-  }
-
-
-}
-
 .input-label {
   color: var(--color-text-primary);
   font-size : 1rem;
 }
 
 .btn-play-media {
-  width: 48px;
-  height: 48px;
+  width: 2rem;
+  height: 2rem;
   border-radius: 50%;
   background: var(--color-surface);
   border: none;
@@ -95,15 +99,15 @@ input,textarea, select {
     width: 0;
     height: 0;
     border-style: solid;
-    border-width: 10px 0 10px 16px;
+    border-width: .5rem 0 .5rem .7rem;
     border-color: transparent transparent transparent var(--color-primary);
-    margin-left: 3px; /* compense l'optique du triangle */
+    margin-left: 1px; /* compense l'optique du triangle */
   }
 
   &.playing::after {
     /* deux barres verticales */
-    width: 14px;
-    height: 16px;
+    width: 40%;
+    height: 50%;
     border: none;
     margin-left: 0;
     background: linear-gradient(
@@ -264,6 +268,11 @@ input,textarea, select {
   }
 }
 
+.card-container {
+  border-radius: 24px;
+  background-color: var(--card-background-container);
+
+}
 
 .card {
   background-color: var(--card-background-color);
@@ -276,6 +285,10 @@ input,textarea, select {
     gap:24px;
     width: 100%;
     padding: 30px 20px;
+  }
+
+  &.card-flat {
+    filter: none;
   }
 }
 

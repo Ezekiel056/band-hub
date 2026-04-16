@@ -37,6 +37,15 @@
     mask-image: url('../images/icons/svg/flash.svg');
   }
 
+  &.icon-metronome {
+    mask-image: url('../images/icons/svg/metronome.svg');
+  }
+
+  &.icon-time {
+    mask-image: url('../images/icons/svg/time.svg');
+  }
+
+
   &.icon-option-menu {
     mask-image: url('../images/icons/svg/options-menu.svg');
   }

@@ -15,21 +15,29 @@
 
 {% block content %}
 
-  <section class="p-4 flex flex-col gap-4 items-center relative">
+  <section class="p-4 flex flex-col gap-8 items-center relative md:grid md:grid-cols-[200px_1fr] xl:col-span-2">
     {# header #}
-    <img src="{{ asset('/uploads/artists/' ~ song.artist.coverFileName) }}" alt="Image du groupe {{ song.artist.name }}" class="rounded-4xl h-40 object-cover object-center w-full">
-    <h2 class="text-3xl font-bold">{{ song.title | upper }}</h2>
-    <p class="text-xl font-light text-(--color-text-primary)">{{ song.artist.name }}</p>
-    <div class="flex justify-center gap-6">
-      <p class="song-tag"><i class="icon icon-time icon-size-extra-small !bg-(--text-color)"></i> {{ song.duration }}</p>
-      <p class="song-tag"><i class="icon icon-metronome icon-size-extra-small !bg-(--text-color)"></i> {{ song.bpm }}</p>
-    </div>
-    <div class="absolute top-8 right-8 rounded-4xl bg-green-200 text-(--color-success) p-1 px-4">
-      <p class="text-base text-center">Validé</p>
+    <img src="{{ asset('/uploads/artists/' ~ song.artist.coverFileName) }}" alt="Image du groupe {{ song.artist.name }}"
+         class="rounded-4xl h-40 object-cover object-center w-full md:rounded-2xl" >
+
+    <div class="flex flex-col items-start md:h-full">
+      <div class="absolute top-8 right-8 rounded-4xl bg-green-200 text-(--color-success) p-1 px-4 md:static md:mb-2">
+        <p class="text-base text-center">Validé</p>
+      </div>
+
+      <div class="flex flex-col items-center md:items-start md:flex-1 md:justify-between">
+        <h2 class="text-3xl font-bold  md:text-4xl md: font-extrabold">{{ song.title | upper }}</h2>
+        <p class="text-xl font-light text-(--color-text-primary)">{{ song.artist.name }}</p>
+        <div class="flex justify-center gap-6">
+          <p class="song-tag"><i class="icon icon-time icon-size-extra-small !bg-(--text-color)"></i> {{ song.duration }}</p>
+          <p class="song-tag"><i class="icon icon-metronome icon-size-extra-small !bg-(--text-color)"></i> {{ song.bpm }}</p>
+        </div>
+      </div>
+
     </div>
   </section>
 
-  <section class="mb-16">
+  <section class="mb-16 xl:grid xl:grid-cols-[2fr_1fr] xl:grid-rows-2">
     <article class="p-4 flex flex-col gap-4 ">
       {# audio #}
       <div class="flex justify-between items-center">
@@ -46,7 +54,7 @@
         Backing Tracks
       </h2>
 
-      <ul class="flex flex-col gap-4">
+      <ul class="grid gap-4 md:grid-cols-2 xl:grid-cols-1">
         <li class="card card-flat p-4 !rounded-2xl flex gap-4 items-center">
           <button type="button" class="btn-play-media"></button>
           <div class="flex-1">
@@ -75,15 +83,15 @@
       </ul>
     </article>
 
-    <article class="p-4">
-      <div class="card card-flat p-4 flex flex-col gap-4 !bg-(--card-background-container)">
+    <article class="p-4 xl:row-span-2">
+      <div class="card card-flat p-4 py-8 flex flex-col gap-4 !bg-(--card-background-container)">
         <h2 class="text-xl font-bold">Paroles (Aperçu)</h2>
-        <p class="italic text-base flex-1">
+        <p class="italic text-base flex-1 mb-6">
           Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium  doloremque
           laudantium, totam rem aperiam, eaque ipsa quae ab illo  inventer veritatis et quasi architecto beatae vitae dicta sunt  explicabo. Nemo enim ipsam voluptatem quia
           Quis autem vel eum iure reprehenderit qui in ea voluptate
         </p>
-        <button class="btn btn-primary">Paroles complètes →</button>
+        <button class="btn btn-primary self-center !px-8">Paroles complètes →</button>
       </div>
     </article>
 
@@ -92,7 +100,7 @@
         <h2 class="text-xl font-bold">Liens externes</h2>
         <button type="button" class=" text-(--link-color) font-extralight">Ajouter un lien</button>
       </div>
-      <ul class="grid gap-6">
+      <ul class="grid gap-6 md:grid-cols-2">
         <li class="flex flex-col gap-2">
           <iframe class="w-full rounded-4xl"  height="250" src="https://www.youtube.com/embed/LuzXr3He9NI?si=okAbC08h899Bhc3l&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
           <div class="flex justify-between items-center">

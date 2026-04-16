@@ -29,7 +29,7 @@
     </div>
   </section>
 
-  <section class="">
+  <section class="mb-16">
     <article class="p-4 flex flex-col gap-4 ">
       {# audio #}
       <div class="flex justify-between items-center">
@@ -42,9 +42,9 @@
         <p class="text-sm flex-1 font-bold">VERSION ORIGINALE</p>
         <button type="button" class="flex items-center"><i class="icon icon-option-menu-side icon-size-small !bg-(--text-color) cursor-pointer"></i></button>
       </div>
-      <h3 class="text-xl font-light">
+      <h2 class="text-xl font-light">
         Backing Tracks
-      </h3>
+      </h2>
 
       <ul class="flex flex-col gap-4">
         <li class="card card-flat p-4 !rounded-2xl flex gap-4 items-center">
@@ -87,8 +87,27 @@
       </div>
     </article>
 
-    <aside>
-      {# liens externes #}
+    <aside class="p-4">
+      <div class="flex justify-between items-center  mb-6">
+        <h2 class="text-xl font-bold">Liens externes</h2>
+        <button type="button" class=" text-(--link-color) font-extralight">Ajouter un lien</button>
+      </div>
+      <ul class="grid gap-6">
+        <li class="flex flex-col gap-2">
+          <iframe class="w-full rounded-4xl"  height="250" src="https://www.youtube.com/embed/LuzXr3He9NI?si=okAbC08h899Bhc3l&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          <div class="flex justify-between items-center">
+            <h3 class="text-xl font-bold">Crawling - Original clip</h3>
+            <i class="icon icon-option-menu-side icon-size-small"></i>
+          </div>
+        </li>
+        <li class="flex flex-col gap-2">
+          <iframe class="w-full rounded-4xl"  height="250" src="https://www.youtube.com/embed/LuzXr3He9NI?si=okAbC08h899Bhc3l&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          <div class="flex justify-between items-center">
+            <h3 class="text-xl font-bold">Crawling - Original clip</h3>
+            <button><i class="icon icon-option-menu-side icon-size-small"></i></button>
+          </div>
+        </li>
+      </ul>
     </aside>
   </section>
 

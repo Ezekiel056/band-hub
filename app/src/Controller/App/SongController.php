@@ -5,14 +5,13 @@ namespace App\Controller\App;
 use App\Entity\Song;
 use App\Form\SongType;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-
-final class SongController extends AbstractController
+use App\Enum\AppMenuTabs;
+final class SongController extends AppController
 {
-    #[Route('app/song/create', name: 'app_song_create', methods: ['POST','GET'])]
+    #[Route('app/song/create', name: 'app_song_create', methods: ['POST','GET']) ]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $song = new Song();
@@ -33,7 +32,7 @@ final class SongController extends AbstractController
         ]);
     }
 
-    #[Route('app/song/{id}', name: 'app_song', methods: ['GET'])]
+    #[Route('app/song/{id}', name: 'app_song', options:['selected_tab' => AppMenuTabs::Repertoire] ,methods: ['GET'])]
 
     public function view(Song $song): Response
     {

@@ -12,6 +12,15 @@
 {% endblock %}
 
 
+{% block header %}
+  <header>
+    <div class ="header-custom gap-5">
+      <a href="{{ app.request.headers.get('referer') ?? path('app_repertoire') }}" class="flex items-center"><i class="icon icon-back-arrow icon-size-small bg-(--label-color)"></i></a>
+      <h1 class="text-lg font-normal flex-1">{{ song.title }}</h1>
+      <button type="button" data-action="modal#open" data-modal-url-param="{{ path('app_song_create') }}"><i class="icon icon-edit icon-size-small !bg-(--text-color)"></i></button>
+    </div>
+  </header>
+{% endblock %}
 
 {% block content %}
 
@@ -29,8 +38,8 @@
         <h2 class="text-3xl font-bold  md:text-4xl md: font-extrabold">{{ song.title | upper }}</h2>
         <p class="text-xl font-light text-(--color-text-primary)">{{ song.artist.name }}</p>
         <div class="flex justify-center gap-6">
-          <p class="song-tag"><i class="icon icon-time icon-size-extra-small !bg-(--text-color)"></i> {{ song.duration }}</p>
-          <p class="song-tag"><i class="icon icon-metronome icon-size-extra-small !bg-(--text-color)"></i> {{ song.bpm }}</p>
+          <p class="song-tag"><i class="icon icon-time icon-size-extra-small !bg-(--text-color)"></i> {{ '%02d:%02d' | format((song.duration / 60) | round(0, 'floor'), song.duration % 60) }}</p>
+          <p class="song-tag"><i class="icon icon-metronome icon-size-extra-small !bg-(--text-color)"></i> {{ song.bpm }} BPM</p>
         </div>
       </div>
 
@@ -38,17 +47,17 @@
   </section>
 
   <section class="mb-16 xl:grid xl:grid-cols-[2fr_1fr] xl:grid-rows-2">
-    <article class="p-4 flex flex-col gap-4 ">
+    <article class="p-4 flex flex-col gap-4 xl:bg-(--card-background-container) xl:rounded-4xl xl:m-4 xl:p-6">
       {# audio #}
       <div class="flex justify-between items-center">
         <h2 class="text-xl font-light">Audio</h2>
-        <button type="button" class=" text-(--link-color) font-extralight">Ajouter un fichier</button>
+        <button type="button" class=" text-(--link-color) font-extralight" aria-label="Ajouter un fichier audio">Ajouter un fichier</button>
       </div>
 
       <div class="card card-flat p-4 !rounded-2xl flex gap-4 items-center" >
-        <button type="button" class="btn-play-media"></button>
+        <button type="button" class="btn-play-media"  aria-label="Jouer le morceau"></button>
         <p class="text-sm flex-1 font-bold">VERSION ORIGINALE</p>
-        <button type="button" class="flex items-center"><i class="icon icon-option-menu-side icon-size-small !bg-(--text-color) cursor-pointer"></i></button>
+        <button type="button" class="flex items-center" aria-label="Acceder aux options du media"><i class="icon icon-option-menu-side icon-size-small !bg-(--text-color) cursor-pointer"></i></button>
       </div>
       <h2 class="text-xl font-light">
         Backing Tracks
@@ -56,29 +65,29 @@
 
       <ul class="grid gap-4 md:grid-cols-2 xl:grid-cols-1">
         <li class="card card-flat p-4 !rounded-2xl flex gap-4 items-center">
-          <button type="button" class="btn-play-media"></button>
+          <button type="button" class="btn-play-media" aria-label="Jouer le morceau"></button>
           <div class="flex-1">
             <p class="text-sm font-bold">GUITARE</p>
             <p class="text-sm">Guitare principale - Standard E</p>
           </div>
-          <button type="button" class="flex items-center"><i class="icon icon-option-menu-side icon-size-small !bg-(--text-color) cursor-pointer"></i></button>
+          <button type="button" class="flex items-center" aria-label="Acceder aux options du media"><i class="icon icon-option-menu-side icon-size-small !bg-(--text-color) cursor-pointer"></i></button>
         </li>
 
         <li class="card card-flat p-4 !rounded-2xl flex gap-4 items-center">
-          <button type="button" class="btn-play-media"></button>
+          <button type="button" class="btn-play-media" aria-label="Jouer le morceau"></button>
           <div class="flex-1">
             <p class="text-sm font-bold">BASSE</p>
             <p class="text-sm">Accordage DROP C</p>
           </div>
-          <button type="button" class="flex items-center"><i class="icon icon-option-menu-side icon-size-small !bg-(--text-color) cursor-pointer"></i></button>
+          <button type="button" class="flex items-center" aria-label="Acceder aux options du media"><i class="icon icon-option-menu-side icon-size-small !bg-(--text-color) cursor-pointer"></i></button>
         </li>
 
         <li class="card card-flat p-4 !rounded-2xl flex gap-4 items-center">
-          <button type="button" class="btn-play-media"></button>
+          <button type="button" class="btn-play-media" aria-label="Jouer le morceau"></button>
           <div class="flex-1">
             <p class="text-sm font-bold">BATTERIE</p>
           </div>
-          <button type="button" class="flex items-center"><i class="icon icon-option-menu-side icon-size-small !bg-(--text-color) cursor-pointer"></i></button>
+          <button type="button" class="flex items-center" aria-label="Acceder aux options du media"><i class="icon icon-option-menu-side icon-size-small !bg-(--text-color) cursor-pointer"></i></button>
         </li>
       </ul>
     </article>
@@ -91,28 +100,28 @@
           laudantium, totam rem aperiam, eaque ipsa quae ab illo  inventer veritatis et quasi architecto beatae vitae dicta sunt  explicabo. Nemo enim ipsam voluptatem quia
           Quis autem vel eum iure reprehenderit qui in ea voluptate
         </p>
-        <button class="btn btn-primary self-center !px-8">Paroles complètes →</button>
+        <button class="btn btn-primary self-center !px-8" aria-label="Affichez les paroles complètes">Paroles complètes →</button>
       </div>
     </article>
 
     <aside class="p-4">
       <div class="flex justify-between items-center  mb-6">
         <h2 class="text-xl font-bold">Liens externes</h2>
-        <button type="button" class=" text-(--link-color) font-extralight">Ajouter un lien</button>
+        <button type="button" class=" text-(--link-color) font-extralight" aria-label="Ajouter un nouveau lien">Ajouter un lien</button>
       </div>
       <ul class="grid gap-6 md:grid-cols-2">
         <li class="flex flex-col gap-2">
           <iframe class="w-full rounded-4xl"  height="250" src="https://www.youtube.com/embed/LuzXr3He9NI?si=okAbC08h899Bhc3l&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
           <div class="flex justify-between items-center">
             <h3 class="text-xl font-bold">Crawling - Original clip</h3>
-            <i class="icon icon-option-menu-side icon-size-small"></i>
+            <button type="button" aria-label="acceder aux options du lien"><i class="icon icon-option-menu-side icon-size-small"></i></button>
           </div>
         </li>
         <li class="flex flex-col gap-2">
           <iframe class="w-full rounded-4xl"  height="250" src="https://www.youtube.com/embed/LuzXr3He9NI?si=okAbC08h899Bhc3l&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
           <div class="flex justify-between items-center">
             <h3 class="text-xl font-bold">Crawling - Original clip</h3>
-            <button><i class="icon icon-option-menu-side icon-size-small"></i></button>
+            <button type="button" aria-label="acceder aux options du lien"><i class="icon icon-option-menu-side icon-size-small"></i></button>
           </div>
         </li>
       </ul>

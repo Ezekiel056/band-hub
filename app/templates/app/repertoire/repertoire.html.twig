@@ -17,6 +17,7 @@
   {# Modal popup : C'est ici que viendra s'inserer la popup d'ajout #}
 
 
+<div class="flex flex-col gap-6 p-4">
 
   <nav class="navbar-tabs">
     <ul>
@@ -48,30 +49,29 @@
     </ul>
   </nav>
 
-  <div class="flex self-stretch pr-2 w-full gap-6 xl:justify-between">
+  <div class="flex self-stretch w-full gap-6 xl:justify-between">
     <div class="search-input cursor-pointer h-full w-full md:w-2/3 xl:w-[660px]">
       <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M9.5 16q-2.725 0-4.612-1.888T3 9.5t1.888-4.612T9.5 3t4.613 1.888T16 9.5q0 1.1-.35 2.075T14.7 13.3l5.6 5.6q.275.275.275.7t-.275.7t-.7.275t-.7-.275l-5.6-5.6q-.75.6-1.725.95T9.5 16m0-2q1.875 0 3.188-1.312T14 9.5t-1.312-3.187T9.5 5T6.313 6.313T5 9.5t1.313 3.188T9.5 14"/></svg>
       <input type="text" data-filter-input placeholder="Rechercher une chanson" class="text-base">
     </div>
 
-    <a role="button"  data-turbo-frame="modal" href="{{ path('app_song_create') }}" class="hidden md:inline-block btn btn-primary w-full max-w-1/3 text-center xl:w-80" aria-label="Ajouter une chanson">
+    <button type="button"  data-action="modal#open" data-modal-url-param="{{ path('app_song_create') }}" class="hidden md:inline-block btn btn-primary w-full max-w-1/3 text-center xl:w-80" aria-label="Ajouter une chanson">
       Ajouter une chanson
-    </a>
+    </button>
   </div>
 
-  <div class="scrollable-container pr-2">
     <div>
       {{ include('/app/repertoire/_songs.html.twig') }}
     </div>
-  </div>
 
 
 
-  <a role="button" data-turbo-frame="modal" href="{{ path('app_song_create') }}" class="btn btn-primary fixed bottom-[80px] right-[10px] flex justify-center items-center md:hidden md:aria-hidden:" aria-label="Ajouter une chanson">
+  <button type="button"  data-action="modal#open" data-modal-url-param="{{ path('app_song_create') }}" class="btn btn-primary fixed bottom-[80px] right-[10px] flex justify-center items-center md:hidden md:aria-hidden:" aria-label="Ajouter une chanson">
     <i class="icon icon-add !bg-white"></i>
-  </a>
+  </button>
 
   <turbo-frame id="modal">
   </turbo-frame>
+</div>
 
 {% endblock %}

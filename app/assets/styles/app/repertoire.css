@@ -1,6 +1,4 @@
-.app-main {
-  gap : 24px;
-}
+
 
 .song-card{
   .song-info span + span::before {

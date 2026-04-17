@@ -1,10 +1,4 @@
-.app-main {
-  gap : 24px;
-}
 
-.app-main {
-  padding: 0!important;
-}
 
 .song-tag {
   display: flex;

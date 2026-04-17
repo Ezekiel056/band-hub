@@ -28,6 +28,10 @@
     mask-image: url('../images/icons/svg/add.svg');
   }
 
+  &.icon-edit {
+    mask-image: url('../images/icons/svg/edit.svg');
+  }
+
   &.icon-vote {
     background-color: var(--color-primary);
     mask-image: url('../images/icons/svg/vote.svg');
@@ -44,6 +48,11 @@
   &.icon-time {
     mask-image: url('../images/icons/svg/time.svg');
   }
+
+  &.icon-back-arrow {
+    mask-image: url('../images/icons/svg/back-arrow.svg');
+  }
+
 
 
   &.icon-option-menu {

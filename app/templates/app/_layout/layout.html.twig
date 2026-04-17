@@ -5,11 +5,13 @@
 
 
 {% block body %}
-  <div class="app-main-body">
-    {% set headerExtra %}{% block headerExtra %}{% endblock %}{% endset %}
-    {{ include('/app/_layout/_header.html.twig', { headerExtra: headerExtra }) }}
+  <div class="app-main-body" data-controller="modal">
+    {% block header %}
+      {% set headerExtra %}{% block headerExtra %}{% endblock %}{% endset %}
+      {{ include('/app/_layout/_header.html.twig', { headerExtra: headerExtra }) }}
+    {% endblock %}
 
-    <main class="app-main">
+    <main class="app-main" >
       {% block content %}{% endblock %}
     </main>
 

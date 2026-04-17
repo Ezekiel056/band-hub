@@ -1286,9 +1286,6 @@
   .h-40 {
     height: calc(var(--spacing) * 40);
   }
-  .h-60 {
-    height: calc(var(--spacing) * 60);
-  }
   .h-\[var\(--radix-select-trigger-height\)\] {
     height: var(--radix-select-trigger-height);
   }
@@ -2173,6 +2170,9 @@
   .bg-\(--color-primary\) {
     background-color: var(--color-primary);
   }
+  .bg-\(--label-color\) {
+    background-color: var(--label-color);
+  }
   .bg-\[\#1a1a1a\] {
     background-color: #1a1a1a;
   }
@@ -2588,9 +2588,6 @@
   .px-6 {
     padding-inline: calc(var(--spacing) * 6);
   }
-  .px-8 {
-    padding-inline: calc(var(--spacing) * 8);
-  }
   .px-\[0\.3rem\] {
     padding-inline: 0.3rem;
   }
@@ -2624,14 +2621,8 @@
   .pt-6 {
     padding-top: calc(var(--spacing) * 6);
   }
-  .pr-2 {
-    padding-right: calc(var(--spacing) * 2);
-  }
   .pr-8 {
     padding-right: calc(var(--spacing) * 8);
-  }
-  .pb-8 {
-    padding-bottom: calc(var(--spacing) * 8);
   }
   .pl-2 {
     padding-left: calc(var(--spacing) * 2);
@@ -3641,34 +3632,14 @@
       margin-top: calc(var(--spacing) * 10);
     }
   }
-  .md\:\!mb-4 {
-    @media (width >= 48rem) {
-      margin-bottom: calc(var(--spacing) * 4) !important;
-    }
-  }
-  .md\:\!mb-10 {
-    @media (width >= 48rem) {
-      margin-bottom: calc(var(--spacing) * 10) !important;
-    }
-  }
   .md\:mb-2 {
     @media (width >= 48rem) {
       margin-bottom: calc(var(--spacing) * 2);
     }
   }
-  .md\:mb-4 {
-    @media (width >= 48rem) {
-      margin-bottom: calc(var(--spacing) * 4);
-    }
-  }
   .md\:mb-5 {
     @media (width >= 48rem) {
       margin-bottom: calc(var(--spacing) * 5);
-    }
-  }
-  .md\:mb-6 {
-    @media (width >= 48rem) {
-      margin-bottom: calc(var(--spacing) * 6);
     }
   }
   .md\:block {
@@ -3731,11 +3702,6 @@
       width: calc(3/4 * 100%);
     }
   }
-  .md\:w-200 {
-    @media (width >= 48rem) {
-      width: calc(var(--spacing) * 200);
-    }
-  }
   .md\:w-\[320px\] {
     @media (width >= 48rem) {
       width: 320px;
@@ -3764,11 +3730,6 @@
   .md\:grid-cols-2 {
     @media (width >= 48rem) {
       grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-  }
-  .md\:grid-cols-\[200_1fr\] {
-    @media (width >= 48rem) {
-      grid-template-columns: 200 1fr;
     }
   }
   .md\:grid-cols-\[200px_1fr\] {
@@ -3944,6 +3905,11 @@
       grid-row-start: 2;
     }
   }
+  .xl\:m-4 {
+    @media (width >= 80rem) {
+      margin: calc(var(--spacing) * 4);
+    }
+  }
   .xl\:mx-0 {
     @media (width >= 80rem) {
       margin-inline: calc(var(--spacing) * 0);
@@ -4002,11 +3968,6 @@
   .xl\:w-xl {
     @media (width >= 80rem) {
       width: var(--container-xl);
-    }
-  }
-  .xl\:grid-flow-row {
-    @media (width >= 80rem) {
-      grid-auto-flow: row;
     }
   }
   .xl\:\!grid-cols-\[215px_450px\] {
@@ -4104,9 +4065,24 @@
       border-radius: var(--radius-2xl);
     }
   }
+  .xl\:rounded-4xl {
+    @media (width >= 80rem) {
+      border-radius: var(--radius-4xl);
+    }
+  }
+  .xl\:bg-\(--card-background-container\) {
+    @media (width >= 80rem) {
+      background-color: var(--card-background-container);
+    }
+  }
   .xl\:bg-white {
     @media (width >= 80rem) {
       background-color: var(--color-white);
+    }
+  }
+  .xl\:p-6 {
+    @media (width >= 80rem) {
+      padding: calc(var(--spacing) * 6);
     }
   }
   .xl\:p-20 {
@@ -4339,6 +4315,7 @@
     flex-direction: column;
     align-items: center;
     gap: 48px;
+    border: none;
     border-right: 1px solid var(--color-border);
     .navbar-logo {
       display: block;
@@ -4347,7 +4324,7 @@
       flex-direction: column;
       justify-content: start;
       align-items: stretch;
-      gap: 16px;
+      gap: 12px;
     }
   }
 }
@@ -4385,6 +4362,13 @@
     height: 32px;
   }
 }
+.header-custom {
+  min-height: 48px;
+  padding: 0 16px;
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+}
 .app-main-body {
   height: 100dvh;
   min-height: 0;
@@ -4397,7 +4381,6 @@
   flex-direction: column;
   overflow-x: hidden;
   min-height: 0;
-  padding: 16px 4px 0 16px;
 }
 @media (min-width: 768px) {
   .app-main-body {
@@ -4405,7 +4388,7 @@
     grid-template-rows: auto 1fr;
   }
   .app-main {
-    padding: 24px 4px 24px 48px;
+    padding: 24px;
   }
 }
 @media (min-width: 1280px) {
@@ -4436,6 +4419,9 @@
   &.icon-add {
     mask-image: url('../images/icons/svg/add.svg');
   }
+  &.icon-edit {
+    mask-image: url('../images/icons/svg/edit.svg');
+  }
   &.icon-vote {
     background-color: var(--color-primary);
     mask-image: url('../images/icons/svg/vote.svg');
@@ -4449,6 +4435,9 @@
   }
   &.icon-time {
     mask-image: url('../images/icons/svg/time.svg');
+  }
+  &.icon-back-arrow {
+    mask-image: url('../images/icons/svg/back-arrow.svg');
   }
   &.icon-option-menu {
     mask-image: url('../images/icons/svg/options-menu.svg');

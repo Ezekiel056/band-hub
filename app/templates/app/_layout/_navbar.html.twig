@@ -4,7 +4,7 @@
     <p class="app-nav-bar-heading">Band Hub</p>
   </div>
   <ul >
-    <li {{ currentRoute == 'app_home' ? 'class="selected"' : '' }}>
+    <li {{ selectedTab == 'home' ? 'class="selected"' : '' }}>
       <a href="{{ path('app_home') }}">
         <div>
           <i class="navbar-icon dashboard"></i>
@@ -14,7 +14,7 @@
     </li>
 
 
-    <li {{ currentRoute == 'app_repertoire' ? 'class="selected"' : '' }}>
+    <li {{ selectedTab == 'repertoire' ? 'class="selected"' : '' }}>
       <a href="{{ path('app_repertoire') }}">
         <div>
           <i class="navbar-icon repertoire"></i>
@@ -23,7 +23,7 @@
       </a>
     </li>
 
-    <li {{ currentRoute == 'app_setlists' ? 'class="selected"' : '' }}>
+    <li {{ selectedTab == 'setlists' ? 'class="selected"' : '' }}>
       <a href="{{ path('app_home') }}">
         <div>
           <i class="navbar-icon setlists"></i>
@@ -32,7 +32,7 @@
       </a>
     </li>
 
-    <li {{ currentRoute == 'app_events' ? 'class="selected"' : '' }}>
+    <li {{ selectedTab == 'events' ? 'class="selected"' : '' }}>
       <a href="{{ path('app_home') }}">
         <div>
           <i class="navbar-icon events"></i>
@@ -41,7 +41,7 @@
       </a>
     </li>
 
-    <li {{ currentRoute == 'app_finances' ? 'class="selected"' : '' }}>
+    <li {{ selectedTab == 'finances' ? 'class="selected"' : '' }}>
       <a href="{{ path('app_home') }}">
         <div>
           <i class="navbar-icon finances"></i>
@@ -50,7 +50,7 @@
       </a>
     </li>
 
-    <li {{ currentRoute == 'app_settings' ? 'class="selected"' : '' }}>
+    <li {{ selectedTab == 'settings' ? 'class="selected"' : '' }}>
       <a href="{{ path('app_home') }}">
         <div>
           <i class="navbar-icon settings"></i>

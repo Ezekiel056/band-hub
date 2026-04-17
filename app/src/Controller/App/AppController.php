@@ -5,7 +5,9 @@ namespace App\Controller\App;
 use App\Entity\Band;
 use App\Service\CurrentBandResolver;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
+
 
 
 abstract class AppController extends AbstractController
@@ -13,7 +15,8 @@ abstract class AppController extends AbstractController
     private ?Band $currentBand;
 
     public function __construct(
-        CurrentBandResolver $currentBandResolver,
+        private CurrentBandResolver $currentBandResolver,
+        private RequestStack $requestStack,
     ) {
         $this->currentBand = $currentBandResolver->resolve();
     }
@@ -23,9 +26,15 @@ abstract class AppController extends AbstractController
         return $this->currentBand;
     }
 
+
+
     protected function render(string $view, array $parameters = [], ?Response $response = null): Response
     {
         $parameters['currentBand'] = $this->getCurrentBand();
+        $route = $this->requestStack->getCurrentRequest()->attributes->get('_route');
+        $routeCollection = $this->container->get('router')->getRouteCollection();
+        $parameters['selectedTab'] = $routeCollection->get($route)?->getOption('selected_tab')?->value ?? '';
+
         return parent::render($view, $parameters, $response);
     }
 }

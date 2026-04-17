@@ -2,6 +2,7 @@
 
 namespace App\Controller\App;
 
+use App\Enum\AppMenuTabs;
 use App\Enum\SongStatus;
 use App\Repository\SongRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,7 +14,7 @@ final class RepertoireController extends AppController
 
     private $pageTitle = 'Repertoire';
 
-    #[Route('app/repertoire', name: 'app_repertoire', methods: ['GET'])]
+    #[Route('app/repertoire', name: 'app_repertoire', options: ['selected_tab' => AppMenuTabs::Repertoire], methods: ['GET'])]
     public function index(
         SongRepository $songRepository,
         Request $request,

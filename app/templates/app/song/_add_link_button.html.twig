@@ -1,0 +1,8 @@
+{% if variant == 'links' %}
+  <button type="button" data-action="modal#open" data-modal-url-param="{{path('app_song_add_link',{id: song.id})}}" class="text-(--link-color) font-extralight" aria-label="Ajouter un nouveau lien">Ajouter un lien</button>
+
+{% elseif variant == 'empty-links' %}
+  <button type="button" data-action="modal#open" data-modal-url-param="{{path('app_song_add_link',{id: song.id})}}" class="btn btn-primary !px-8 !py-2 self-start flex items-center gap-2" aria-label="Ajouter un nouveau lien"><i class="icon icon-add icon-size-small !bg-(--color-text-inverse)"></i><span>Ajouter un lien</span></button>
+
+
+{% endif %}

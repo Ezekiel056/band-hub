@@ -107,16 +107,24 @@
     <aside class="p-4">
       <div class="flex justify-between items-center  mb-6">
         <h2 class="text-xl font-bold">Liens externes</h2>
-        <button type="button" data-action="modal#open" data-modal-url-param="{{path('app_song_add_link',{id: song.id})}}" class="text-(--link-color) font-extralight" aria-label="Ajouter un nouveau lien">Ajouter un lien</button>
+        {% if song.songLinks is not empty %}
+          {{ include('/app/song/_add_link_button.html.twig', {variant : 'links'}) }}
+        {% endif %}
       </div>
       {% if song.songLinks is not empty %}
         <ul class="grid gap-6 md:grid-cols-2">
           {% for songLink in song.songLinks %}
-            {% include('app/song/_songLink.html.twig') %}
+            {% include('/app/song/_songLink.html.twig') %}
           {% endfor %}
         </ul>
       {% else %}
-        <p class="w-full md:text-center card-container card-flat text-xl  md:text-2xl p-6 flex gap-1 md:flex-col text-(--label-color)">Aucun lien à afficher.<span>Ajoutez-en dès maintenant !</span></p>
+        <div class="card p-6 flex flex-col gap-2">
+          <p class="text-2xl text-(--label-color)">Ajoute un lien externe</p>
+          <div class="flex gap-4">
+            <p class="text-(--text-color) text-base flex-1">Ajouter facilement un lien vers une vidéo youtube afin de partager avec les autres membres du groupe des version live, unplugged etc...</p>
+            {{ include('/app/song/_add_link_button.html.twig', {variant : 'empty-links'}) }}
+          </div>
+        </div>
       {% endif %}
     </aside>
   </section>

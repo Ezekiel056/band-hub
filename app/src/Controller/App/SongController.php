@@ -64,9 +64,7 @@ final class SongController extends AppController
             $entityManager->persist($link);
             $entityManager->flush();
 
-            $response = $this->redirect($referer ?? $this->generateUrl('app_song', ['id' => $song->getId()]));
-            $response->headers->set('Turbo-Visit-Control', 'reload');
-            return $response;
+            return $this->redirectToRoute('app_song', ['id' => $song->getId()]);
         }
 
         return $this->render('app/song/_addLink.html.twig' , [

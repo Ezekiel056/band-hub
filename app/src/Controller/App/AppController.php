@@ -26,6 +26,11 @@ abstract class AppController extends AbstractController
         return $this->currentBand;
     }
 
+    protected function TurboRefreshRoute(string $route, array $parameters = []) {
+        return $this->render('app/_modal_success.html.twig', [
+            'redirect' => $this->generateUrl($route, $parameters)
+        ]);
+    }
 
 
     protected function render(string $view, array $parameters = [], ?Response $response = null): Response

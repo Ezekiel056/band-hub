@@ -1,0 +1,9 @@
+<div data-controller="contextual-menu" class="relative">
+  <button type="button" aria-label="Accéder aux options"
+          data-action="contextual-menu#toggle">
+    <i class="icon icon-option-menu-side icon-size-small"></i>
+  </button>
+  <div data-contextual-menu-target="menu" class="hidden absolute right-0 bg-(--card-background) rounded-xl shadow-lg p-2 z-10">
+    {% block items %}{% endblock %}
+  </div>
+</div>

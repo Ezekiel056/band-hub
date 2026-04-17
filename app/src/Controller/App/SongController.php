@@ -47,7 +47,6 @@ final class SongController extends AppController
     }
 
     #[Route('app/song/{id}/links/add', name: 'app_song_add_link' ,methods: ['GET', 'POST'])]
-
     public function addSongLink(Song $song,Request $request, EntityManagerInterface $entityManager, YoutubeLinksResolver $youtubeLinks): Response
     {
         if ($request->isMethod('GET') && !$request->headers->has('Turbo-Frame')) {
@@ -64,12 +63,27 @@ final class SongController extends AppController
             $entityManager->persist($link);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_song', ['id' => $song->getId()]);
+            return $this->TurboRefreshRoute('app_song', ['id' => $song->getId()]);
         }
 
         return $this->render('app/song/_addLink.html.twig' , [
             'form' => $form,
             'song_id' => $song->getId(),
         ]);
+    }
+
+    #[Route('app/song/links/delete/{id}', name: 'app_song_link_delete' ,methods: ['POST'])]
+    public function deleteSongLink(SongLink $songLink, EntityManagerInterface $entityManager): Response
+    {
+
+        $song = $songLink->getSong();
+        $this->denyAccessUnlessGranted('song.view', $song);
+
+        $entityManager->remove($songLink);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_song', ['id' => $song->getId()]);
+
+
     }
 }

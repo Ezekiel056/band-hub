@@ -54,6 +54,9 @@
   }
 
 
+  &.icon-trash {
+    mask-image: url('../images/icons/svg/trash.svg');
+  }
 
   &.icon-option-menu {
     mask-image: url('../images/icons/svg/options-menu.svg');

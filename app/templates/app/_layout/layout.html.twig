@@ -5,7 +5,7 @@
 
 
 {% block body %}
-  <div class="app-main-body" data-controller="modal">
+  <div class="app-main-body" data-controller="confirm modal">
     {% block header %}
       {% set headerExtra %}{% block headerExtra %}{% endblock %}{% endset %}
       {{ include('/app/_layout/_header.html.twig', { headerExtra: headerExtra }) }}
@@ -16,6 +16,10 @@
     </main>
 
     {{ include('/app/_layout/_navbar.html.twig') }}
+
+    {# Dialogs frame #}
+    {{ include('app/components/_dialog_confirm.html.twig') }}
+    {{ include('app/components/_modal.html.twig') }}
   </div>
 
   {# ==== Gestion des TOASTS ==== #}
@@ -26,5 +30,7 @@
       </div>
     {% endfor %}
   {% endfor %}
+
+
 
 {% endblock %}

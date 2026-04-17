@@ -49,7 +49,11 @@ input,textarea, select {
     @apply outline-none;
   }
 
+}
 
+label.required::after {
+  content: ' *';
+  color: var(--color-error);
 }
 
 

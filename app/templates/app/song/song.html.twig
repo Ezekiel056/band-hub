@@ -107,24 +107,17 @@
     <aside class="p-4">
       <div class="flex justify-between items-center  mb-6">
         <h2 class="text-xl font-bold">Liens externes</h2>
-        <button type="button" class=" text-(--link-color) font-extralight" aria-label="Ajouter un nouveau lien">Ajouter un lien</button>
+        <button type="button" data-action="modal#open" data-modal-url-param="{{path('app_song_add_link',{id: song.id})}}" class="text-(--link-color) font-extralight" aria-label="Ajouter un nouveau lien">Ajouter un lien</button>
       </div>
-      <ul class="grid gap-6 md:grid-cols-2">
-        <li class="flex flex-col gap-2">
-          <iframe class="w-full rounded-4xl"  height="250" src="https://www.youtube.com/embed/LuzXr3He9NI?si=okAbC08h899Bhc3l&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-          <div class="flex justify-between items-center">
-            <h3 class="text-xl font-bold">Crawling - Original clip</h3>
-            <button type="button" aria-label="acceder aux options du lien"><i class="icon icon-option-menu-side icon-size-small"></i></button>
-          </div>
-        </li>
-        <li class="flex flex-col gap-2">
-          <iframe class="w-full rounded-4xl"  height="250" src="https://www.youtube.com/embed/LuzXr3He9NI?si=okAbC08h899Bhc3l&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-          <div class="flex justify-between items-center">
-            <h3 class="text-xl font-bold">Crawling - Original clip</h3>
-            <button type="button" aria-label="acceder aux options du lien"><i class="icon icon-option-menu-side icon-size-small"></i></button>
-          </div>
-        </li>
-      </ul>
+      {% if song.songLinks is not empty %}
+        <ul class="grid gap-6 md:grid-cols-2">
+          {% for songLink in song.songLinks %}
+            {% include('app/song/_songLink.html.twig') %}
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p class="w-full md:text-center card-container card-flat text-xl  md:text-2xl p-6 flex gap-1 md:flex-col text-(--label-color)">Aucun lien à afficher.<span>Ajoutez-en dès maintenant !</span></p>
+      {% endif %}
     </aside>
   </section>
 

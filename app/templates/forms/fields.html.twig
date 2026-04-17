@@ -29,3 +29,8 @@
         {% endfor %}
     {% endif %}
 {% endblock %}
+
+{% block form_end %}
+  <p class="text-sm italic text-(--text-color)">* Champs obligatoires</p>
+  {{ parent() }}
+{% endblock %}

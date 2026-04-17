@@ -3737,6 +3737,11 @@
       grid-template-columns: 200px 1fr;
     }
   }
+  .md\:flex-col {
+    @media (width >= 48rem) {
+      flex-direction: column;
+    }
+  }
   .md\:flex-row {
     @media (width >= 48rem) {
       flex-direction: row;
@@ -3835,6 +3840,17 @@
   .md\:py-8 {
     @media (width >= 48rem) {
       padding-block: calc(var(--spacing) * 8);
+    }
+  }
+  .md\:text-center {
+    @media (width >= 48rem) {
+      text-align: center;
+    }
+  }
+  .md\:text-2xl {
+    @media (width >= 48rem) {
+      font-size: var(--text-2xl);
+      line-height: var(--tw-leading, var(--text-2xl--line-height));
     }
   }
   .md\:text-4xl {
@@ -4520,6 +4536,10 @@ input,textarea, select {
     --tw-outline-style: none;
     outline-style: none;
   }
+}
+label.required::after {
+  content: ' *';
+  color: var(--color-error);
 }
 .toast {
   position: fixed;

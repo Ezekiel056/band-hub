@@ -67,6 +67,9 @@ class Song
     #[ORM\OneToMany(targetEntity: SongVote::class, mappedBy: 'song', orphanRemoval: true)]
     private Collection $songVotes;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $originalSongFileName = null;
+
     public function __construct()
     {
         $this->backingTracks = new ArrayCollection();
@@ -300,6 +303,18 @@ class Song
                 $songVote->setSong(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getOriginalSongFileName(): ?string
+    {
+        return $this->originalSongFileName;
+    }
+
+    public function setOriginalSongFileName(?string $originalSongFileName): static
+    {
+        $this->originalSongFileName = $originalSongFileName;
 
         return $this;
     }

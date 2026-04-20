@@ -10,4 +10,30 @@
   color : var(--text-color);
   background-color: var(--card-background-container);
 
+  &.status-tag {
+    border : 1px  var(--text-color) solid;
+    padding: .2rem 1rem;
+  }
+
+  &.song-status-tag-validated {
+    background-color: var(--color-status-validated-light);
+    color: var(--color-status-validated);
+    border-color: var(--color-status-validated);
+
+  }
+
+  &.song-status-tag-pending {
+    background-color: var(--color-status-pending-light);
+    color: var(--color-status-pending);
+    border-color: var(--color-status-pending);
+
+  }
+
+  &.song-status-tag-learning {
+    background-color: var(--color-status-learning-light);
+    color: var(--color-status-learning);
+    border-color: var(--color-status-learning);
+
+  }
+
 }

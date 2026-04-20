@@ -2,10 +2,14 @@
 
 namespace App\Controller\App;
 
+use App\Entity\BackingTrack;
 use App\Entity\Song;
 use App\Entity\SongLink;
+use App\Enum\FileUploadType;
+use App\Form\BackingTrackType;
 use App\Form\SongLinkType;
 use App\Form\SongType;
+use App\Service\AudioUploadManager;
 use App\Service\YoutubeLinksResolver;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,9 +28,8 @@ final class SongController extends AppController
             $entityManager->persist($song);
             $entityManager->flush();
 
-            $response = $this->redirect($referer ?? $this->generateUrl('app_repertoire'));
-            $response->headers->set('Turbo-Visit-Control', 'reload');
-            return $response;
+
+            return $this->TurboRefreshRoute('app_song', ['id' => $song->getId()]);
         }
 
         return $this->render('app/song/_create.html.twig', [
@@ -35,7 +38,7 @@ final class SongController extends AppController
         ]);
     }
 
-    #[Route('app/song/{id}', name: 'app_song', options:['selected_tab' => AppMenuTabs::Repertoire] ,methods: ['GET'])]
+    #[Route('app/song/{id}', name: 'app_song', requirements: ['id' => '\d+'], options:['selected_tab' => AppMenuTabs::Repertoire] ,methods: ['GET'])]
 
     public function view(Song $song): Response
     {
@@ -67,6 +70,37 @@ final class SongController extends AppController
         }
 
         return $this->render('app/song/_addLink.html.twig' , [
+            'form' => $form,
+            'song_id' => $song->getId(),
+        ]);
+    }
+    #[Route('app/song/{id}/backingtrack/add', name: 'app_song_add_backingtrack' ,methods: ['GET', 'POST'])]
+    public function addSongBackingTrack(Song $song,Request $request, EntityManagerInterface $entityManager, AudioUploadManager $audioManager): Response
+    {
+        if ($request->isMethod('GET') && !$request->headers->has('Turbo-Frame')) {
+            return $this->redirectToRoute('app_song', ['id' => $song->getId()]);
+        }
+        $this->denyAccessUnlessGranted('song.view', $song);
+
+
+        $backingTrack= new BackingTrack();
+        $form = $this->createForm(BackingTrackType::class, $backingTrack);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $file = $form->get('fileName')->getData();
+            $filename = $audioManager->ManageUploadedFile($file, FileUploadType::BackingTracks);
+            dump($filename);
+            $backingTrack->setSong($song);
+            $backingTrack->setFileName($filename);
+            $entityManager->persist($backingTrack);
+            $entityManager->flush();
+
+            $this->addFlash('success','Backing track ajouté avec success');
+
+            return $this->TurboRefreshRoute('app_song', ['id' => $song->getId()]);
+        }
+
+        return $this->render('app/song/_add_backingtrack.html.twig' , [
             'form' => $form,
             'song_id' => $song->getId(),
         ]);

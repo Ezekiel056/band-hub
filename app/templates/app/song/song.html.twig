@@ -30,8 +30,8 @@
          class="rounded-4xl h-40 object-cover object-center w-full md:rounded-2xl" >
 
     <div class="flex flex-col items-start md:h-full">
-      <div class="absolute top-8 right-8 rounded-4xl bg-green-200 text-(--color-success) p-1 px-4 md:static md:mb-2">
-        <p class="text-base text-center">Validé</p>
+      <div class="song-tag status-tag absolute top-8 right-8 rounded-4xl  {{  song.status.tagClass }}  md:static md:mb-2">
+        <p class="text-base text-center">{{  song.status.label }} </p>
       </div>
 
       <div class="flex flex-col items-center md:items-start md:flex-1 md:justify-between">
@@ -51,45 +51,41 @@
       {# audio #}
       <div class="flex justify-between items-center">
         <h2 class="text-xl font-light">Audio</h2>
-        <button type="button" class=" text-(--link-color) font-extralight" aria-label="Ajouter un fichier audio">Ajouter un fichier</button>
+        {% embed 'app/components/_contextual_menu.html.twig' with {link:'true',label:'Ajouter un fichier'} %}
+          {% block items %}
+            <button type="button" class="contextual-menu-item" >Morceau original</button>
+            <button type="button" class="contextual-menu-item" data-action="modal#open" data-modal-url-param="{{ path('app_song_add_backingtrack',{id: song.id}) }}">Backing track</button>
+          {% endblock %}
+        {% endembed %}
       </div>
 
-      <div class="card card-flat p-4 !rounded-2xl flex gap-4 items-center" >
-        <button type="button" class="btn-play-media"  aria-label="Jouer le morceau"></button>
-        <p class="text-sm flex-1 font-bold">VERSION ORIGINALE</p>
-        <button type="button" class="flex items-center" aria-label="Acceder aux options du media"><i class="icon icon-option-menu-side icon-size-small !bg-(--text-color) cursor-pointer"></i></button>
+      <div class="card card-flat p-4 !rounded-2xl flex gap-4 items-center {{ song.originalSongFileName == '' ? 'card-dotted': '' }}">
+        {%  if song.originalSongFileName != '' %}
+          <button type="button" class="btn-play-media"  aria-label="Jouer le morceau"></button>
+          <p class="text-sm flex-1 font-bold">VERSION ORIGINALE</p>
+          <button type="button" class="flex items-center" aria-label="Acceder aux options du media"><i class="icon icon-option-menu-side icon-size-small !bg-(--text-color) cursor-pointer"></i></button>
+        {% else %}
+          <p class="text-base text-(--label-color)">Ajoutez la version originale du morceau.</p>
+        {% endif %}
+
       </div>
       <h2 class="text-xl font-light">
         Backing Tracks
       </h2>
 
-      <ul class="grid gap-4 md:grid-cols-2 xl:grid-cols-1">
-        <li class="card card-flat p-4 !rounded-2xl flex gap-4 items-center">
-          <button type="button" class="btn-play-media" aria-label="Jouer le morceau"></button>
-          <div class="flex-1">
-            <p class="text-sm font-bold">GUITARE</p>
-            <p class="text-sm">Guitare principale - Standard E</p>
-          </div>
-          <button type="button" class="flex items-center" aria-label="Acceder aux options du media"><i class="icon icon-option-menu-side icon-size-small !bg-(--text-color) cursor-pointer"></i></button>
-        </li>
+      {% if song.backingTracks is not empty %}
+        <ul class="grid gap-4 md:grid-cols-2 xl:grid-cols-1">
+          {% for backingtrack in song.backingtracks %}
+            {{ include('app/song/_backingtrack.html.twig') }}
+          {% endfor %}
+        </ul>
+      {% else %}
+      <div class="card card-flat card-dotted p-4 !rounded-2xl flex gap-4 items-center ">
+        <p class="text-base text-(--label-color)">Aucun backing track pour ce morceau. Ajoutez-en un dès maintenant.</p>
+      </div>
+      {% endif %}
 
-        <li class="card card-flat p-4 !rounded-2xl flex gap-4 items-center">
-          <button type="button" class="btn-play-media" aria-label="Jouer le morceau"></button>
-          <div class="flex-1">
-            <p class="text-sm font-bold">BASSE</p>
-            <p class="text-sm">Accordage DROP C</p>
-          </div>
-          <button type="button" class="flex items-center" aria-label="Acceder aux options du media"><i class="icon icon-option-menu-side icon-size-small !bg-(--text-color) cursor-pointer"></i></button>
-        </li>
 
-        <li class="card card-flat p-4 !rounded-2xl flex gap-4 items-center">
-          <button type="button" class="btn-play-media" aria-label="Jouer le morceau"></button>
-          <div class="flex-1">
-            <p class="text-sm font-bold">BATTERIE</p>
-          </div>
-          <button type="button" class="flex items-center" aria-label="Acceder aux options du media"><i class="icon icon-option-menu-side icon-size-small !bg-(--text-color) cursor-pointer"></i></button>
-        </li>
-      </ul>
     </article>
 
     <article class="p-4 xl:row-span-2">

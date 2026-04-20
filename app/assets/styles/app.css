@@ -168,6 +168,23 @@ label.required::after {
     box-shadow: 0 1px 3px 1px var(--color-text-muted);
     transform: translateY(0);
   }
+
+  &.btn-danger {
+    background-color: var(--color-error);
+    color: var(--color-text-inverse);
+    box-shadow: 0 2px 6px 1px var(--color-text-muted);
+    transform: translateY(0);
+  }
+
+  &.btn-danger:hover {
+    box-shadow: 0 3px 10px 1px var(--color-text-muted);
+    transform: translateY(-1px);
+  }
+
+  &.btn-danger:active {
+    box-shadow: 0 1px 3px 1px var(--color-text-muted);
+    transform: translateY(0);
+  }
 }
 
 .link {
@@ -272,6 +289,37 @@ label.required::after {
   }
 }
 
+.contextual-container {
+  background-color: var(--card-background-color);
+  box-shadow: 0 0px 20px calc(100vh) rgba(0, 0, 0, 0.3);
+  position: fixed;
+  height: 33.333%;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-radius: 1rem 1rem 0 0;
+  padding: 0.5rem;
+  z-index: 10;
+
+  .contextual-menu-item {
+    display: block;
+
+    width: 100%;
+    text-align: center;
+    padding: 8px 12px;
+    font-size: 1.2rem;
+    border-radius: 1rem;
+    &:hover {
+      background-color: var(--card-background-container);
+    }
+  }
+
+  /* md (768px) */
+  @media (min-width: 768px) {
+
+  }
+}
+
 .card-container {
   border-radius: 24px;
   background-color: var(--card-background-container);
@@ -293,6 +341,10 @@ label.required::after {
 
   &.card-flat {
     filter: none;
+  }
+
+  &.card-dotted {
+    border: 2px dashed var(--color-border);
   }
 }
 
@@ -324,6 +376,21 @@ label.required::after {
  */
 
 @media (min-width:768px) {
+  .contextual-container {
+    position: absolute;
+    box-shadow: var(--card-shadow);
+    left: auto;
+    right: 0;
+    bottom: auto;
+    height: auto;
+    border-radius: 0.75rem;
+    width: max-content;
+    .contextual-menu-item {
+      text-align: left;
+      font-size: 1rem;
+      padding: 1rem;
+    }
+  }
   .navbar-tabs {
     display: block;
     overflow-x: unset;

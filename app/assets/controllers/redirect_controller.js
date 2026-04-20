@@ -6,6 +6,7 @@ export default class extends Controller {
   static values = { url: String }
 
   connect() {
+    if (document.documentElement.hasAttribute('data-turbo-preview')) return;
     visit(this.urlValue);
   }
 }

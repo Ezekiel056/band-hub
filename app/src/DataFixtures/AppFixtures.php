@@ -27,11 +27,11 @@ class AppFixtures extends Fixture
 
 
         $insturmentsMap = [
-            'guitare' => 'guitar',
-            'basse' => 'basse',
-            'batterie' => 'drums',
-            'voix' => 'vocals',
-            'piano' => 'piano',
+            'Guitare' => 'guitar',
+            'Basse' => 'basse',
+            'Batterie' => 'drums',
+            'Voix' => 'vocals',
+            'Piano' => 'piano',
         ];
         foreach ($insturmentsMap as $name => $ref) {
             $instrument = new Instrument();

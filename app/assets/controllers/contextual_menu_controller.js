@@ -18,10 +18,18 @@ export default class extends Controller {
         this.close();
       }
     };
+    this.menuClickHandler = (e) => {
+      if (e.target !== this.menuTarget) {
+        this.close();
+      }
+    };
+
     document.addEventListener('click', this.outsideClickHandler);
+    this.menuTarget.addEventListener('click', this.menuClickHandler);
   }
 
   disconnect() {
     document.removeEventListener('click', this.outsideClickHandler);
+    this.menuTarget.removeEventListener('click', this.menuClickHandler);
   }
 }

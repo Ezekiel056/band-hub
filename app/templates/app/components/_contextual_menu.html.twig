@@ -1,9 +1,15 @@
-<div data-controller="contextual-menu" class="relative">
+<div data-controller="contextual-menu" class=" relative ">
   <button type="button" aria-label="Accéder aux options"
-          data-action="contextual-menu#toggle">
-    <i class="icon icon-option-menu-side icon-size-small"></i>
+          data-action="contextual-menu#toggle"
+          class="{{ link is defined ? 'link' :'' }}">
+    {% if link is defined %}
+      {{ label ?? 'menu_contextuel'}}
+    {%  else %}
+      <i class="icon icon-option-menu-side icon-size-small"></i>
+    {% endif %}
   </button>
-  <div data-contextual-menu-target="menu" class="hidden absolute right-0 bg-(--card-background) rounded-xl shadow-lg p-2 z-10">
+{#  <div data-contextual-menu-target="menu" class="absolute card hidden mt-2 right-0 !rounded-xl  p-2 px-4 z-10 w-dvw md:w-max">#}
+  <div data-contextual-menu-target="menu" class="hidden contextual-container">
     {% block items %}{% endblock %}
   </div>
 </div>

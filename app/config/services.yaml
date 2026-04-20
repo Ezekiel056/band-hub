@@ -10,6 +10,7 @@
 
 parameters:
     artists_uploads_dir: '%kernel.project_dir%/public/uploads/artists/'
+    backingtracks_uploads_dir : '%kernel.project_dir%/var/uploads/backingtracks/'
 services:
     # default configuration for services in *this* file
     _defaults:

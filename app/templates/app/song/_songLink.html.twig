@@ -4,7 +4,7 @@
     <h3 class="text-xl font-bold">{{ songLink.label }}</h3>
     <button data-action="confirm#open" type="button" aria-label="Supprimer le lien"
             data-confirm-url-param="{{ path('app_song_link_delete', {id: songLink.id}) }}"
-            data-confirm-message-param="Voulez-vous supprimer le lien ?">
+            data-confirm-title-param="Voulez-vous supprimer le lien ?"
     <i class="icon icon-trash icon-size-small"></i></button>
   </div>
 </li>

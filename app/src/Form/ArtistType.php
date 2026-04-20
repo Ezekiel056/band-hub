@@ -8,6 +8,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class ArtistType extends AbstractType
 {
@@ -16,10 +18,15 @@ class ArtistType extends AbstractType
         $builder
             ->add('name', TextType::class, options : [
                 'label' => 'Nom',
+                'constraints' => [
+                    new NotBlank(message: 'Nom obligatoire'),
+                    new Length(max:100, maxMessage: 'Trop long (100 max)')
+                ]
             ])
             ->add('coverFileName', FileType::class, [
                 'label' => 'Image du groupe',
                 'constraints' => [
+                    new NotBlank(message: 'Image obligatoire'),
                     new File(mimeTypes : ["image/jpeg", "image/png"]),
                 ]
             ]);

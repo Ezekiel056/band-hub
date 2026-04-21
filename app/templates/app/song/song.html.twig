@@ -47,14 +47,14 @@
   </section>
 
   <section class="mb-16 xl:grid xl:grid-cols-[2fr_1fr] xl:grid-rows-2">
-    <article class="p-4 flex flex-col gap-4 xl:bg-(--card-background-container) xl:rounded-4xl xl:m-4 xl:p-6">
+    <article class="p-4 flex flex-col gap-6 xl:bg-(--card-background-container) xl:rounded-4xl xl:m-4 xl:p-6">
       {# audio #}
       <div class="flex justify-between items-center">
-        <h2 class="text-xl font-light">Audio</h2>
+        <h2 class="text-xl font-bold">Audio</h2>
         {% embed 'app/components/_contextual_menu.html.twig' with {link:'true',label:'Ajouter un fichier'} %}
           {% block items %}
             <button type="button" class="contextual-menu-item" data-action="modal#open" data-modal-url-param="{{ path('app_song_add_original_song',{id: song.id, request: song.originalSongFileName != '' ? 'edit' : '' }) }}" >Morceau original</button>
-            <button type="button" class="contextual-menu-item" data-action="modal#open" data-modal-url-param="{{ path('app_song_add_backingtrack',{id: song.id}) }}">Backing track</button>
+            <button type="button" class="contextual-menu-item" data-action="modal#open" data-modal-url-param="{{ path('app_backingtrack_add',{id:song.id}) }}">Backing track</button>
           {% endblock %}
         {% endembed %}
       </div>
@@ -72,9 +72,10 @@
         {% endif %}
 
       </div>
-      <h2 class="text-xl font-light">
-        Backing Tracks
-      </h2>
+      <div class="flex justify-between">
+        <h2 class="text-xl font-light">Backing Tracks</h2>
+          <a class ="link"  target="_blank" href="https://www.version-karaoke.fr/playback-personnalise/search.html?navcat=1&section=%2Fplayback-personnalise%2Fsearch.html&query={{ song.title }}+{{ song.artist.name }}">Rechercher sur internet</a>
+      </div>
 
       {% if song.backingTracks is not empty %}
         <ul class="grid gap-4 md:grid-cols-2 xl:grid-cols-1">
@@ -94,12 +95,8 @@
     <article class="p-4 xl:row-span-2">
       <div class="card card-flat p-4 py-8 flex flex-col gap-4 !bg-(--card-background-container)">
         <h2 class="text-xl font-bold">Paroles (Aperçu)</h2>
-        <p class="italic text-base flex-1 mb-6">
-          Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium  doloremque
-          laudantium, totam rem aperiam, eaque ipsa quae ab illo  inventer veritatis et quasi architecto beatae vitae dicta sunt  explicabo. Nemo enim ipsam voluptatem quia
-          Quis autem vel eum iure reprehenderit qui in ea voluptate
-        </p>
-        <button class="btn btn-primary self-center !px-8" aria-label="Affichez les paroles complètes">Paroles complètes →</button>
+        <p class="italic text-base flex-1 mb-6">{{ song.lyrics|u.truncate(150, '...', true) }}</p>
+        <a href="{{ path('app_song_lyrics',{id:song.id}) }}" class="btn btn-primary self-center !px-8" aria-label="Affichez les paroles complètes">Paroles complètes →</a>
       </div>
     </article>
 

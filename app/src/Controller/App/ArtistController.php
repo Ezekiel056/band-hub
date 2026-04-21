@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\App;
 
-use App\Controller\App\AppController;
+use App\Controller\UploadedFile;
 use App\Entity\Artist;
 use App\Enum\FileUploadType;
 use App\Form\ArtistType;

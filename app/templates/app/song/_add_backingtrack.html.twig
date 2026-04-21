@@ -2,7 +2,7 @@
   <div class="modal active" data-controller="modal">
     <div class="card card-popup max-w-[600px] ">
       <h2 class="text-3xl">Ajouter un backing track</h2>
-      {{ form_start(form,{action: path('app_song_add_backingtrack',{id:song_id})}) }}
+      {{ form_start(form,{action: path('app_backingtrack_add', {id:song_id})}) }}
       {{ form_row(form.label) }}
       {{ form_row(form.instrument) }}
       {{ form_row(form.fileName) }}

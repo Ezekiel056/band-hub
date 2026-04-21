@@ -20,6 +20,17 @@ use App\Enum\AppMenuTabs;
 
 final class SongController extends AppController
 {
+
+    #[Route('app/song/{id}', name: 'app_song', requirements: ['id' => '\d+'], options:['selected_tab' => AppMenuTabs::Repertoire] ,methods: ['GET'])]
+    public function view(Song $song): Response
+    {
+        $this->denyAccessUnlessGranted('song.view', $song);
+        return $this->render('app/song/song.html.twig', [
+            'song' => $song,
+            'pageTitle' => $song->getTitle() .' - '. $song->getArtist()->getName(),
+        ]);
+    }
+
     #[Route('app/song/create', name: 'app_song_create', methods: ['POST','GET']) ]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -67,16 +78,6 @@ final class SongController extends AppController
         ]);
     }
 
-    #[Route('app/song/{id}', name: 'app_song', requirements: ['id' => '\d+'], options:['selected_tab' => AppMenuTabs::Repertoire] ,methods: ['GET'])]
-
-    public function view(Song $song): Response
-    {
-        $this->denyAccessUnlessGranted('song.view', $song);
-        return $this->render('app/song/song.html.twig', [
-            'song' => $song,
-            'pageTitle' => 'Fiche chanson',
-        ]);
-    }
 
     #[Route('app/song/{id}/links/add', name: 'app_song_add_link' ,methods: ['GET', 'POST'])]
     public function addSongLink(Song $song,Request $request, EntityManagerInterface $entityManager, YoutubeLinksResolver $youtubeLinks): Response
@@ -103,85 +104,6 @@ final class SongController extends AppController
             'song_id' => $song->getId(),
         ]);
     }
-    #[Route('app/song/{id}/backingtrack/add', name: 'app_song_add_backingtrack' ,methods: ['GET', 'POST'])]
-    public function addSongBackingTrack(Song $song,Request $request, EntityManagerInterface $entityManager, AudioUploadManager $audioManager): Response
-    {
-        if ($request->isMethod('GET') && !$request->headers->has('Turbo-Frame')) {
-            return $this->redirectToRoute('app_song', ['id' => $song->getId()]);
-        }
-        $this->denyAccessUnlessGranted('song.view', $song);
-
-
-        $backingTrack= new BackingTrack();
-        $form = $this->createForm(BackingTrackType::class, $backingTrack);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $file = $form->get('fileName')->getData();
-            $filename = $audioManager->ManageUploadedFile($file, FileUploadType::BackingTracks);
-            dump($filename);
-            $backingTrack->setSong($song);
-            $backingTrack->setFileName($filename);
-            $entityManager->persist($backingTrack);
-            $entityManager->flush();
-
-            $this->addFlash('success','Backing track ajouté avec success');
-
-            return $this->TurboRefreshRoute('app_song', ['id' => $song->getId()]);
-        }
-
-        return $this->render('app/song/_add_backingtrack.html.twig' , [
-            'form' => $form,
-            'song_id' => $song->getId(),
-        ]);
-    }
-
-
-    #[Route('app/backingtrack/{id}/delete', name: 'app_backingtrack_delete' ,methods:['POST'])]
-    public function DeleteBackingTrack(BackingTrack $backingtrack,Request $request, EntityManagerInterface $entityManager): Response
-    {
-
-        $song = $backingtrack->getSong();
-        $this->denyAccessUnlessGranted('song.view', $song);
-
-        $fileName = $this->getParameter(FileUploadType::BackingTracks->value) . $backingtrack->getFileName();
-        if (file_exists($fileName)) {
-            unlink($fileName);
-        }
-
-        $entityManager->remove($backingtrack);
-        $entityManager->flush();
-
-        $this->addFlash('success','Backing track supprmé avec succèes');
-
-        return $this->redirectToRoute('app_song', ['id' => $song->getId()]);
-    }
-
-    #[Route('app/backingtrack/{id}/edit', name: 'app_backingtrack_edit' ,methods:['GET','POST'])]
-    public function EditBackingTrack(BackingTrack $backingtrack,Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $song = $backingtrack->getSong();
-        $this->denyAccessUnlessGranted('song.view', $song);
-
-
-        $form = $this->createForm(BackingTrackType::class, $backingtrack,['edit_mode' =>true]);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-
-            $entityManager->persist($backingtrack);
-            $entityManager->flush();
-
-            $this->addFlash('success','Backingtrack modifié avec success');
-
-            return $this->TurboRefreshRoute('app_song', ['id' => $song->getId()]);
-        }
-
-        return $this->render('app/song/_edit_backingtrack.html.twig' , [
-            'form' => $form,
-            'backingtrack_id' => $backingtrack->getId(),
-        ]);
-    }
-
 
     #[Route('app/song/{id}/original-song/add', name: 'app_song_add_original_song' ,methods: ['GET', 'POST'])]
     public function addSongOriginalSong(Song $song,Request $request, EntityManagerInterface $entityManager, AudioUploadManager $audioManager): Response
@@ -263,8 +185,20 @@ final class SongController extends AppController
         $entityManager->flush();
 
         return $this->redirectToRoute('app_song', ['id' => $song->getId()]);
+    }
+
+    #[Route('app/song/{id}/lyrics', name: 'app_song_lyrics' , options:['selected_tab' => AppMenuTabs::Repertoire],methods: ['GET'])]
+    public function lyrics(Song $song, EntityManagerInterface $entityManager): Response
+    {
+
+        $this->denyAccessUnlessGranted('song.view', $song);
+
+       return $this->render('app/song/lyrics.html.twig' , [
+           'song' => $song,
+           'pageTitle' => $song->getTitle() . ' - paroles',
 
 
+       ]);
     }
 
 }

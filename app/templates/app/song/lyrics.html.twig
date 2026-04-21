@@ -1,0 +1,31 @@
+{% extends 'app/_layout/layout.html.twig' %}
+{% block stylesheets %}
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+{% endblock %}
+
+{% block headerExtra %}
+
+{% endblock %}
+
+
+{% block header %}
+  <header>
+    <div class ="header-custom gap-5">
+      <a href="{{ path('app_song',{id: song.id}) }}" class="flex items-center"><i class="icon icon-back-arrow icon-size-small bg-(--label-color)"></i></a>
+      <h1 class="text-lg font-normal flex-1">Paroles de {{ song.title }}</h1>
+    </div>
+  </header>
+{% endblock %}
+
+{% block content %}
+  <div>
+    <p>
+      {{ song.lyrics }}
+    </p>
+  </div>
+{% endblock %}
+
+

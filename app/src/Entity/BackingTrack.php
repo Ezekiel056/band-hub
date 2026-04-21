@@ -26,7 +26,7 @@ class BackingTrack
     private ?string $fileName = null;
 
     #[ORM\ManyToOne(inversedBy: 'backingTracks')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
     private ?Song $song = null;
 
     #[ORM\ManyToOne]

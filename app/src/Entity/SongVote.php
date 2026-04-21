@@ -21,7 +21,7 @@ class SongVote
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\ManyToOne(inversedBy: 'songVotes')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
     private ?Song $song = null;
 
     #[ORM\ManyToOne(inversedBy: 'songVotes')]

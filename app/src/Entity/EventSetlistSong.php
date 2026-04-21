@@ -20,7 +20,7 @@ class EventSetlistSong
     private ?int $position = null;
 
     #[ORM\ManyToOne(inversedBy: 'eventSetlistSongs')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: false,onDelete: 'CASCADE')]
 
     private ?Song $song = null;
 

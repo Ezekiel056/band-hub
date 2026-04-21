@@ -21,7 +21,7 @@ class SongLink
     private ?string $link = null;
 
     #[ORM\ManyToOne(inversedBy: 'songLinks')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: false,onDelete: 'CASCADE')]
     private ?Song $song = null;
 
     public function getId(): ?int

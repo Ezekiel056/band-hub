@@ -3,6 +3,7 @@
 namespace App\Controller\App;
 
 use App\Entity\BackingTrack;
+use App\Entity\Song;
 use App\Enum\FileUploadType;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\Routing\Attribute\Route;
@@ -19,6 +20,21 @@ final class MediaController extends AppController
 
 
         $path = $this->getParameter(FileUploadType::BackingTracks->value) . $backingTrack->getFileName();
+        if (file_exists($path)) {
+            return new BinaryFileResponse($path);
+        } else {
+            throw $this->createNotFoundException('Fichier introuvable');
+        }
+    }
+
+    #[Route('/app/song/{id}/original-song', name: 'serve_original_song', requirements: ['id' => '\d+'], methods: ['GET'])]
+    public function serveOriginalSong(
+        Song $song): BinaryFileResponse
+    {
+
+        $this->denyAccessUnlessGranted('song.view',$song);
+
+        $path = $this->getParameter(FileUploadType::BackingTracks->value) . $song->getOriginalSongFileName();
         if (file_exists($path)) {
             return new BinaryFileResponse($path);
         } else {

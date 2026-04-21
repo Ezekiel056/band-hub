@@ -60,9 +60,15 @@
         {% endembed %}
       </div>
 
-      <div class="card card-flat p-4 !rounded-2xl flex gap-4 items-center {{ song.originalSongFileName == '' ? 'card-dotted': '' }}">
+      <div class="card card-flat audio-card {{ song.originalSongFileName == '' ? 'card-dotted': '' }}">
         {%  if song.originalSongFileName != '' %}
-          <button type="button" class="btn-play-media"  aria-label="Jouer le morceau"></button>
+          <button type="button"
+                  class="btn-play-media"
+                  data-action="audio-player#play"
+                  aria-label="Jouer le morceau"
+                  data-audio-url="{{ path('serve_original_song', {id: song.id}) }}"
+                  data-audio-label="{{ song.title }} - Version originale">
+          </button>
           <p class="text-sm flex-1 font-bold">VERSION ORIGINALE</p>
           <button data-action="confirm#open" type="button" aria-label="Supprimer la version originale"
                   data-confirm-url-param="{{ path('app_song_original_song_delete', {id: song.id}) }}"

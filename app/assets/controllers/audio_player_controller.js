@@ -16,7 +16,7 @@ export default class extends Controller {
       this.audio.paused ? this.audio.play() : this.audio.pause();
       const isPlaying = !this.audio.paused;
       btn.classList.toggle('playing', isPlaying);
-      btn.closest('li')?.classList.toggle('playing', isPlaying);
+      btn.closest('.audio-card')?.classList.toggle('playing', isPlaying);
       this.playPauseTarget.classList.toggle('playing', isPlaying);
       return;
     }
@@ -41,16 +41,16 @@ export default class extends Controller {
     // Fin de lecture → reset
     this.audio.addEventListener('ended', () => {
       btn.classList.remove('playing');
-      btn.closest('li')?.classList.remove('playing');
+      btn.closest('.audio-card')?.classList.remove('playing');
       this.playPauseTarget.classList.remove('playing');
       this.playerTarget.classList.add('hidden');
     });
 
     this.audio.play();
 
-    // Marque le bouton et le li comme actifs
+    // Marque le bouton et la card comme actifs
     btn.classList.add('playing');
-    btn.closest('li')?.classList.add('playing');
+    btn.closest('.audio-card')?.classList.add('playing');
     this.playPauseTarget.classList.add('playing');
   }
 
@@ -65,7 +65,7 @@ export default class extends Controller {
     const activeBtn = document.querySelector(`[data-audio-url="${this.currentValue}"]`);
     if (activeBtn) {
       activeBtn.classList.toggle('playing', isPlaying);
-      activeBtn.closest('li')?.classList.toggle('playing', isPlaying);
+      activeBtn.closest('.audio-card')?.classList.toggle('playing', isPlaying);
     }
   }
 
@@ -80,7 +80,7 @@ export default class extends Controller {
   stopAll() {
     if (this.audio) this.audio.pause();
     document.querySelectorAll('[data-audio-url]').forEach(b => b.classList.remove('playing'));
-    document.querySelectorAll('li.playing').forEach(li => li.classList.remove('playing'));
+    document.querySelectorAll('.audio-card.playing').forEach(li => li.classList.remove('playing'));
     this.playPauseTarget.classList.remove('playing');
   }
 

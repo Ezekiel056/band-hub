@@ -1,5 +1,12 @@
-<li class="card card-flat p-4 !rounded-2xl flex gap-4 items-center">
-  <button type="button" class="btn-play-media" aria-label="Jouer le morceau"></button>
+<li class="card card-flat audio-card ">
+
+  <button type="button"
+          class="btn-play-media"
+          data-action="audio-player#play"
+          aria-label="Jouer le morceau"
+          data-audio-url="{{ path('serve_backing_track', {id: backingtrack.id}) }}"
+          data-audio-label="{{ backingtrack.instrument.name }} - {{ backingtrack.label }}">
+  </button>
   <div class="flex-1">
     <p class="text-sm font-bold">{{ backingtrack.instrument.name }}</p>
     <p class="text-sm">{{ backingtrack.label }}</p>

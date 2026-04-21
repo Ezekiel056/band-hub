@@ -22,6 +22,7 @@
   </header>
 {% endblock %}
 
+{% block mainAttributes %}data-controller="audio-player"{% endblock %}
 {% block content %}
 
   <section class="p-4 flex flex-col gap-8 items-center relative md:grid md:grid-cols-[200px_1fr] xl:col-span-2">
@@ -125,6 +126,7 @@
     </aside>
   </section>
 
+  {{ include('app/song/_audio_player.html.twig') }}
 
   {# Modal popup : C'est ici que viendra s'inserer la popup d'ajout #}
 

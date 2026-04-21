@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class MediaController extends AppController
 {
-    #[Route('/app/backingtrack/{id}', name: 'serve_backing_track', requirements: ['backingTrackId' => '\d+'], methods: ['GET'])]
+    #[Route('/app/backingtrack/{id}', name: 'serve_backing_track', requirements: ['id' => '\d+'], methods: ['GET'])]
     public function serveBackingTrack(
         BackingTrack $backingTrack): BinaryFileResponse
     {

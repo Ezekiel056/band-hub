@@ -11,7 +11,8 @@
       {{ include('/app/_layout/_header.html.twig', { headerExtra: headerExtra }) }}
     {% endblock %}
 
-    <main class="app-main" >
+
+    <main class="app-main" {% block mainAttributes %}{% endblock %}>
       {% block content %}{% endblock %}
     </main>
 

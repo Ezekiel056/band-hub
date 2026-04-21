@@ -371,6 +371,42 @@ label.required::after {
   }
 }
 
+
+.audio-player-container {
+  position : fixed;
+  bottom: 5rem;
+  left: 0;
+  left: 8px;
+  right: 8px;
+  border-radius: 1rem;
+  padding: 0.5rem 1.5rem;
+
+  display: flex;
+  justify-content: start;
+  align-items: center;
+
+  background-color: color-mix(in srgb, rgb(0, 0, 0, 0.4) 60%, transparent);
+  backdrop-filter: blur(12px);
+  border: 1px solid color-mix(in srgb, var(--card-background-color) 40%, transparent);
+}
+
+.audio-player {
+  display: flex;
+  align-items: center;
+  gap : 24px;
+}
+
+.audio-card {
+  padding : 1rem;
+  border-radius: 1rem;
+  display: flex;
+  gap : 1rem;
+  align-items: center;
+  &.playing {
+    border: 2px solid var(--color-border);
+  }
+}
+
 /*
   MEDIA QUERIES
  */
@@ -421,7 +457,13 @@ label.required::after {
   .card {
     &.card-popup {
     padding: 40px 30px;
+    }
   }
+
+  .audio-player-container  {
+    bottom: .2rem;
+    left : calc((100% - 768px) / 2 + 90px);
+    right : calc((100% - 768px) / 2  + 8px);
   }
 }
 

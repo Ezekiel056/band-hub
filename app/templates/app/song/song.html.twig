@@ -17,7 +17,7 @@
     <div class ="header-custom gap-5">
       <a href="{{ app.request.headers.get('referer') ?? path('app_repertoire') }}" class="flex items-center"><i class="icon icon-back-arrow icon-size-small bg-(--label-color)"></i></a>
       <h1 class="text-lg font-normal flex-1">{{ song.title }}</h1>
-      <button type="button" data-action="modal#open" data-modal-url-param="{{ path('app_song_create') }}"><i class="icon icon-edit icon-size-small !bg-(--text-color)"></i></button>
+      <button type="button" data-action="modal#open" data-modal-url-param="{{ path('app_song_edit', {id:song.id}) }}"><i class="icon icon-edit icon-size-small !bg-(--text-color)"></i></button>
     </div>
   </header>
 {% endblock %}
@@ -53,7 +53,7 @@
         <h2 class="text-xl font-light">Audio</h2>
         {% embed 'app/components/_contextual_menu.html.twig' with {link:'true',label:'Ajouter un fichier'} %}
           {% block items %}
-            <button type="button" class="contextual-menu-item" >Morceau original</button>
+            <button type="button" class="contextual-menu-item" data-action="modal#open" data-modal-url-param="{{ path('app_song_add_original_song',{id: song.id, request: song.originalSongFileName != '' ? 'edit' : '' }) }}" >Morceau original</button>
             <button type="button" class="contextual-menu-item" data-action="modal#open" data-modal-url-param="{{ path('app_song_add_backingtrack',{id: song.id}) }}">Backing track</button>
           {% endblock %}
         {% endembed %}
@@ -63,7 +63,10 @@
         {%  if song.originalSongFileName != '' %}
           <button type="button" class="btn-play-media"  aria-label="Jouer le morceau"></button>
           <p class="text-sm flex-1 font-bold">VERSION ORIGINALE</p>
-          <button type="button" class="flex items-center" aria-label="Acceder aux options du media"><i class="icon icon-option-menu-side icon-size-small !bg-(--text-color) cursor-pointer"></i></button>
+          <button data-action="confirm#open" type="button" aria-label="Supprimer la version originale"
+                  data-confirm-url-param="{{ path('app_song_original_song_delete', {id: song.id}) }}"
+                  data-confirm-title-param="Voulez-vous supprimer la version originale ?">
+          <i class="icon icon-trash icon-size-small"></i></button>
         {% else %}
           <p class="text-base text-(--label-color)">Ajoutez la version originale du morceau.</p>
         {% endif %}

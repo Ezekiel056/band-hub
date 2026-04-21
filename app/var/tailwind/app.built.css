@@ -2850,6 +2850,9 @@
   .whitespace-pre-wrap {
     white-space: pre-wrap;
   }
+  .\!text-\(--color-error\) {
+    color: var(--color-error) !important;
+  }
   .text-\(--color-success\) {
     color: var(--color-success);
   }

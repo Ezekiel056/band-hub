@@ -25,29 +25,34 @@ class BackingTrackType extends AbstractType
                     new NotBlank(message: 'Intitulé obligatoire'),
                     new Length(max:100, maxMessage: 'Trop long (Max 100)')
                 ]
-    ])
-            ->add('fileName',FileType::class, [
-                'label' => 'Fichier audio (mp3)',
-                'attr' => ['accept' => 'audio/mpeg'],
-                'constraints' => [
-                    new NotBlank(message: 'Fichier obligatoire'),
-                    new File(mimeTypes: ['audio/mpeg'],mimeTypesMessage:'Format de ficher interdit. Fichiers mp3 uniquement'),
-                ]
             ])
+
+
             ->add('instrument', EntityType::class, [
                 'class' => Instrument::class,
                 'choice_label' => 'name',
                 'constraints' => [
                     new NotBlank(message: 'Instrument obligatoire'),
                 ]
-            ])
-        ;
+            ]);
+            if (!$options['edit_mode']) {
+                $builder->add('fileName',FileType::class, [
+                    'label' => 'Fichier audio (mp3)',
+                    'attr' => ['accept' => 'audio/mpeg'],
+                    'constraints' => [
+                        new NotBlank(message: 'Fichier obligatoire'),
+                        new File(mimeTypes: ['audio/mpeg'],mimeTypesMessage:'Format de ficher interdit. Fichiers mp3 uniquement'),
+                    ]
+                ]);
+            }
+
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => BackingTrack::class,
+            'edit_mode' => false,
         ]);
     }
 }

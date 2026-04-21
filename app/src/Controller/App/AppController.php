@@ -5,6 +5,7 @@ namespace App\Controller\App;
 use App\Entity\Band;
 use App\Service\CurrentBandResolver;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -21,6 +22,11 @@ abstract class AppController extends AbstractController
         $this->currentBand = $currentBandResolver->resolve();
     }
 
+    protected function isTurboFrameRequest(Request $request) : bool
+    {
+        return ($request->isMethod('GET') && !$request->headers->has('Turbo-Frame'));
+
+    }
     protected function getCurrentBand(): ?Band
     {
         return $this->currentBand;
@@ -41,5 +47,9 @@ abstract class AppController extends AbstractController
         $parameters['selectedTab'] = $routeCollection->get($route)?->getOption('selected_tab')?->value ?? '';
 
         return parent::render($view, $parameters, $response);
+    }
+
+    protected function DenyAcces() {
+        throw $this->createAccessDeniedException();
     }
 }

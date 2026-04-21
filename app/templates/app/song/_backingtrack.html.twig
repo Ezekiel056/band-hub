@@ -4,5 +4,17 @@
     <p class="text-sm font-bold">{{ backingtrack.instrument.name }}</p>
     <p class="text-sm">{{ backingtrack.label }}</p>
   </div>
-  <button type="button" class="flex items-center" aria-label="Acceder aux options du media"><i class="icon icon-option-menu-side icon-size-small !bg-(--text-color) cursor-pointer"></i></button>
+{#  <button type="button" class="flex items-center" aria-label="Acceder aux options du media"><i class="icon icon-option-menu-side icon-size-small !bg-(--text-color) cursor-pointer"></i></button>#}
+  {% embed 'app/components/_contextual_menu.html.twig' %}
+    {% block items %}
+      <button type="button" class="contextual-menu-item" data-action="modal#open" data-modal-url-param="{{ path('app_backingtrack_edit',{id: backingtrack.id}) }}" >Modifier</button>
+
+      <button class= "contextual-menu-item !text-(--color-error)" data-action="confirm#open" type="button" aria-label="Supprimer le backing track" data-confirm-url-param="{{ path('app_backingtrack_delete', {'id': backingtrack.id}) }}"
+              data-confirm-title-param="Supprimer le backingtrack {{ backingtrack.label}} ?"
+              data-confirm-message-param="Ceci supprimera aussi le fichier audio associé"
+      >
+      Supprimer</button>
+    {% endblock %}
+  {% endembed %}
+
 </li>

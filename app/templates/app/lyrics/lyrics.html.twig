@@ -1,0 +1,63 @@
+{% extends 'app/_layout/layout.html.twig' %}
+{% block stylesheets %}
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+{% endblock %}
+
+{% block headerExtra %}
+
+{% endblock %}
+
+
+{% block header %}
+  <header>
+    <div class ="header-custom gap-5">
+      <a href="{{ path('app_song',{id: song.id}) }}" class="flex items-center"><i class="icon icon-back-arrow icon-size-small bg-(--label-color)"></i></a>
+      <h1 class="text-lg font-normal flex-1">Paroles</h1>
+    </div>
+  </header>
+{% endblock %}
+
+{% block content %}
+  <section class="p-4 flex gap-3 items-center ">
+    {# header #}
+    <img src="{{ asset('/uploads/artists/' ~ song.artist.coverFileName) }}" alt="Image du groupe {{ song.artist.name }}"
+         class="rounded-lg h-[48px]  aspect-square object-cover object-center  md:rounded-2xl" >
+
+
+      <div class="flex flex-col items-start">
+        <h2 class="text-2xl font-bold  md:text-4xl md: font-extrabold">{{ song.title | upper }}</h2>
+        <p class="text-xl font-light text-(--color-text-primary)">{{ song.artist.name }}</p>
+      </div>
+  </section>
+
+  <turbo-frame id="song-lyrics-{{ song.id }}" class="flex-1">
+    {% set paragraphs = song.lyrics|replace({'\r\n': '\n'})|split('\n\n') %}
+    <section class="p-4">
+      <div class="card p-6 py-12 flex flex-col gap-6 mb-6 relative">
+        <div class="flex justify-end absolute right-6 top-6"><a href="{{ path('app_song_lyrics_edit',{id: song.id}) }}"><i class="icon icon-edit icon-size-small !bg-(--text-color)"></i></a></div>
+        {% for p in paragraphs %}
+          {% set lines = p|split('\n') %}
+          {% for line in lines %}
+            <p class="text-center leading-6 text-xl">
+              {{ line|trim }}
+            </p>
+          {% endfor %}
+
+          {# On dessine les séparateurs#}
+          {% if not loop.last %}
+            <div class="flex items-center justify-center my-4 opacity-40" aria-hidden="true">
+              <div class="w-8 h-px bg-(--color-primary)"></div>
+              <div class="mx-2 text-xs text-(--color-primary)">✦</div>
+              <div class="w-8 h-px bg-(--color-primary)"></div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </section >
+  </turbo-frame>
+{% endblock %}
+
+

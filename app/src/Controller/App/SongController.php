@@ -6,7 +6,7 @@ use App\Entity\BackingTrack;
 use App\Entity\Song;
 use App\Entity\SongLink;
 use App\Enum\FileUploadType;
-use App\Form\BackingTrackType;
+use App\Form\LyricsEditType;
 use App\Form\OriginalSongType;
 use App\Form\SongLinkType;
 use App\Form\SongType;
@@ -193,12 +193,37 @@ final class SongController extends AppController
 
         $this->denyAccessUnlessGranted('song.view', $song);
 
-       return $this->render('app/song/lyrics.html.twig' , [
+       return $this->render('app/lyrics/lyrics.html.twig' , [
            'song' => $song,
            'pageTitle' => $song->getTitle() . ' - paroles',
 
 
        ]);
+    }
+
+    #[Route('app/song/{id}/lyrics/edit', name: 'app_song_lyrics_edit' , options:['selected_tab' => AppMenuTabs::Repertoire],methods: ['GET','POST'])]
+    public function EditLyrics(Song $song, Request $request, EntityManagerInterface $entityManager): Response
+    {
+
+        if ($this->isTurboFrameRequest($request)) {
+            return $this->redirectToRoute('app_song_lyrics', ['id' => $song->getId()]);
+        }
+        $this->denyAccessUnlessGranted('song.view', $song);
+
+        $form = $this->createForm(LyricsEditType::class, $song);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $entityManager->persist($song);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_song_lyrics', ['id' => $song->getId()]);
+        }
+        return $this->render('app/lyrics/_edit.html.twig' , [
+            'lyrics' => $song->getLyrics(),
+            'song_id' => $song->getId(),
+            'form' => $form
+        ]);
     }
 
 }

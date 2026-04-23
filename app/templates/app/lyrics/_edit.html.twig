@@ -1,0 +1,19 @@
+<turbo-frame id="song-lyrics-{{ song_id }}" >
+  <section class="p-4 h-full">
+    <div class="card p-6 py-12 flex flex-col gap-6 mb-6 h-full">
+      {{ form_start(form,
+        {
+          attr: {class: 'h-full flex flex-col gap-6'},
+          action: path('app_song_lyrics_edit', {id: song_id})
+        })
+      }}
+      {{ form_widget(form.lyrics, {attr: {class: 'w-full flex-1 resize-none h-full'}}) }}
+      <div class="grid grid-cols-[1fr_2fr] gap-4 md:flex md:justify-end">
+        <a role="button" href="{{ path('app_song_lyrics', {id: song_id}) }}" class="btn btn-secondary text-center md:!px-20 ">Annuler</a>
+        <button class="btn btn-primary md:!px-20" type="submit">Valider</button>
+      </div>
+      {{ form_end(form) }}
+    </div>
+  </section>
+
+</turbo-frame>

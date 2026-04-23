@@ -24,9 +24,7 @@ class SongType extends AbstractType
                 'label' => 'Durée'
             ])
             ->add('bpm')
-            ->add('lyrics', TextareaType::class, options: [
-                'label' => 'Paroles',
-            ])
+
             ->add('status', options: [
                 'label' => 'Statut',
             ])

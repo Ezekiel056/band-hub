@@ -4,6 +4,7 @@
      <h2 class="text-3xl">Modifier les informations</h2>
       {{ form_start(form,{action: path('app_song_edit', {id: songId})}) }}
         {{ form_row(form.title) }}
+
         {# Artiste + bouton Add #}
         <div class="flex flex-col">
           {{ form_label(form.artist) }}

@@ -2,7 +2,6 @@
 
 namespace App\Controller\App;
 
-use App\Entity\BackingTrack;
 use App\Entity\Song;
 use App\Entity\SongLink;
 use App\Enum\FileUploadType;

@@ -16,7 +16,7 @@
       <p class="text-white text-2xl ">
         L'outil tout-en-un conçu pour les musiciens
       </p>
-      <a class="button w-full mt-28 mb-4 md:w-3/4 xl:w-xl">
+      <a href="{{ path('app_register') }}" class="button w-full mt-28 mb-4 md:w-3/4 xl:w-xl">
         Commencez dès maintenant !
       </a>
     </div>
@@ -33,7 +33,7 @@
   <article class="flex flex-col gap-12 md:mt-10 xl:col-span-4  xl:flex-col-reverse">
     <header class="flex flex-col justify-between items-center gap-20 px-5 py-10">
       <h2 class="text-white text-3xl text-center">Prêt à <br>nous rejoindre ?</h2>
-      <a class="button w-full md:w-[320px]"  href="">Explorez les possibilités de Band Hub</a>
+      <a class="button w-full md:w-[320px]"  href="{{ path('app_login') }}">Explorez les possibilités de Band Hub</a>
     </header>
     <div class="flex flex-col gap-20 text-center py-10 px-4">
       <p class="text-4xl text-black font-medium">Centralisez la gestion de votre groupe</p>
@@ -58,7 +58,7 @@
     <p class="text-white font-light text-xl">
       Des centaines de groupes utilisent déjà Band HUB pour gagner du temps et mieux s’organiser au quotidien.
     </p>
-    <a class="button large w-full md:w-1/2 xl:!py-6 xl:!text-2xl" href="">Nous rejoindre</a>
+    <a class="button large w-full md:w-1/2 xl:!py-6 xl:!text-2xl" href="{{ path('app_register') }}">Nous rejoindre</a>
   </article>
 </main>
 

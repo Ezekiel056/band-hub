@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Band;
 use App\Entity\SetlistModel;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -15,7 +16,15 @@ class SetlistModelRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, SetlistModel::class);
     }
+    public function findByBand(Band $band): array
+    {
+        $query = $this->createQueryBuilder('s')
+            ->where('s.band = :band')
+            ->setParameter('band', $band)
+            ->orderBy('s.label', 'ASC');
 
+        return $query->getQuery()->getResult();
+    }
     //    /**
     //     * @return SetlistModel[] Returns an array of SetlistModel objects
     //     */

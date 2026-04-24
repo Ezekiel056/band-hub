@@ -1,0 +1,36 @@
+<turbo-frame id="modal"  >
+  <div class="modal active" data-controller="modal">
+    <div class="card card-popup max-w-[600px] ">
+      <h2 class="text-3xl">Créer une nouvelle setlist</h2>
+      {{ form_start(form,{action: path('app_setlist_create')}) }}
+      {{ form_row(form.label) }}
+
+      {{ form_label(form.color) }}
+      <div class="flex gap-3 -mt-3">
+        {% for child in form.color %}
+          <label class="cursor-pointer">
+            {{ form_widget(child, {
+              attr: {
+                class: 'sr-only peer',
+                'aria-label': 'Sélectionner la couleur ' ~ child.vars.label
+              }
+            }) }}
+            <div
+              class="w-10 h-10 rounded-lg border transition-all
+                 peer-checked:ring-2 peer-checked:ring-purple-500
+                 peer-checked:scale-101
+                 peer-focus:ring-2 peer-focus:ring-purple-300"
+              style="background: {{ child.vars.value }}"
+            ></div>
+          </label>
+        {% endfor %}
+      </div>
+
+      <div class="flex flex-col gap-4 md:flex-row-reverse">
+        <button type="submit" class="btn btn-primary flex-1">Valider</button>
+        <button type="button" class="btn btn-secondary md:w-1/3" data-action="modal#close" >Annuler</button>
+      </div>
+      {{ form_end(form) }}
+    </div>
+  </div>
+</turbo-frame>

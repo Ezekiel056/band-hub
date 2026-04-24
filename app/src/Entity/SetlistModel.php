@@ -32,6 +32,9 @@ class SetlistModel
     #[ORM\OneToMany(targetEntity: SetlistModelSong::class, mappedBy: 'setlistModel', orphanRemoval: true)]
     private Collection $setlistModelSongs;
 
+    #[ORM\Column(length: 10)]
+    private ?string $color = null;
+
     public function __construct()
     {
         $this->setlistModelSongs = new ArrayCollection();
@@ -104,6 +107,18 @@ class SetlistModel
                 $setlistModelSong->setSetlistModel(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getColor(): ?string
+    {
+        return $this->color;
+    }
+
+    public function setColor(string $color): static
+    {
+        $this->color = $color;
 
         return $this;
     }

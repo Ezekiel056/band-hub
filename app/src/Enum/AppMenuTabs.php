@@ -6,7 +6,7 @@ enum AppMenuTabs: string
 {
     case Home   = 'home';
     case Repertoire = 'repertoire';
-    case Setlists  = 'setlilsts';
+    case Setlists  = 'setlists';
     case Events = 'events';
     case Finances = 'finances';
 

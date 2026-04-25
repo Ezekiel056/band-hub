@@ -89,6 +89,12 @@ class SetlistModel
         return $this->setlistModelSongs;
     }
 
+    public function getSetlistDuration() : int {
+        return array_reduce($this->setlistModelSongs->toArray(), function($total, SetlistModelSong $item) {
+            return $total + $item->getSong()->getDuration();
+        },0);
+    }
+
     public function addSetlistModelSong(SetlistModelSong $setlistModelSong): static
     {
         if (!$this->setlistModelSongs->contains($setlistModelSong)) {
@@ -122,4 +128,6 @@ class SetlistModel
 
         return $this;
     }
+
+
 }

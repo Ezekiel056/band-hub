@@ -1,9 +1,25 @@
 
 <li class="cursor-pointer">
   <a href={{ path('app_song', {id: 1}) }}>
-    <article class="song-card card  hover:shadow-xs hover:-translate-y-px transition-transform active:translate-y-0.5 p-4 flex justify-between">
-      {# todo : add content #}
-      content goes here
+    <article class="song-card card  hover:shadow-xs hover:-translate-y-px transition-transform active:translate-y-0.5 px-5 py-4 flex justify-start gap-3
+                    md:flex-col md:items-start">
+      <div class="flex justify-center items-center rounded w-[48px] h-[48px] md:w-[64px] md:h-[64px] "style="background-color: {{ setlist.color }}">
+        <i class="icon icon-setlist icon-size-small md:!w-[32px] md:!h-[32px]" style="background-color: color-mix(in srgb, {{ setlist.color }} 30%, black)"></i>
+      </div>
+      <div class="flex flex-col gap-0 flex-1 items-stretch">
+        <h2 class="text-xl font-bold">{{ setlist.label }}</h2>
+        <div class="flex gap-4">
+          <div class="flex gap-1 items-center ">
+            <i class="icon icon-time icon-size-extra-small !bg-(--text-color)"></i>
+            <p class="text-(--text-color)">{{ '%d:%02d'|format((setlist.getSetlistDuration // 60), (setlist.getSetlistDuration % 60)) }}
+            </p>
+          </div>
+          <div class="flex gap-1 items-center">
+            <i class="icon icon-music-note icon-size-extra-small !bg-(--text-color)"></i>
+            <p class="text-(--text-color)">{{ setlist.setlistModelSongs | length }} titres</p>
+          </div>
+        </div>
+      </div>
     </article>
   </a>
 </li>

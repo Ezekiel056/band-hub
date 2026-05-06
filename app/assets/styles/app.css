@@ -440,13 +440,9 @@ label.required::after {
     padding-left: 0;
     border-radius: unset;
 
-
-
     &.active {
       border: unset;
       border-bottom: 2px solid var(--button-background-color);
-
-
     }
   }
 
@@ -471,7 +467,5 @@ label.required::after {
 @media (min-width: 1280px ) {
   .tab-item {
     font-size: 18px;
-
-
   }
 }

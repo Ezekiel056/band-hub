@@ -33,10 +33,8 @@ class RequireBandListener implements EventSubscriberInterface
         if (!$event->isMainRequest()) {
             return;
         }
-
         $route = $event->getRequest()->attributes->get('_route');
         $bandContext = $this->parameterBag->get('band_context');
-
         // On intercepte uniquement les routes app_ concernées.
         // Par défaut, toutes les routes app_ mais on peu définir des exclusions dans le fichier
         // config/band_context.yaml
@@ -48,6 +46,7 @@ class RequireBandListener implements EventSubscriberInterface
         $band = $this->currentBandResolver->resolve();
         if (!$band) {
             $event->setResponse(
+                // on redirige vers la route définie dans band_context.yaml
                 new RedirectResponse($this->router->generate($bandContext['redirect_to']))
             );
         }

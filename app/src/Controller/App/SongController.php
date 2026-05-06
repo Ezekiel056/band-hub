@@ -19,7 +19,6 @@ use App\Enum\AppMenuTabs;
 
 final class SongController extends AppController
 {
-
     #[Route('app/song/{id}', name: 'app_song', requirements: ['id' => '\d+'], options:['selected_tab' => AppMenuTabs::Repertoire] ,methods: ['GET'])]
     public function view(Song $song): Response
     {
@@ -60,7 +59,7 @@ final class SongController extends AppController
         }
 
         $this->denyAccessUnlessGranted('song.view', $song);
-        dump($song);
+
         $form = $this->createForm(SongType::class, $song);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {

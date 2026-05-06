@@ -1,19 +1,21 @@
-<div class="audio-player-container !hidden" data-audio-player-target="player">
+<section class="audio-player-container !hidden" data-audio-player-target="player" aria-label="Lecteur audio">
   <div class="audio-player !flex-1" >
     <button type="button" class="btn-play-media"
             data-audio-player-target="playPause"
-            data-action="audio-player#togglePlayPause" >
+            data-action="audio-player#togglePlayPause"
+            aria-label="Lancer / stopper l'écoute du morceau">
     </button>
     <div class="flex flex-col flex-1">
       <p data-audio-player-target="title" class="text-white text-shadow-sm">song-title</p>
       <input type="range" min="0" max="100" value="0"
              data-audio-player-target="progress"
-             data-action="input->audio-player#seek">
+             data-action="input->audio-player#seek"
+             aria-label="Progression du morceau">
       <p class="text-white text-shadow-sm">
-        <span data-audio-player-target="currentTime">0.00</span>
-        <span> / </span>
-        <span data-audio-player-target="duration">0.00</span>
+        <span data-audio-player-target="currentTime" aria-label="Temps écoulé">0.00</span>
+        <span aria-hidden="true"> / </span>
+        <span data-audio-player-target="duration" aria-label="Durée totale">0.00</span>
       </p>
     </div>
   </div>
-</div>
+</section>

@@ -16,7 +16,7 @@ export default class extends Controller {
       this.audio.paused ? this.audio.play() : this.audio.pause();
       const isPlaying = !this.audio.paused;
       btn.classList.toggle('playing', isPlaying);
-      btn.closest('.audio-card')?.classList.toggle('playing', isPlaying);
+      btn.closest('.audio-card')?.classList.toggle('playing', isPlaying); // toggle le liseret
       this.playPauseTarget.classList.toggle('playing', isPlaying);
       return;
     }

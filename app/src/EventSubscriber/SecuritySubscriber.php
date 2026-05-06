@@ -39,6 +39,17 @@ class SecuritySubscriber implements EventSubscriberInterface
 
         ];
     }
+
+    private function CheckUser(RequestEvent $event) : void {
+        // gestion de l'utilisateur : Sommes nous toujours actif ?
+        $user = $this->security->getUser();
+        if ($user instanceof User && !$user->isActive()) {
+            $event->setResponse(
+                new RedirectResponse($this->router->generate('app_logout'))
+            );
+        }
+    }
+
     public function onKernelRequest(RequestEvent $event): void
     {
         //Evite la gestion des sous requetes, on ne traite que la requete principale
@@ -55,19 +66,21 @@ class SecuritySubscriber implements EventSubscriberInterface
         /** @var User $user */
         $user = $event->getUser();
 
-
-        // On recupere le dernier bandID du user (Le dernier band sur lequel le user a travaillé lors de sa derniere connexion)
+        // On recupere le dernier bandID du user
+        // (Le dernier band sur lequel le user a travaillé lors de sa derniere connexion)
         $bandId = $user->getLastBandId();
-        if (!$bandId) { // Si on n'a pas trouvé de BandID, on récupère le premier de la liste des bands du user, par défaut
+
+        // Si on n'a pas trouvé de BandID,
+        // on récupère le premier de la liste des bands du user, par défaut
+        if (!$bandId) {
             $band = $this->bandRepository->findFirstByUser($user);
             if ($band) {
                 $bandId = $band->getId();
             }
         }
-
-
         //$bandID est null si le user n'a pas de groupe
-        if ($bandId) { // si un band a bien été trouvé, on met a jour le user avec le LastBandID = BandID
+        // si un band a bien été trouvé, on met a jour le user avec le LastBandID = BandID
+        if ($bandId) {
             $this->requestStack->getSession()->set('current_band_id', $bandId);
             $user->setLastBandId($bandId);
             $this->entityManager->flush();
@@ -75,14 +88,6 @@ class SecuritySubscriber implements EventSubscriberInterface
 
     }
 
-    private function CheckUser(RequestEvent $event) {
-        // gestion de l'utilisateur : Sommes nous toujours actif ?
-        $user = $this->security->getUser();
-        if ($user instanceof User && !$user->isActive()) {
-            $event->setResponse(
-                new RedirectResponse($this->router->generate('app_logout'))
-            );
-        }
-    }
+
 }
 

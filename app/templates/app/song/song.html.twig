@@ -14,7 +14,7 @@
 
 {% block header %}
   <header>
-    <div class ="header-custom gap-5">
+    <div class="header-custom gap-5">
       <a href="{{ app.request.headers.get('referer') ?? path('app_repertoire') }}" class="flex items-center"><i class="icon icon-back-arrow icon-size-small bg-(--label-color)"></i></a>
       <h1 class="text-lg font-normal flex-1">{{ song.title }}</h1>
       <button type="button" data-action="modal#open" data-modal-url-param="{{ path('app_song_edit', {id:song.id}) }}"><i class="icon icon-edit icon-size-small !bg-(--text-color)"></i></button>
@@ -47,14 +47,17 @@
     </div>
   </section>
 
-  <section class="mb-16 xl:grid xl:grid-cols-[2fr_1fr] xl:grid-rows-2">
-    <article class="p-4 flex flex-col gap-6 xl:bg-(--card-background-container) xl:rounded-4xl xl:m-4 xl:p-6">
+  <section class="mb-16 xl:grid xl:grid-cols-[2fr_1fr] xl:grid-rows-2" aria-label="Détail du morceau">
+    <article class="p-4 flex flex-col gap-6 xl:bg-(--card-background-container) xl:rounded-4xl xl:m-4 xl:p-6" aria-label="Medias audio disponibles">
       {# audio #}
       <div class="flex justify-between items-centers">
         <h2 class="text-xl font-bold">Audio</h2>
         {% embed 'app/components/_contextual_menu.html.twig' with {link:'true',label:'Ajouter un fichier'} %}
           {% block items %}
-            <button type="button" class="contextual-menu-item" data-action="modal#open" data-modal-url-param="{{ path('app_song_add_original_song',{id: song.id, request: song.originalSongFileName != '' ? 'edit' : '' }) }}" >Morceau original</button>
+            <button type="button" class="contextual-menu-item" data-action="modal#open"
+                    data-modal-url-param="{{ path('app_song_add_original_song',{id: song.id, request: song.originalSongFileName != '' ? 'edit' : '' }) }}" >
+              Morceau original
+            </button>
             <button type="button" class="contextual-menu-item" data-action="modal#open" data-modal-url-param="{{ path('app_backingtrack_add',{id:song.id}) }}">Backing track</button>
           {% endblock %}
         {% endembed %}
@@ -65,7 +68,7 @@
           <button type="button"
                   class="btn-play-media"
                   data-action="audio-player#play"
-                  aria-label="Jouer le morceau"
+                  aria-label="Ecouter le morceau original"
                   data-audio-url="{{ path('serve_original_song', {id: song.id}) }}"
                   data-audio-label="{{ song.title }} - Version originale">
           </button>
@@ -77,11 +80,13 @@
         {% else %}
           <p class="text-base text-(--label-color)">Ajoutez la version originale du morceau.</p>
         {% endif %}
-
       </div>
       <div class="flex justify-between">
         <h2 class="text-xl font-light">Backing Tracks</h2>
-          <a class ="link"  target="_blank" href="https://www.version-karaoke.fr/playback-personnalise/search.html?navcat=1&section=%2Fplayback-personnalise%2Fsearch.html&query={{ song.title }}+{{ song.artist.name }}">Rechercher sur internet</a>
+          <a class ="link"  target="_blank"
+             aria-label="Rechercher un backing track sur internet (nouvel onglet)"
+             href="https://www.version-karaoke.fr/playback-personnalise/search.html?navcat=1&section=%2Fplayback-personnalise%2Fsearch.html&query={{ song.title }}+{{ song.artist.name }}">
+            Rechercher sur internet</a>
       </div>
 
       {% if song.backingTracks is not empty %}
@@ -95,8 +100,6 @@
         <p class="text-base text-(--label-color)">Aucun backing track pour ce morceau. Ajoutez-en un dès maintenant.</p>
       </div>
       {% endif %}
-
-
     </article>
 
     <article class="p-4 xl:row-span-2">
@@ -134,14 +137,4 @@
 
   {{ include('app/song/_audio_player.html.twig') }}
 
-  {# Modal popup : C'est ici que viendra s'inserer la popup d'ajout #}
-
 {% endblock %}
-
-
-{# {% embed 'app/components/_contextual_menu.html.twig' %}#}
-{#   {% block items %}#}
-{#     <button type="button" class="block w-full text-left p-2">Supprimer</button>#}
-{#     <button type="button" class="block w-full text-left p-2">Modifier</button>#}
-{#   {% endblock %}#}
-{# {% endembed %}#}

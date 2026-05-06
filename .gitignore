@@ -7,6 +7,23 @@
 /var/
 /vendor/
 
+# Build
+/node_modules/
+/public/build/
+
+# database
+/database/*
+# on autorise le dossier merise.
+!/database/merise/
+
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+
 # PHPUnit
 /phpunit.xml
 
@@ -18,20 +35,7 @@
 .Spotlight-V100
 .Trashes
 
-# IDE
-.idea/
-.vscode/
-*.swp
-*.swo
 
-# Build
-/node_modules/
-/public/build/
-
-# database
-/database/*
-# on autorise le dossier merise.
-!/database/merise/
 
 
 # PHPUnit

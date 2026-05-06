@@ -11,7 +11,8 @@
     <p class="text-sm font-bold">{{ backingtrack.instrument.name }}</p>
     <p class="text-sm">{{ backingtrack.label }}</p>
   </div>
-{#  <button type="button" class="flex items-center" aria-label="Acceder aux options du media"><i class="icon icon-option-menu-side icon-size-small !bg-(--text-color) cursor-pointer"></i></button>#}
+
+
   {% embed 'app/components/_contextual_menu.html.twig' %}
     {% block items %}
       <button type="button" class="contextual-menu-item" data-action="modal#open" data-modal-url-param="{{ path('app_backingtrack_edit',{id: backingtrack.id}) }}" >Modifier</button>

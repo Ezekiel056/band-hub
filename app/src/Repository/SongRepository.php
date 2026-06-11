@@ -18,7 +18,7 @@ class SongRepository extends ServiceEntityRepository
         parent::__construct($registry, Song::class);
     }
 
-    public function findByBand(Band $band, SongStatus $songStatus = null): array
+    public function findByBand(Band $band, ?SongStatus $songStatus = null): array
     {
         $query = $this->createQueryBuilder('s')
             ->join('s.artist', 'a')

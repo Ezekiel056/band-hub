@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\App;
 
-use App\Controller\App\AppController;
 use App\Entity\SetlistModel;
 use App\Enum\AppMenuTabs;
 use App\Form\SetlistModelType;
@@ -17,7 +16,6 @@ final class SetlistsController extends AppController
     #[Route('app/setlists', name: 'app_setlists', options: ['selected_tab' => AppMenuTabs::Setlists])]
     public function index(SetlistModelRepository $setlistModelRepository): Response
     {
-
         $setlists = $setlistModelRepository->findByBand($this->getCurrentBand());
         return $this->render('app/setlists/setlists.html.twig', [
             'setlists' => $setlists,
@@ -49,6 +47,14 @@ final class SetlistsController extends AppController
         return $this->render('app/setlists/_create.html.twig', [
             'form' => $form,
 
+        ]);
+    }
+
+    #[Route('app/setlists/{id}', name: 'app_setlist_view', options: ['selected_tab' => AppMenuTabs::Setlists], methods: ['GET']) ]
+    public function view(SetlistModel $setList,Request $request, EntityManagerInterface $entityManager): Response
+    {
+        return $this->render('app/setlists/setlist.html.twig', [
+            'pageTitle' => 'Setlists',
         ]);
     }
 

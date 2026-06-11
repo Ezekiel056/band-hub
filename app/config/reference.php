@@ -1473,6 +1473,14 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         strip?: bool|Param, // Default: false
  *     },
  * }
+ * @psalm-type LiipTestFixturesConfig = array{
+ *     cache_db?: array{
+ *         sqlite?: scalar|Param|null, // Default: null
+ *         ...<mixed>
+ *     },
+ *     keep_database_and_schema?: bool|Param, // Default: false
+ *     cache_metadata?: bool|Param, // Default: true
+ * }
  * @psalm-type ConfigType = array{
  *     imports?: ImportsConfig,
  *     parameters?: ParametersConfig,
@@ -1506,6 +1514,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         maker?: MakerConfig,
  *         symfonycasts_tailwind?: SymfonycastsTailwindConfig,
  *         intervention_image?: InterventionImageConfig,
+ *         liip_test_fixtures?: LiipTestFixturesConfig,
  *     },
  *     "when@prod"?: array{
  *         imports?: ImportsConfig,
@@ -1539,6 +1548,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         monolog?: MonologConfig,
  *         symfonycasts_tailwind?: SymfonycastsTailwindConfig,
  *         intervention_image?: InterventionImageConfig,
+ *         liip_test_fixtures?: LiipTestFixturesConfig,
  *     },
  *     ...<string, ExtensionType|array{ // extra keys must follow the when@%env% pattern or match an extension alias
  *         imports?: ImportsConfig,

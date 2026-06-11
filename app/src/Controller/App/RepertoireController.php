@@ -19,7 +19,7 @@ final class RepertoireController extends AppController
         SongRepository $songRepository,
         Request $request,
     ): Response {
-        $status  = SongStatus::tryFrom($request->query->get('status'));
+        $status  = SongStatus::tryFrom((string) $request->query->get('status'));
         $songs = $songRepository->findByBand($this->getCurrentBand(),$status);
 
         $counts = [];

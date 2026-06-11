@@ -61,7 +61,7 @@ class Band
         $this->events = new ArrayCollection();
 
         $this->createdAt = new \DateTimeImmutable();
-        $this->is_active = true;
+        $this->isActive = true;
     }
 
     public function getId(): ?int

@@ -23,7 +23,6 @@ class SecuritySubscriber implements EventSubscriberInterface
     public function __construct(
         private BandRepository         $bandRepository,
         private RequestStack           $requestStack,
-        private UserRepository         $userRepository,
         private EntityManagerInterface $entityManager,
         private Security               $security,
         private RouterInterface        $router

@@ -13,12 +13,13 @@ use Symfony\Component\Security\Http\Authorization\AccessDeniedHandlerInterface;
 class AccessDeniedHandler implements AccessDeniedHandlerInterface
 {
     public function __construct(
-        private RouterInterface $router,
-        private RequestStack $requestStack,
+        private readonly RouterInterface $router,
+        private readonly RequestStack $requestStack,
     ) {}
+
+
     public function handle(Request $request, AccessDeniedException $exception): Response
     {
-        // redirect ou flash + redirect
         $this->requestStack->getSession()->getFlashBag()->add('error', 'Vous n\'avez pas accès a cette ressource');
         $referer = $request->headers->get('referer');
         return new RedirectResponse($referer ?? $this->router->generate('app_repertoire'));

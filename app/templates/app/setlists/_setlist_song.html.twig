@@ -1,0 +1,17 @@
+<div class="flex gap-6 items-center border-b border-(--color-border) py-2" data-id="{{ setlistModelSong.id }}">
+  <i class="icon bg-(--text-color)! icon-option-menu-points icon-size-extra-small cursor-grab" data-sortable-handle></i>
+  <div class="flex flex-col gap-1 flex-auto">
+    <p class="font-bold text-lg text-(--label-color)">{{ setlistModelSong.song.title }}</p>
+    <p class="font-light text-(--text-color)">{{ setlistModelSong.song.artist.name }}</p>
+  </div>
+  <div class="flex gap-4 items-center">
+    <p class="font-light text-(--text-color)">{{ '%d:%02d'|format((setlistModelSong.song.getDuration // 60), (setlistModelSong.song.getDuration% 60)) }}</p>
+    <button type="button"
+          data-action="confirm#open"
+          data-confirm-url-param="{{ path('app_setlist_song_delete', {setlist: setlistModelSong.setlistModel.id, song: setlistModelSong.id}) }}"
+          data-confirm-title-param="Retirer ce morceau de la setlist ?"
+          aria-label="Supprimer">
+    <i class="icon bg-(--text-color)! icon-trash icon-size-extra-small cursor-pointer"></i>
+  </button>
+  </div>
+</div>

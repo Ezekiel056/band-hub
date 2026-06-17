@@ -6,7 +6,10 @@ use App\Entity\SetlistModel;
 use App\Enum\AppMenuTabs;
 use App\Form\SetlistModelType;
 use App\Repository\SetlistModelRepository;
+use App\Entity\SetlistModelSong;
+use App\Repository\SetlistModelSongRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -53,9 +56,43 @@ final class SetlistsController extends AppController
     #[Route('app/setlists/{id}', name: 'app_setlist_view', options: ['selected_tab' => AppMenuTabs::Setlists], methods: ['GET']) ]
     public function view(SetlistModel $setList,Request $request, EntityManagerInterface $entityManager): Response
     {
+        $this->denyAccessUnlessGranted('setlist.view', $setList);
         return $this->render('app/setlists/setlist.html.twig', [
+            'setlist' => $setList,
             'pageTitle' => 'Setlists',
         ]);
+    }
+
+    #[Route('app/setlists/{setlist}/songs/{song}/delete', name: 'app_setlist_song_delete', methods: ['POST'])]
+    public function deleteSong(SetlistModel $setlist, SetlistModelSong $song, EntityManagerInterface $entityManager): Response
+    {
+        $this->denyAccessUnlessGranted('setlist.view', $setlist);
+
+        if ($song->getSetlistModel() === $setlist) {
+            $entityManager->remove($song);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('app_setlist_view', ['id' => $setlist->getId()]);
+    }
+
+    #[Route('app/setlists/{id}/reorder', name: 'app_setlist_reorder', methods: ['PATCH'])]
+    public function reorder(SetlistModel $setList, Request $request, SetlistModelSongRepository $songRepository, EntityManagerInterface $entityManager): JsonResponse
+    {
+        $this->denyAccessUnlessGranted('setlist.view', $setList);
+
+        $data = json_decode($request->getContent(), true);
+
+        foreach ($data['positions'] ?? [] as $item) {
+            $song = $songRepository->find($item['id']);
+            if ($song && $song->getSetlistModel() === $setList) {
+                $song->setPosition($item['position']);
+            }
+        }
+
+        $entityManager->flush();
+
+        return new JsonResponse(null, Response::HTTP_NO_CONTENT);
     }
 
 }

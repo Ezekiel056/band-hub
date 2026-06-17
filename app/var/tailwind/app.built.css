@@ -704,6 +704,9 @@
   .m-0 {
     margin: calc(var(--spacing) * 0);
   }
+  .m-auto {
+    margin: auto;
+  }
   .-mx-1 {
     margin-inline: calc(var(--spacing) * -1);
   }
@@ -1161,6 +1164,9 @@
   .\!mb-10 {
     margin-bottom: calc(var(--spacing) * 10) !important;
   }
+  .mb-2 {
+    margin-bottom: calc(var(--spacing) * 2);
+  }
   .mb-3 {
     margin-bottom: calc(var(--spacing) * 3);
   }
@@ -1313,6 +1319,9 @@
   .h-\[48px\] {
     height: 48px;
   }
+  .h-\[64px\] {
+    height: 64px;
+  }
   .h-\[var\(--radix-select-trigger-height\)\] {
     height: var(--radix-select-trigger-height);
   }
@@ -1346,6 +1355,9 @@
   .max-h-screen {
     max-height: 100vh;
   }
+  .min-h-0 {
+    min-height: calc(var(--spacing) * 0);
+  }
   .min-h-\[140px\] {
     min-height: 140px;
   }
@@ -1361,6 +1373,9 @@
   .min-h-screen {
     min-height: 100vh;
   }
+  .w-1\/6 {
+    width: calc(1/6 * 100%);
+  }
   .w-8 {
     width: calc(var(--spacing) * 8);
   }
@@ -1373,8 +1388,20 @@
   .w-20 {
     width: calc(var(--spacing) * 20);
   }
+  .w-40 {
+    width: calc(var(--spacing) * 40);
+  }
+  .w-60 {
+    width: calc(var(--spacing) * 60);
+  }
+  .w-80 {
+    width: calc(var(--spacing) * 80);
+  }
   .w-\[48px\] {
     width: 48px;
+  }
+  .w-\[64px\] {
+    width: 64px;
   }
   .w-\[94px\] {
     width: 94px;
@@ -1453,6 +1480,9 @@
   }
   .shrink {
     flex-shrink: 1;
+  }
+  .shrink-0 {
+    flex-shrink: 0;
   }
   .flex-grow {
     flex-grow: 1;
@@ -1565,6 +1595,9 @@
   }
   .cursor-default {
     cursor: default;
+  }
+  .cursor-grab {
+    cursor: grab;
   }
   .cursor-pointer {
     cursor: pointer;
@@ -2212,6 +2245,15 @@
     --tw-border-style: solid;
     border-style: solid;
   }
+  .border-\(--border-color\) {
+    border-color: var(--border-color);
+  }
+  .border-\(--color-border\) {
+    border-color: var(--color-border);
+  }
+  .border-\(--color-divider\) {
+    border-color: var(--color-divider);
+  }
   .border-\[\#fbf0df\] {
     border-color: #fbf0df;
   }
@@ -2236,6 +2278,12 @@
   .bg-\(--label-color\) {
     background-color: var(--label-color);
   }
+  .bg-\(--text-color\) {
+    background-color: var(--text-color);
+  }
+  .bg-\(--text-color\)\! {
+    background-color: var(--text-color) !important;
+  }
   .bg-\[\#1a1a1a\] {
     background-color: #1a1a1a;
   }
@@ -2244,6 +2292,12 @@
   }
   .bg-\[\#fbf0df\] {
     background-color: #fbf0df;
+  }
+  .bg-red-100 {
+    background-color: var(--color-red-100);
+  }
+  .bg-red-100\! {
+    background-color: var(--color-red-100) !important;
   }
   .bg-red-500 {
     background-color: var(--color-red-500);
@@ -2696,6 +2750,12 @@
   .pr-8 {
     padding-right: calc(var(--spacing) * 8);
   }
+  .pb-2 {
+    padding-bottom: calc(var(--spacing) * 2);
+  }
+  .pb-4 {
+    padding-bottom: calc(var(--spacing) * 4);
+  }
   .pl-2 {
     padding-left: calc(var(--spacing) * 2);
   }
@@ -2900,6 +2960,9 @@
   .\!text-\(--color-error\) {
     color: var(--color-error) !important;
   }
+  .\!text-red-100 {
+    color: var(--color-red-100) !important;
+  }
   .text-\(--color-primary\) {
     color: var(--color-primary);
   }
@@ -2911,6 +2974,9 @@
   }
   .text-\(--color-text-secondary\) {
     color: var(--color-text-secondary);
+  }
+  .text-\(--labek-color\) {
+    color: var(--labek-color);
   }
   .text-\(--label-color\) {
     color: var(--label-color);
@@ -2935,6 +3001,12 @@
   }
   .text-gray-500 {
     color: var(--color-gray-500);
+  }
+  .text-red-100\! {
+    color: var(--color-red-100) !important;
+  }
+  .text-red-300 {
+    color: var(--color-red-300);
   }
   .text-red-500 {
     color: var(--color-red-500);
@@ -4087,6 +4159,11 @@
       margin: calc(var(--spacing) * 4);
     }
   }
+  .xl\:m-auto {
+    @media (width >= 80rem) {
+      margin: auto;
+    }
+  }
   .xl\:mx-0 {
     @media (width >= 80rem) {
       margin-inline: calc(var(--spacing) * 0);
@@ -4115,6 +4192,16 @@
   .xl\:hidden {
     @media (width >= 80rem) {
       display: none;
+    }
+  }
+  .xl\:w-3\/5 {
+    @media (width >= 80rem) {
+      width: calc(3/5 * 100%);
+    }
+  }
+  .xl\:w-4\/5 {
+    @media (width >= 80rem) {
+      width: calc(4/5 * 100%);
     }
   }
   .xl\:w-80 {
@@ -4621,6 +4708,9 @@
   }
   &.icon-option-menu {
     mask-image: url('../images/icons/svg/options-menu.svg');
+  }
+  &.icon-option-menu-points {
+    mask-image: url('../images/icons/svg/points.svg');
   }
   &.icon-option-menu-side {
     mask-image: url('../images/icons/svg/options-menu-side.svg');

@@ -72,6 +72,10 @@
     mask-image: url('../images/icons/svg/options-menu.svg');
   }
 
+  &.icon-option-menu-points {
+    mask-image: url('../images/icons/svg/points.svg');
+  }
+
   &.icon-option-menu-side {
     mask-image: url('../images/icons/svg/options-menu-side.svg');
   }

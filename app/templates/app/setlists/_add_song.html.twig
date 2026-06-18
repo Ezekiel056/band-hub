@@ -1,0 +1,35 @@
+<turbo-frame id="modal">
+  <div class="modal active" data-controller="modal">
+    <div class="card card-popup max-w-[600px] flex flex-col gap-4" data-controller="filter-list">
+      <h2 class="text-3xl">Ajouter un morceau</h2>
+
+      <div class="search-input">
+        <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M9.5 16q-2.725 0-4.612-1.888T3 9.5t1.888-4.612T9.5 3t4.613 1.888T16 9.5q0 1.1-.35 2.075T14.7 13.3l5.6 5.6q.275.275.275.7t-.275.7t-.7.275t-.7-.275l-5.6-5.6q-.75.6-1.725.95T9.5 16m0-2q1.875 0 3.188-1.312T14 9.5t-1.312-3.187T9.5 5T6.313 6.313T5 9.5t1.313 3.188T9.5 14"/></svg>
+        <input type="text" data-filter-list-target="input" data-action="input->filter-list#filter" placeholder="Rechercher un morceau" class="text-base">
+      </div>
+
+      <ul class="flex flex-col gap-2 max-h-[50dvh] overflow-y-auto">
+        {% for song in songs %}
+          <li data-filter-list-target="item" data-label="{{ song.title ~ ' ' ~ song.artist.name }}">
+            <form method="post" action="{{ path('app_setlist_song_attach', {setlist: setlist.id, song: song.id}) }}">
+              <button type="submit" class="flex gap-4 items-center w-full p-2 rounded-xl hover:bg-(--card-background-container) transition-colors text-left">
+                <img src="{{ asset('/uploads/artists/' ~ song.artist.coverFileName) }}"
+                     alt="{{ song.artist.name }}"
+                     class="w-10 h-10 rounded-lg object-cover object-center shrink-0">
+                <div class="flex flex-col flex-1 min-w-0">
+                  <p class="font-bold text-(--label-color) truncate">{{ song.title }}</p>
+                  <p class="text-sm text-(--text-color)">{{ song.artist.name }}</p>
+                </div>
+                <p class="text-sm text-(--text-color) shrink-0">{{ '%d:%02d'|format((song.getDuration // 60), (song.getDuration % 60)) }}</p>
+              </button>
+            </form>
+          </li>
+        {% else %}
+          <li class="text-(--text-color) text-center py-4">Tous les morceaux sont déjà dans la setlist.</li>
+        {% endfor %}
+      </ul>
+
+      <button type="button" class="btn btn-secondary" data-action="modal#close">Fermer</button>
+    </div>
+  </div>
+</turbo-frame>

@@ -1349,6 +1349,9 @@
   .max-h-96 {
     max-height: calc(var(--spacing) * 96);
   }
+  .max-h-\[50dvh\] {
+    max-height: 50dvh;
+  }
   .max-h-lh {
     max-height: 1lh;
   }
@@ -2089,6 +2092,9 @@
   }
   .overflow-hidden {
     overflow: hidden;
+  }
+  .overflow-y-auto {
+    overflow-y: auto;
   }
   .scroll-auto {
     scroll-behavior: auto;
@@ -3618,6 +3624,13 @@
       @media (hover: hover) {
         --tw-translate-y: -1px;
         translate: var(--tw-translate-x) var(--tw-translate-y);
+      }
+    }
+  }
+  .hover\:bg-\(--card-background-container\) {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--card-background-container);
       }
     }
   }

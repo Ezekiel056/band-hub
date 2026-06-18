@@ -3,11 +3,13 @@
 namespace App\Controller\App;
 
 use App\Entity\SetlistModel;
+use App\Entity\Song;
 use App\Enum\AppMenuTabs;
 use App\Form\SetlistModelType;
 use App\Repository\SetlistModelRepository;
 use App\Entity\SetlistModelSong;
 use App\Repository\SetlistModelSongRepository;
+use App\Repository\SongRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -98,6 +100,46 @@ final class SetlistsController extends AppController
 
         $this->addFlash('success', 'Setlist supprimée');
         return $this->redirectToRoute('app_setlists');
+    }
+
+    #[Route('app/setlists/{id}/songs/add', name: 'app_setlist_song_add', methods: ['GET'])]
+    public function addSong(SetlistModel $setList, SongRepository $songRepository): Response
+    {
+        $this->denyAccessUnlessGranted('setlist.view', $setList);
+
+        // on recupere la liste des morceaux deja presents dans la setlist
+        $alreadyInSetlist = $setList->getSetlistModelSongs()
+            ->map(fn($s) => $s->getSong()->getId())
+            ->toArray();
+
+        // on recuere tous les morceaux du groupe et on filtre pour retirer les morceaux deja présents.
+        $songs = array_filter(
+            $songRepository->findByBand($this->getCurrentBand()),
+            fn($song) => !in_array($song->getId(), $alreadyInSetlist)
+        );
+
+        return $this->render('app/setlists/_add_song.html.twig', [
+            'setlist' => $setList,
+            'songs' => $songs,
+        ]);
+    }
+
+    #[Route('app/setlists/{setlist}/songs/{song}/attach', name: 'app_setlist_song_attach', methods: ['POST'])]
+    public function attachSong(SetlistModel $setlist, Song $song, EntityManagerInterface $entityManager): Response
+    {
+        $this->denyAccessUnlessGranted('setlist.view', $setlist);
+
+        $nextPosition = $setlist->getSetlistModelSongs()->count();
+
+        $entry = new SetlistModelSong();
+        $entry->setSetlistModel($setlist);
+        $entry->setSong($song);
+        $entry->setPosition($nextPosition);
+
+        $entityManager->persist($entry);
+        $entityManager->flush();
+
+        return $this->TurboRefreshRoute('app_setlist_view', ['id' => $setlist->getId()]);
     }
 
     #[Route('app/setlists/{setlist}/songs/{song}/delete', name: 'app_setlist_song_delete', methods: ['POST'])]

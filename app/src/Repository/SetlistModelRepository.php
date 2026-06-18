@@ -25,6 +25,17 @@ class SetlistModelRepository extends ServiceEntityRepository
 
         return $query->getQuery()->getResult();
     }
+
+    public function findRecentByBand(Band $band, int $limit = 3): array
+    {
+        return $this->createQueryBuilder('s')
+            ->where('s.band = :band')
+            ->setParameter('band', $band)
+            ->orderBy('s.createdAt', 'DESC')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
     //    /**
     //     * @return SetlistModel[] Returns an array of SetlistModel objects
     //     */

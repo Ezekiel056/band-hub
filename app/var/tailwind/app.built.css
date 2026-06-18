@@ -1301,6 +1301,9 @@
     width: auto;
     height: auto;
   }
+  .h-2 {
+    height: calc(var(--spacing) * 2);
+  }
   .h-8 {
     height: calc(var(--spacing) * 8);
   }
@@ -1309,6 +1312,9 @@
   }
   .h-10 {
     height: calc(var(--spacing) * 10);
+  }
+  .h-12 {
+    height: calc(var(--spacing) * 12);
   }
   .h-24 {
     height: calc(var(--spacing) * 24);
@@ -1382,17 +1388,26 @@
   .w-1\/6 {
     width: calc(1/6 * 100%);
   }
+  .w-6 {
+    width: calc(var(--spacing) * 6);
+  }
   .w-8 {
     width: calc(var(--spacing) * 8);
   }
   .w-10 {
     width: calc(var(--spacing) * 10);
   }
+  .w-12 {
+    width: calc(var(--spacing) * 12);
+  }
   .w-16 {
     width: calc(var(--spacing) * 16);
   }
   .w-20 {
     width: calc(var(--spacing) * 20);
+  }
+  .w-28 {
+    width: calc(var(--spacing) * 28);
   }
   .w-40 {
     width: calc(var(--spacing) * 40);
@@ -1575,6 +1590,9 @@
   .scale-none {
     scale: none;
   }
+  .rotate-180 {
+    rotate: 180deg;
+  }
   .rotate-none {
     rotate: none;
   }
@@ -1719,6 +1737,9 @@
   }
   .auto-rows-min {
     grid-auto-rows: min-content;
+  }
+  .grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
   .grid-cols-\[1fr_1fr\] {
     grid-template-columns: 1fr 1fr;
@@ -2016,6 +2037,11 @@
       --tw-divide-y-reverse: 1;
     }
   }
+  .divide-\(--color-border\) {
+    :where(& > :not(:last-child)) {
+      border-color: var(--color-border);
+    }
+  }
   .place-self-auto {
     place-self: auto;
   }
@@ -2280,6 +2306,9 @@
   }
   .\!bg-white {
     background-color: var(--color-white) !important;
+  }
+  .bg-\(--color-border\) {
+    background-color: var(--color-border);
   }
   .bg-\(--color-primary\) {
     background-color: var(--color-primary);

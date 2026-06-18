@@ -4,32 +4,40 @@
 <div class="flex flex-col gap-6 p-4 mb-6 xl:m-auto xl:w-4/5">
 
   {# KPIs #}
-  <div class="grid grid-cols-3 gap-3">
+  <section aria-label="Chiffres clés">
+    <ul class="grid grid-cols-3 gap-3">
 
-    <div class="card p-4 flex flex-col gap-1">
-      <i class="icon icon-music-note icon-size-extra-small"></i>
-      <p class="text-2xl font-bold">{{ totalSongs }}</p>
-      <p class="text-xs text-(--text-color)">morceaux</p>
-    </div>
+      <li class="card p-4 flex flex-col gap-1">
+        <i class="icon icon-music-note icon-size-extra-small" aria-hidden="true"></i>
+        <dl>
+          <dd class="text-2xl font-bold">{{ totalSongs }}</dd>
+          <dt class="text-xs text-(--text-color)">morceaux</dt>
+        </dl>
+      </li>
 
-    <div class="card p-4 flex flex-col gap-1">
-      <i class="icon icon-setlist icon-size-extra-small"></i>
-      <p class="text-2xl font-bold">{{ totalSetlists }}</p>
-      <p class="text-xs text-(--text-color)">setlists</p>
-    </div>
+      <li class="card p-4 flex flex-col gap-1">
+        <i class="icon icon-setlist icon-size-extra-small" aria-hidden="true"></i>
+        <dl>
+          <dd class="text-2xl font-bold">{{ totalSetlists }}</dd>
+          <dt class="text-xs text-(--text-color)">setlists</dt>
+        </dl>
+      </li>
 
-    <div class="card p-4 flex flex-col gap-1">
-      <i class="icon icon-time icon-size-extra-small"></i>
-      <p class="text-2xl font-bold">{{ '%dh%02d'|format((totalDuration // 3600), ((totalDuration % 3600) // 60)) }}</p>
-      <p class="text-xs text-(--text-color)">répertoire</p>
-    </div>
+      <li class="card p-4 flex flex-col gap-1">
+        <i class="icon icon-time icon-size-extra-small" aria-hidden="true"></i>
+        <dl>
+          <dd class="text-2xl font-bold">{{ '%dh%02d'|format((totalDuration // 3600), ((totalDuration % 3600) // 60)) }}</dd>
+          <dt class="text-xs text-(--text-color)">répertoire</dt>
+        </dl>
+      </li>
 
-  </div>
+    </ul>
+  </section>
 
   {# Statuts #}
-  <div class="card p-4 flex flex-col gap-4">
-    <h2 class="text-lg font-bold">Répertoire par statut</h2>
-    <div class="flex flex-col gap-2">
+  <section class="card p-4 flex flex-col gap-4" aria-labelledby="heading-statuts">
+    <h2 id="heading-statuts" class="text-lg font-bold">Répertoire par statut</h2>
+    <ul class="flex flex-col gap-2">
       {% set statuses = [
         {value: 'validated', label: 'Validé',      class: 'song-status-tag-validated'},
         {value: 'learning',  label: 'À apprendre', class: 'song-status-tag-learning'},
@@ -40,66 +48,70 @@
       {% for status in statuses %}
         {% set count = countByStatus[status.value] ?? 0 %}
         {% set percent = totalSongs > 0 ? (count / totalSongs * 100)|round : 0 %}
-        <div class="flex items-center gap-3">
+        <li class="flex items-center gap-3">
           <a href="{{ path('app_repertoire', {status: status.value}) }}" class="song-tag {{ status.class }} w-32 justify-center text-xs shrink-0">{{ status.label }}</a>
-          <div class="flex-auto bg-(--color-border) rounded-full h-2">
+          <div class="flex-auto bg-(--color-border) rounded-full h-2" role="progressbar" aria-valuenow="{{ percent }}" aria-valuemin="0" aria-valuemax="100">
             <div class="h-2 rounded-full bg-(--label-color) transition-all" style="width: {{ percent }}%"></div>
           </div>
           <span class="text-sm text-(--text-color) w-6 text-right shrink-0">{{ count }}</span>
-        </div>
+        </li>
       {% endfor %}
-    </div>
-  </div>
+    </ul>
+  </section>
 
   {# Dernières setlists #}
   {% if recentSetlists is not empty %}
-  <div class="flex flex-col gap-3">
-    <h2 class="text-lg font-bold">Dernières setlists</h2>
-    <div class="flex flex-col gap-3">
+  <section class="flex flex-col gap-3" aria-labelledby="heading-setlists">
+    <h2 id="heading-setlists" class="text-lg font-bold">Dernières setlists</h2>
+    <ul class="flex flex-col gap-3">
       {% for setlist in recentSetlists %}
-        <a href="{{ path('app_setlist_view', {id: setlist.id}) }}"
-           class="card p-4 flex gap-4 items-center">
-          <div class="flex justify-center items-center rounded w-12 h-12 shrink-0"
-               style="background-color: {{ setlist.color }}">
-            <i class="icon icon-setlist icon-size-extra-small"
-               style="background-color: color-mix(in srgb, {{ setlist.color }} 30%, black)"></i>
-          </div>
-          <div class="flex flex-col flex-1 min-w-0">
-            <p class="font-bold truncate">{{ setlist.label }}</p>
-            <div class="flex gap-3 text-sm text-(--text-color)">
-              <span>{{ setlist.setlistModelSongs|length }} morceaux</span>
-              <span>{{ '%d:%02d'|format((setlist.getSetlistDuration // 60), (setlist.getSetlistDuration % 60)) }}</span>
+        <li>
+          <a href="{{ path('app_setlist_view', {id: setlist.id}) }}"
+             class="card p-4 flex gap-4 items-center">
+            <div class="flex justify-center items-center rounded w-12 h-12 shrink-0"
+                 style="background-color: {{ setlist.color }}">
+              <i class="icon icon-setlist icon-size-extra-small" aria-hidden="true"
+                 style="background-color: color-mix(in srgb, {{ setlist.color }} 30%, black)"></i>
             </div>
-          </div>
-          <i class="icon icon-back-arrow icon-size-extra-small rotate-180 shrink-0"></i>
-        </a>
+            <div class="flex flex-col flex-1 min-w-0">
+              <p class="font-bold truncate">{{ setlist.label }}</p>
+              <div class="flex gap-3 text-sm text-(--text-color)">
+                <span>{{ setlist.setlistModelSongs|length }} morceaux</span>
+                <span>{{ '%d:%02d'|format((setlist.getSetlistDuration // 60), (setlist.getSetlistDuration % 60)) }}</span>
+              </div>
+            </div>
+            <i class="icon icon-back-arrow icon-size-extra-small rotate-180 shrink-0" aria-hidden="true"></i>
+          </a>
+        </li>
       {% endfor %}
-    </div>
-  </div>
+    </ul>
+  </section>
   {% endif %}
 
   {# Morceaux à apprendre #}
   {% if learningSongs is not empty %}
-  <div class="flex flex-col gap-3">
-    <h2 class="text-lg font-bold">À apprendre</h2>
-    <div class="card flex flex-col divide-y divide-(--color-border) overflow-hidden">
+  <section class="flex flex-col gap-3" aria-labelledby="heading-learning">
+    <h2 id="heading-learning" class="text-lg font-bold">À apprendre</h2>
+    <ul class="card flex flex-col divide-y divide-(--color-border) overflow-hidden">
       {% for song in learningSongs %}
-        <a href="{{ path('app_song', {id: song.id}) }}"
-           class="flex gap-4 items-center p-3 hover:bg-(--card-background-container) transition-colors">
-          <img src="{{ asset('/uploads/artists/' ~ song.artist.coverFileName) }}"
-               alt="{{ song.artist.name }}"
-               class="w-10 h-10 rounded-lg object-cover object-center shrink-0">
-          <div class="flex flex-col flex-1 min-w-0">
-            <p class="font-bold truncate">{{ song.title }}</p>
-            <p class="text-sm text-(--text-color)">{{ song.artist.name }}</p>
-          </div>
-          <p class="text-sm text-(--text-color) shrink-0">
-            {{ '%d:%02d'|format((song.getDuration // 60), (song.getDuration % 60)) }}
-          </p>
-        </a>
+        <li>
+          <a href="{{ path('app_song', {id: song.id}) }}"
+             class="flex gap-4 items-center p-3 hover:bg-(--card-background-container) transition-colors">
+            <img src="{{ asset('/uploads/artists/' ~ song.artist.coverFileName) }}"
+                 alt="{{ song.artist.name }}"
+                 class="w-10 h-10 rounded-lg object-cover object-center shrink-0">
+            <div class="flex flex-col flex-1 min-w-0">
+              <p class="font-bold truncate">{{ song.title }}</p>
+              <p class="text-sm text-(--text-color)">{{ song.artist.name }}</p>
+            </div>
+            <p class="text-sm text-(--text-color) shrink-0">
+              {{ '%d:%02d'|format((song.getDuration // 60), (song.getDuration % 60)) }}
+            </p>
+          </a>
+        </li>
       {% endfor %}
-    </div>
-  </div>
+    </ul>
+  </section>
   {% endif %}
 
 </div>

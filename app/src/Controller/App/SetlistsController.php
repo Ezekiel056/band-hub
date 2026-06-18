@@ -35,6 +35,7 @@ final class SetlistsController extends AppController
         }
 
         $setlist = new SetlistModel();
+        $setlist->setColor('#ECE4FD');
         $form = $this->createForm(SetlistModelType::class, $setlist);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -61,6 +62,42 @@ final class SetlistsController extends AppController
             'setlist' => $setList,
             'pageTitle' => 'Setlists',
         ]);
+    }
+
+    #[Route('app/setlists/{id}/edit', name: 'app_setlist_edit', methods: ['GET', 'POST'])]
+    public function edit(SetlistModel $setList, Request $request, EntityManagerInterface $entityManager): Response
+    {
+        if ($this->isTurboFrameRequest($request)) {
+            return $this->redirectToRoute('app_setlist_view', ['id' => $setList->getId()]);
+        }
+
+        $this->denyAccessUnlessGranted('setlist.view', $setList);
+
+        $form = $this->createForm(SetlistModelType::class, $setList);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Setlist modifiée avec succès');
+            return $this->TurboRefreshRoute('app_setlist_view', ['id' => $setList->getId()]);
+        }
+
+        return $this->render('app/setlists/_edit.html.twig', [
+            'form' => $form,
+            'setlist' => $setList,
+        ]);
+    }
+
+    #[Route('app/setlists/{id}/delete', name: 'app_setlist_delete', methods: ['POST'])]
+    public function delete(SetlistModel $setList, EntityManagerInterface $entityManager): Response
+    {
+        $this->denyAccessUnlessGranted('setlist.view', $setList);
+
+        $entityManager->remove($setList);
+        $entityManager->flush();
+
+        $this->addFlash('success', 'Setlist supprimée');
+        return $this->redirectToRoute('app_setlists');
     }
 
     #[Route('app/setlists/{setlist}/songs/{song}/delete', name: 'app_setlist_song_delete', methods: ['POST'])]

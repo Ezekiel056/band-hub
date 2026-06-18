@@ -14,7 +14,7 @@
 {% block header %}
   <header>
     <div class="header-custom gap-5">
-      <a href="{{ app.request.headers.get('referer') ?? path('app_setlists') }}" class="flex items-center "><i class="icon icon-back-arrow icon-size-small bg-(--label-color)"></i></a>
+      <a href="{{ path('app_setlists') }}" class="flex items-center "><i class="icon icon-back-arrow icon-size-small bg-(--label-color)"></i></a>
       <h1 class="text-lg font-normal flex-1">{{ setlist.label }}</h1>
 {#      <button type="button" data-action="modal#open" data-modal-url-param="{{ path('app_song_edit', {id:song.id}) }}"><i class="icon icon-edit icon-size-small !bg-(--text-color)"></i></button>#}
     </div>
@@ -54,7 +54,21 @@
              </div>
            </div>
 
-           <a href=""><i class="icon icon-option-menu-side icon-size-small"></i></a>
+           {% embed 'app/components/_contextual_menu.html.twig' %}
+             {% block items %}
+               <button type="button" class="contextual-menu-item" data-action="modal#open"
+                       data-modal-url-param="{{ path('app_setlist_edit', {id: setlist.id}) }}">
+                 Modifier
+               </button>
+               <button type="button" class="contextual-menu-item text-red-400"
+                       data-action="confirm#open"
+                       data-confirm-url-param="{{ path('app_setlist_delete', {id: setlist.id}) }}"
+                       data-confirm-title-param="Supprimer la setlist « {{ setlist.label }} » ?"
+                       data-confirm-message-param="Cette action est irréversible.">
+                 Supprimer
+               </button>
+             {% endblock %}
+           {% endembed %}
          </div>
       </div>
 

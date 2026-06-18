@@ -34,7 +34,6 @@ class SetlistModelType extends AbstractType
                 ],
                 'expanded' => true,
                 'multiple' => false,
-                'data' => '#ECE4FD',
             ]);
 
         ;

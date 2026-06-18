@@ -1,5 +1,5 @@
 <div class="flex gap-6 items-center border-b border-(--color-border) py-2" data-id="{{ setlistModelSong.id }}">
-  <i class="icon bg-(--text-color)! icon-option-menu-points icon-size-extra-small cursor-grab" data-sortable-handle></i>
+  <i class="icon bg-(--text-color)! icon-option-menu-points icon-size-extra-small cursor-grab" title="Changer l'ordre" aria-hidden="true" data-sortable-handle></i>
   <div class="flex flex-col gap-1 flex-auto">
     <p class="font-bold text-lg text-(--label-color)">{{ setlistModelSong.song.title }}</p>
     <p class="font-light text-(--text-color)">{{ setlistModelSong.song.artist.name }}</p>
@@ -10,8 +10,10 @@
           data-action="confirm#open"
           data-confirm-url-param="{{ path('app_setlist_song_delete', {setlist: setlistModelSong.setlistModel.id, song: setlistModelSong.id}) }}"
           data-confirm-title-param="Retirer ce morceau de la setlist ?"
-          aria-label="Supprimer">
-    <i class="icon bg-(--text-color)! icon-trash icon-size-extra-small cursor-pointer"></i>
+          aria-label="Supprimer le morceau de la setlist"
+          title="Supprimer"
+          class="flex item-item center">
+    <i class="icon bg-(--text-color)! icon-trash icon-size-extra-small cursor-pointer" aria-hidden="true"></i>
   </button>
   </div>
 </div>

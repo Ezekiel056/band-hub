@@ -704,9 +704,6 @@
   .m-0 {
     margin: calc(var(--spacing) * 0);
   }
-  .m-auto {
-    margin: auto;
-  }
   .-mx-1 {
     margin-inline: calc(var(--spacing) * -1);
   }
@@ -721,9 +718,6 @@
   }
   .my-1 {
     margin-block: calc(var(--spacing) * 1);
-  }
-  .my-2 {
-    margin-block: calc(var(--spacing) * 2);
   }
   .my-4 {
     margin-block: calc(var(--spacing) * 4);
@@ -1385,9 +1379,6 @@
   .min-h-screen {
     min-height: 100vh;
   }
-  .w-1\/6 {
-    width: calc(1/6 * 100%);
-  }
   .w-6 {
     width: calc(var(--spacing) * 6);
   }
@@ -1409,11 +1400,11 @@
   .w-28 {
     width: calc(var(--spacing) * 28);
   }
-  .w-40 {
-    width: calc(var(--spacing) * 40);
+  .w-30 {
+    width: calc(var(--spacing) * 30);
   }
-  .w-60 {
-    width: calc(var(--spacing) * 60);
+  .w-32 {
+    width: calc(var(--spacing) * 32);
   }
   .w-80 {
     width: calc(var(--spacing) * 80);
@@ -2280,9 +2271,6 @@
     --tw-border-style: solid;
     border-style: solid;
   }
-  .border-\(--border-color\) {
-    border-color: var(--border-color);
-  }
   .border-\(--color-border\) {
     border-color: var(--color-border);
   }
@@ -2316,9 +2304,6 @@
   .bg-\(--label-color\) {
     background-color: var(--label-color);
   }
-  .bg-\(--text-color\) {
-    background-color: var(--text-color);
-  }
   .bg-\(--text-color\)\! {
     background-color: var(--text-color) !important;
   }
@@ -2330,12 +2315,6 @@
   }
   .bg-\[\#fbf0df\] {
     background-color: #fbf0df;
-  }
-  .bg-red-100 {
-    background-color: var(--color-red-100);
-  }
-  .bg-red-100\! {
-    background-color: var(--color-red-100) !important;
   }
   .bg-red-500 {
     background-color: var(--color-red-500);
@@ -2704,9 +2683,6 @@
   .object-top-right {
     object-position: right top;
   }
-  .p-0 {
-    padding: calc(var(--spacing) * 0);
-  }
   .p-1 {
     padding: calc(var(--spacing) * 1);
   }
@@ -3001,9 +2977,6 @@
   .\!text-\(--color-error\) {
     color: var(--color-error) !important;
   }
-  .\!text-red-100 {
-    color: var(--color-red-100) !important;
-  }
   .text-\(--color-primary\) {
     color: var(--color-primary);
   }
@@ -3015,9 +2988,6 @@
   }
   .text-\(--color-text-secondary\) {
     color: var(--color-text-secondary);
-  }
-  .text-\(--labek-color\) {
-    color: var(--labek-color);
   }
   .text-\(--label-color\) {
     color: var(--label-color);
@@ -3042,12 +3012,6 @@
   }
   .text-gray-500 {
     color: var(--color-gray-500);
-  }
-  .text-red-100\! {
-    color: var(--color-red-100) !important;
-  }
-  .text-red-300 {
-    color: var(--color-red-300);
   }
   .text-red-400 {
     color: var(--color-red-400);
@@ -3670,13 +3634,6 @@
       }
     }
   }
-  .hover\:text-red-600 {
-    &:hover {
-      @media (hover: hover) {
-        color: var(--color-red-600);
-      }
-    }
-  }
   .hover\:underline {
     &:hover {
       @media (hover: hover) {
@@ -4252,11 +4209,6 @@
       display: none;
     }
   }
-  .xl\:w-3\/5 {
-    @media (width >= 80rem) {
-      width: calc(3/5 * 100%);
-    }
-  }
   .xl\:w-4\/5 {
     @media (width >= 80rem) {
       width: calc(4/5 * 100%);
@@ -4541,6 +4493,10 @@
   --color-status-validated-light: var(--color-success-light);
   --color-status-learning: var(--color-warning);
   --color-status-learning-light: var(--color-warning-light);
+  --color-status-rejected: var(--color-error);
+  --color-status-rejected-light: #FDECEA;
+  --color-status-archived: #757575;
+  --color-status-archived-light: #EEEEEE;
   --color-background: #F5F6FA;
   --color-background-alt: #F0F1F3;
   --color-surface: #EEEEF0;
@@ -4821,6 +4777,45 @@
   }
   &.settings {
     mask-image: url('../images/icons/svg/app_navbar/settings.svg');
+  }
+}
+.song-tag {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  font-size: 1rem;
+  padding: .5rem 1rem;
+  border-radius: 2rem;
+  color: var(--text-color);
+  background-color: var(--card-background-container);
+  &.status-tag {
+    border: 1px var(--text-color) solid;
+    padding: .2rem 1rem;
+  }
+  &.song-status-tag-validated {
+    background-color: var(--color-status-validated-light);
+    color: var(--color-status-validated);
+    border-color: var(--color-status-validated);
+  }
+  &.song-status-tag-pending {
+    background-color: var(--color-status-pending-light);
+    color: var(--color-status-pending);
+    border-color: var(--color-status-pending);
+  }
+  &.song-status-tag-learning {
+    background-color: var(--color-status-learning-light);
+    color: var(--color-status-learning);
+    border-color: var(--color-status-learning);
+  }
+  &.song-status-tag-rejected {
+    background-color: var(--color-status-rejected-light);
+    color: var(--color-status-rejected);
+    border-color: var(--color-status-rejected);
+  }
+  &.song-status-tag-archived {
+    background-color: var(--color-status-archived-light);
+    color: var(--color-status-archived);
+    border-color: var(--color-status-archived);
   }
 }
 :root {

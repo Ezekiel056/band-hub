@@ -21,7 +21,13 @@
     --color-status-validated-light: var(--color-success-light);
 
     --color-status-learning: var(--color-warning);
-    --color-status-learning-light: var(--color-warning-light) ;
+    --color-status-learning-light: var(--color-warning-light);
+
+    --color-status-rejected: var(--color-error);
+    --color-status-rejected-light: #FDECEA;
+
+    --color-status-archived: #757575;
+    --color-status-archived-light: #EEEEEE;
 
     --color-background: #F5F6FA;
     --color-background-alt: #F0F1F3;

@@ -1,0 +1,73 @@
+{% extends 'app/_layout/layout.html.twig' %}
+
+{% block content %}
+<div class="flex flex-col gap-6 p-4 mb-6 xl:m-auto xl:w-4/5">
+
+  {# Profil #}
+  <section class="card p-6 flex flex-col gap-4" aria-labelledby="heading-profile">
+    <h2 id="heading-profile" class="text-lg font-bold">Profil</h2>
+    {{ form_start(profileForm, {action: path('app_settings_profile')}) }}
+      {{ form_row(profileForm.username) }}
+      {{ form_row(profileForm.email) }}
+      <div class="flex justify-end">
+        <button type="submit" class="btn btn-primary">Enregistrer</button>
+      </div>
+    {{ form_end(profileForm) }}
+  </section>
+
+  {# Mot de passe #}
+  <section class="card p-6 flex flex-col gap-4" aria-labelledby="heading-password">
+    <h2 id="heading-password" class="text-lg font-bold">Mot de passe</h2>
+    {{ form_start(passwordForm, {action: path('app_settings_password')}) }}
+      {{ form_row(passwordForm.currentPassword) }}
+      {{ form_row(passwordForm.newPassword.first) }}
+      {{ form_row(passwordForm.newPassword.second) }}
+      <div class="flex justify-end">
+        <button type="submit" class="btn btn-primary">Modifier</button>
+      </div>
+    {{ form_end(passwordForm) }}
+  </section>
+
+  {# Groupes #}
+  {% if bands|length > 1 %}
+  <section class="card p-6 flex flex-col gap-4" aria-labelledby="heading-bands">
+    <h2 id="heading-bands" class="text-lg font-bold">Changer de groupe</h2>
+    <ul class="flex flex-col divide-y divide-(--color-border) overflow-hidden rounded-xl border border-(--color-border)">
+      {% for member in bands %}
+        {% set band = member.band %}
+        <li class="flex items-center gap-4 p-3 {{ band.id == currentBand.id ? 'bg-(--card-background-container)' : '' }}">
+          <div class="flex flex-col flex-1 min-w-0">
+            <p class="font-bold truncate">{{ band.name }}</p>
+            <p class="text-xs text-(--text-color)">{{ member.roles|join(', ') }}</p>
+          </div>
+          {% if band.id == currentBand.id %}
+            <span class="text-xs text-(--text-color) font-bold">Actif</span>
+          {% else %}
+            <form method="post" action="{{ path('app_settings_switch_band', {id: band.id}) }}">
+              <button type="submit" class="btn btn-secondary text-sm py-2 px-4">Rejoindre</button>
+            </form>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endif %}
+
+  {# Déconnexion #}
+  <section class="card p-6 flex flex-col gap-3" aria-labelledby="heading-logout">
+    <h2 id="heading-logout" class="text-lg font-bold">Session</h2>
+    <p class="text-sm text-(--text-color)">Vous êtes connecté en tant que <strong>{{ app.user.username }}</strong>.</p>
+    <div>
+      <button type="button"
+              class="btn btn-secondary"
+              data-action="confirm#open"
+              data-confirm-url-param="{{ path('app_logout') }}"
+              data-confirm-title-param="Se déconnecter ?"
+              data-confirm-message-param="Vous allez être redirigé vers la page de connexion.">
+        Se déconnecter
+      </button>
+    </div>
+  </section>
+
+</div>
+{% endblock %}

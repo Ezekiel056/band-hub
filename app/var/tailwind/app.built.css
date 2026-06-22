@@ -2292,6 +2292,9 @@
   .\!bg-white {
     background-color: var(--color-white) !important;
   }
+  .bg-\(--card-background-container\) {
+    background-color: var(--card-background-container);
+  }
   .bg-\(--color-border\) {
     background-color: var(--color-border);
   }

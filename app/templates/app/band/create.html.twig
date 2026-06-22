@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+  <link rel="stylesheet" href="{{ asset('styles/security.css') }}">
+{% endblock %}
+
+{% block title %}BandHub - Créer un groupe{% endblock %}
+
+{% block body %}
+  <div class="flex flex-col w-full gap-7 md:gap-4 md:h-dvh xl:justify-center xl:items-center">
+
+    <header class="flex flex-col items-center justify-center gap-3 w-full text-center py-18 md:py-8 xl:hidden">
+      <img src="{{ asset('/images/brand-logo.png') }}" alt="BandHub logo" class="w-[94px]">
+      <p class="text-4xl text-white font-extrabold">Band <span class="font-light">Hub</span></p>
+    </header>
+
+    <main class="flex-1 md:self-center xl:flex xl:items-center md:w-2/3 xl:w-auto">
+      <div class="px-6 w-full xl:rounded-2xl xl:shadow-2xl xl:bg-white xl:grid xl:!grid-cols-[215px_450px] md:gap-5 md:overflow-hidden md:p-0">
+
+        <div class="login-box-image hidden xl:flex gap-2 flex-col justify-center items-center">
+          <img src="{{ asset('/images/brand-logo.png') }}" alt="BandHub logo" class="w-[94px]">
+          <p class="text-4xl text-white font-extrabold">Band <span class="font-light">Hub</span></p>
+          <p class="text-2xl text-white">Make it simple</p>
+        </div>
+
+        <div class="p-6 flex flex-col gap-6">
+
+          <div class="flex flex-col gap-2">
+            <h1 class="text-3xl font-bold">Bienvenue sur BandHub&nbsp;!</h1>
+            <p class="text-(--text-color)">
+              Pour accéder à l'application, vous devez appartenir à un groupe.
+              Commencez par en créer un — vous pourrez ensuite inviter vos musiciens à vous rejoindre.
+            </p>
+          </div>
+
+          <ul class="flex flex-col gap-3 text-sm text-(--text-color)">
+            <li class="flex gap-3 items-start">
+              <i class="icon icon-music-note icon-size-extra-small shrink-0 mt-0.5"></i>
+              <span>Gérez votre <strong>répertoire</strong> de morceaux</span>
+            </li>
+            <li class="flex gap-3 items-start">
+              <i class="icon icon-setlist icon-size-extra-small shrink-0 mt-0.5"></i>
+              <span>Créez et organisez vos <strong>setlists</strong></span>
+            </li>
+            <li class="flex gap-3 items-start">
+              <i class="icon icon-time icon-size-extra-small shrink-0 mt-0.5"></i>
+              <span>Suivez la <strong>progression</strong> de votre groupe</span>
+            </li>
+          </ul>
+
+          <hr class="border-(--color-border)">
+
+          {{ form_start(form) }}
+            {{ form_row(form.name) }}
+            <button type="submit" class="btn btn-primary w-full mt-2">Créer le groupe</button>
+          {{ form_end(form) }}
+
+          <div class="text-center border-t border-(--color-border) pt-4">
+            <a href="{{ path('app_logout') }}" class="link text-sm">Se déconnecter</a>
+          </div>
+
+        </div>
+      </div>
+    </main>
+  </div>
+{% endblock %}

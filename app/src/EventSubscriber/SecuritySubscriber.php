@@ -51,9 +51,8 @@ class SecuritySubscriber implements EventSubscriberInterface
 
     public function onKernelRequest(RequestEvent $event): void
     {
-        //Evite la gestion des sous requetes, on ne traite que la requete principale
         if (!$event->isMainRequest()) {
-        return;
+            return;
         }
 
         $this->checkUser($event);

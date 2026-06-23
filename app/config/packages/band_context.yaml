@@ -4,5 +4,6 @@ parameters:
             - app_login
             - app_register
             - app_band_create
+            - app_band_create_modal
         redirect_to: app_band_create
 

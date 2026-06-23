@@ -3,32 +3,26 @@
 
 namespace App\EventSubscriber;
 
-use App\Repository\BandRepository;
-use App\Repository\UserRepository;
 use App\Entity\User;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\BandRepository;
+use App\Service\CurrentBandResolver;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Http\Event\LoginSuccessEvent;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Bundle\SecurityBundle\Security;
-
-
 
 class SecuritySubscriber implements EventSubscriberInterface
 {
     public function __construct(
-        private BandRepository         $bandRepository,
-        private RequestStack           $requestStack,
-        private EntityManagerInterface $entityManager,
-        private Security               $security,
-        private RouterInterface        $router
-    )
-    {
-    }
+        private BandRepository     $bandRepository,
+        private CurrentBandResolver $bandResolver,
+        private Security           $security,
+        private RouterInterface    $router,
+    ) {}
+
 
     public static function getSubscribedEvents(): array
     {
@@ -58,32 +52,23 @@ class SecuritySubscriber implements EventSubscriberInterface
         $this->checkUser($event);
     }
 
-    // Cet evenement est déclenché par la classe Security de symfony lorsque le login est OK
     public function onLoginSuccess(LoginSuccessEvent $event): void
     {
         /** @var User $user */
         $user = $event->getUser();
 
-        // On recupere le dernier bandID du user
-        // (Le dernier band sur lequel le user a travaillé lors de sa derniere connexion)
-        $bandId = $user->getLastBandId();
-
-        // Si on n'a pas trouvé de BandID,
-        // on récupère le premier de la liste des bands du user, par défaut
-        if (!$bandId) {
+        $band = null;
+        $lastBandId = $user->getLastBandId();
+        if ($lastBandId) {
+            $band = $this->bandRepository->find($lastBandId);
+        }
+        if (!$band) {
             $band = $this->bandRepository->findFirstByUser($user);
-            if ($band) {
-                $bandId = $band->getId();
-            }
-        }
-        //$bandID est null si le user n'a pas de groupe
-        // si un band a bien été trouvé, on met a jour le user avec le LastBandID = BandID
-        if ($bandId) {
-            $this->requestStack->getSession()->set('current_band_id', $bandId);
-            $user->setLastBandId($bandId);
-            $this->entityManager->flush();
         }
 
+        if ($band) {
+            $this->bandResolver->switchTo($band, $user);
+        }
     }
 
 

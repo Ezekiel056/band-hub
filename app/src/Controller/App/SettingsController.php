@@ -7,6 +7,7 @@ use App\Entity\User;
 use App\Enum\AppMenuTabs;
 use App\Form\ChangePasswordType;
 use App\Form\ProfileType;
+use App\Service\CurrentBandResolver;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -55,7 +56,7 @@ final class SettingsController extends AppController
         ]);
     }
 
-    #[Route('/password', name: '_password', options: ['selected_tab' => AppMenuTabs::Settings], methods: ['POST'])]
+    #[Route('/password', name: '_password', methods: ['POST'])]
     public function changePassword(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $hasher): Response
     {
         /** @var User $user */
@@ -85,7 +86,7 @@ final class SettingsController extends AppController
     }
 
     #[Route('/switch/{id}', name: '_switch_band', methods: ['POST'])]
-    public function switchBand(Band $band, Request $request, EntityManagerInterface $entityManager): Response
+    public function switchBand(Band $band, CurrentBandResolver $bandResolver): Response
     {
         /** @var User $user */
         $user = $this->getUser();
@@ -93,9 +94,7 @@ final class SettingsController extends AppController
         $isMember = $user->getBandMembers()->exists(fn($_, $m) => $m->getBand() === $band);
 
         if ($isMember) {
-            $request->getSession()->set('current_band_id', $band->getId());
-            $user->setLastBandId($band->getId());
-            $entityManager->flush();
+            $bandResolver->switchTo($band, $user);
             $this->addFlash('success', 'Groupe changé : ' . $band->getName());
         }
 

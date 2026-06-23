@@ -5,6 +5,7 @@ namespace App\Service;
 use App\Entity\Band;
 use App\Entity\User;
 use App\Repository\BandRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\RequestStack;
 
@@ -14,6 +15,7 @@ class CurrentBandResolver
         private RequestStack $requestStack,
         private BandRepository $bandRepository,
         private Security $security,
+        private EntityManagerInterface $entityManager,
     ) {}
 
     public function resolve(): ?Band
@@ -39,5 +41,12 @@ class CurrentBandResolver
         )->first();
 
         return $member ? $member->getRoles() : [];
+    }
+
+    public function switchTo(Band $band, User $user): void
+    {
+        $this->requestStack->getSession()->set('current_band_id', $band->getId());
+        $user->setLastBandId($band->getId());
+        $this->entityManager->flush();
     }
 }

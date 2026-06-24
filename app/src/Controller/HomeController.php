@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Repository\ReviewRepository;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -10,7 +12,7 @@ final class HomeController extends AbstractController
 {
 
     #[Route('/', name: 'landing')]
-    public function index(): Response
+    public function index(ReviewRepository $reviewRepository, UserRepository $userRepository): Response
     {
         if ($this->getUser()) {
             return $this->redirectToRoute('app_home');
@@ -44,23 +46,16 @@ final class HomeController extends AbstractController
                 'text'=> 'Suivez les dépenses, les recettes et le budget du groupe en toute transparence.'
             ],
         ];
-        $testimonials = [
-            [
-                'avatar'=>'avatar_1.png',
-                'name'=>'Julian K.',
-                'text'=>'Cette application est juste géniale! Elle nous ...'
-            ],
-            [
-                'avatar'=>'avatar_2.png',
-                'name'=>'Sarah M.',
-                'text'=>'C\'est tellement devenu plus simple de s\'organiser ...'
-            ],
-            [
-                'avatar'=>'avatar_3.png',
-                'name'=>'Marc M.',
-                'text'=>'Fini les prises de tête pour planifier les répétitions ...'
-            ]
-        ];
+        $avatars = ['avatar_1.png', 'avatar_2.png', 'avatar_3.png'];
+        $testimonials = [];
+        foreach ($reviewRepository->findLatest(3) as $i => $review) {
+            $user = $userRepository->find($review->getUserId());
+            $testimonials[] = [
+                'avatar' => $avatars[$i % count($avatars)],
+                'name' => $user?->getUsername() ?? 'Utilisateur',
+                'text' => $review->getContent(),
+            ];
+        }
 
         return $this->render('home/index.html.twig', [
             'features' => $features,

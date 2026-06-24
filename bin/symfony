@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# Local override of the `symfony` binary for this project: runs `console`
+# inside the bandhub_php container (which has the mongodb extension),
+# falls back to the real symfony binary for everything else (serve, new, etc).
+if [ "$1" = "console" ]; then
+  shift
+  exec docker exec -it bandhub_php php bin/console "$@"
+fi
+exec /opt/homebrew/bin/symfony "$@"

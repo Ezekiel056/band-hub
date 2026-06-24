@@ -14,6 +14,13 @@ doctrine_mongodb:
                     dir: '%kernel.project_dir%/src/Document'
                     prefix: 'App\Document'
 
+when@dev:
+  doctrine_mongodb:
+    document_managers:
+      default:
+        profiler: false
+        logging: false
+
 when@prod:
     doctrine_mongodb:
         auto_generate_proxy_classes: false

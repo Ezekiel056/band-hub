@@ -175,7 +175,7 @@ label.required::after {
   cursor: pointer;
   transition: box-shadow 0.2s ease, transform 0.15s ease;
 
-  @apply rounded-3xl font-bold p-3;
+  @apply rounded-3xl font-bold py-3 px-5;
 
   &.btn-square {
     @apply rounded-lg;

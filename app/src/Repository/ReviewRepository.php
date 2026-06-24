@@ -25,4 +25,9 @@ class ReviewRepository extends ServiceDocumentRepository
             ->execute()
             ->toArray();
     }
+
+    public function findOneByUserId(int $userId): ?Review
+    {
+        return $this->findOneBy(['userId' => $userId]);
+    }
 }

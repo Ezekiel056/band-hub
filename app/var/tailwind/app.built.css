@@ -4928,7 +4928,8 @@ label.required::after {
   cursor: pointer;
   transition: box-shadow 0.2s ease, transform 0.15s ease;
   border-radius: var(--radius-3xl);
-  padding: calc(var(--spacing) * 3);
+  padding-inline: calc(var(--spacing) * 5);
+  padding-block: calc(var(--spacing) * 3);
   --tw-font-weight: var(--font-weight-bold);
   font-weight: var(--font-weight-bold);
   &.btn-square {

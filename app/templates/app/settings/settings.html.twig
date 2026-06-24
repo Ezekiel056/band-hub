@@ -37,7 +37,7 @@
         <li class="flex items-center gap-4 p-3 {{ band.id == currentBand.id ? 'bg-(--card-background-container)' : '' }}">
           <div class="flex flex-col flex-1 min-w-0">
             <p class="font-bold truncate">{{ band.name }}</p>
-            <p class="text-xs text-(--text-color)">{{ member.roles|join(', ') }}</p>
+{#            <p class="text-xs text-(--text-color)">{{ member.roles|join(', ') }}</p>#}
           </div>
           {% if band.id == currentBand.id %}
             <span class="text-xs text-(--text-color) font-bold">Actif</span>
@@ -54,6 +54,31 @@
               data-action="modal#open"
               data-modal-url-param="{{ path('app_band_create_modal') }}">
         Créer un nouveau groupe
+      </button>
+    </div>
+  </section>
+
+  {# Avis #}
+  <section class="card p-6 flex flex-col gap-6 xl:flex-row" aria-labelledby="heading-review">
+    <div class="flex flex-col gap-3 flex-auto">
+      <h2 id="heading-review" class="text-lg font-bold">Vous aimez BandHub, faites le savoir !</h2>
+      <p class="text-sm text-(--text-color)">
+        {{ hasReviewed ? 'Merci pour votre avis, vous pouvez le modifier à tout moment.' : 'Laissez un avis pour faire connaître BandHub.' }}
+      </p>
+    </div>
+
+    <div class="flex justify-end items-center gap-3">
+      <button type="button" class="btn btn-primary btn-danger {{ hasReviewed === false ? 'hidden' : 'block' }}"
+              data-action="confirm#open"
+              data-confirm-url-param="{{ path('app_review_delete') }}"
+              data-confirm-title-param="Supprimer mon avis ?"
+              data-confirm-message-param="Cette action est irréversible.">
+        Supprimer mon avis
+      </button>
+      <button type="button" class="btn btn-primary"
+              data-action="modal#open"
+              data-modal-url-param="{{ path('app_review_create') }}">
+        {{ hasReviewed ? 'Modifier mon avis' : 'Laisser un avis' }}
       </button>
     </div>
   </section>

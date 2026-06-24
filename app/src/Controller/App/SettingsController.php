@@ -7,9 +7,11 @@ use App\Entity\User;
 use App\Enum\AppMenuTabs;
 use App\Form\ChangePasswordType;
 use App\Form\ProfileType;
+use App\Repository\ReviewRepository;
 use App\Service\CurrentBandResolver;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
@@ -17,6 +19,14 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/app/settings', name: 'app_settings')]
 final class SettingsController extends AppController
 {
+    public function __construct(
+        private ReviewRepository $reviewRepository,
+        CurrentBandResolver $currentBandResolver,
+        RequestStack $requestStack,
+    ) {
+        parent::__construct($currentBandResolver, $requestStack);
+    }
+
     #[Route('', name: '', options: ['selected_tab' => AppMenuTabs::Settings], methods: ['GET'])]
     public function index(Request $request): Response
     {
@@ -31,10 +41,11 @@ final class SettingsController extends AppController
             'passwordForm' => $passwordForm,
             'pageTitle' => 'Paramètres',
             'bands' => $user->getBandMembers(),
+            'hasReviewed' => $this->reviewRepository->findOneByUserId($user->getId()) !== null,
         ]);
     }
 
-    #[Route('/profile', name: '_profile', options: ['selected_tab' => AppMenuTabs::Settings], methods: ['POST'])]
+    #[Route('/profile', name: '_profile', methods: ['POST'])]
     public function updateProfile(Request $request, EntityManagerInterface $entityManager): Response
     {
         /** @var User $user */
@@ -53,6 +64,7 @@ final class SettingsController extends AppController
             'passwordForm' => $this->createForm(ChangePasswordType::class),
             'pageTitle' => 'Paramètres',
             'bands' => $user->getBandMembers(),
+            'hasReviewed' => $this->reviewRepository->findOneByUserId($user->getId()) !== null,
         ]);
     }
 
@@ -82,6 +94,7 @@ final class SettingsController extends AppController
             'passwordForm' => $form,
             'pageTitle' => 'Paramètres',
             'bands' => $user->getBandMembers(),
+            'hasReviewed' => $this->reviewRepository->findOneByUserId($user->getId()) !== null,
         ]);
     }
 

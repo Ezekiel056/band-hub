@@ -1,7 +1,7 @@
 FROM php:8.4-apache
 
 RUN apt-get update \
-    && apt-get install -y zlib1g-dev g++ git libicu-dev libzip-dev libpng-dev libwebp-dev libjpeg-dev zip \
+    && apt-get install -y zlib1g-dev g++ git libicu-dev libzip-dev libpng-dev libwebp-dev libjpeg-dev zip libssl-dev \
     && docker-php-ext-install intl opcache pdo pdo_mysql \
     && pecl install apcu \
     && docker-php-ext-enable apcu \
@@ -9,7 +9,9 @@ RUN apt-get update \
     && docker-php-ext-install gd \
     && docker-php-ext-enable gd \
     && docker-php-ext-configure zip \
-    && docker-php-ext-install zip
+    && docker-php-ext-install zip \
+    && pecl install mongodb \
+    && docker-php-ext-enable mongodb
 
 RUN a2enmod rewrite && a2enmod ssl && a2enmod socache_shmcb
 

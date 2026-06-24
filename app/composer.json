@@ -9,6 +9,7 @@
         "ext-iconv": "*",
         "doctrine/doctrine-bundle": "^3.2",
         "doctrine/doctrine-migrations-bundle": "^4.0",
+        "doctrine/mongodb-odm-bundle": "^5.6",
         "doctrine/orm": "^3.6",
         "intervention/image-symfony": "^4.0",
         "phpdocumentor/reflection-docblock": "^6.0",
@@ -97,7 +98,8 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "8.0.*"
+            "require": "8.0.*",
+            "docker": false
         }
     },
     "require-dev": {

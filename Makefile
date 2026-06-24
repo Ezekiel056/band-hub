@@ -1,6 +1,9 @@
 docker-up:
 	docker compose --env-file app/.env.local up -d
 
+docker-up-build:
+	docker compose --env-file app/.env.local up -d --build
+
 docker-down:
 	docker compose --env-file app/.env.local down
 
@@ -21,3 +24,6 @@ tailwind:
 
 fixtures:
 	docker compose --env-file app/.env.local exec php php bin/console doctrine:fixtures:load --no-interaction
+
+install-mongodb:
+	docker compose --env-file app/.env.local exec php composer require doctrine/mongodb-odm-bundle

@@ -2316,9 +2316,6 @@
   .bg-\[\#fbf0df\] {
     background-color: #fbf0df;
   }
-  .bg-red-500 {
-    background-color: var(--color-red-500);
-  }
   .bg-transparent {
     background-color: transparent;
   }
@@ -2700,9 +2697,6 @@
   }
   .p-8 {
     padding: calc(var(--spacing) * 8);
-  }
-  .p-12 {
-    padding: calc(var(--spacing) * 12);
   }
   .\!px-8 {
     padding-inline: calc(var(--spacing) * 8) !important;
@@ -4884,6 +4878,23 @@ label.required::after {
   }
   &.toast-error {
     background: var(--color-error);
+  }
+  &.toast-center {
+    position: absolute;
+    bottom: auto;
+    right: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 22rem;
+    text-align: center;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    &.toast-hidden {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.95);
+      pointer-events: none;
+    }
   }
 }
 .labeled-input {

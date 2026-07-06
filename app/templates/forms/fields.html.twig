@@ -21,6 +21,16 @@
 {% endblock %}
 
 
+{% block checkbox_row %}
+  <div class="flex flex-col gap-1">
+    <div class="flex items-start gap-2">
+      {{ form_widget(form) }}
+      {{ form_label(form, null, { label_attr: { class: ('cursor-pointer ' ~ (label_attr.class|default('')))|trim } }) }}
+    </div>
+    {{ form_errors(form) }}
+  </div>
+{% endblock %}
+
 {# Defintion de la mise en forme des erreurs #}
 {% block form_errors %}
     {% if errors|length > 0 %}

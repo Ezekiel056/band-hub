@@ -37,9 +37,11 @@ class RegistrationFormType extends AbstractType
             ])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
+                'label' => 'J\'accepte que mes données personnelles (adresse email, nom d\'utilisateur) soient collectées et traitées par BandHub afin de gérer mon compte, conformément au <a href="#" class="link">Règlement Général sur la Protection des Données (RGPD)</a>. Je peux exercer mes droits d\'accès, de rectification et de suppression en contactant l\'administrateur.',
+                'label_html' => true,
                 'constraints' => [
                     new IsTrue(
-                        message: 'Veuillez accepter les conditions d\'utilisation.',
+                        message: 'Vous devez accepter la politique de confidentialité pour créer un compte.',
                     ),
                 ],
             ])

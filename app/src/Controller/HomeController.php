@@ -2,14 +2,21 @@
 
 namespace App\Controller;
 
+use App\Controller\App\AppController;
 use App\Repository\ReviewRepository;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-final class HomeController extends AbstractController
+final class HomeController extends appController
 {
+
+    #[Route('/politique-de-confidentialite', name: 'rgpd')]
+    public function rgpd(): Response
+    {
+        return $this->render('home/rgpd/index.html.twig');
+    }
 
     #[Route('/', name: 'landing')]
     public function index(ReviewRepository $reviewRepository, UserRepository $userRepository): Response

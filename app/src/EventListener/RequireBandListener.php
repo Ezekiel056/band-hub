@@ -37,7 +37,7 @@ class RequireBandListener implements EventSubscriberInterface
         $bandContext = $this->parameterBag->get('band_context');
         // On intercepte uniquement les routes app_ concernées.
         // Par défaut, toutes les routes app_ mais on peu définir des exclusions dans le fichier
-        // config/band_context.yaml
+        // config/packages/band_context.yaml
 
         if (!str_starts_with($route ?? '', 'app_') || in_array($route, $bandContext['excluded_routes'])) {
             return; // cette route n'est pas concernée, on quitte et on laisse le traitement se poursuivre.

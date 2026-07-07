@@ -27,7 +27,7 @@ final class BandController extends AppController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->persistBand($band, $user, $entityManager, $bandResolver);
+            $this->createBand($band, $user, $entityManager, $bandResolver);
             return $this->redirectToRoute('app_home');
         }
 

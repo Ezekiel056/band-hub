@@ -9,8 +9,10 @@
   <div class="flex flex-col w-full gap-7 md:gap-4 md:h-dvh xl:justify-center xl:items-center" >
 
     <header class="flex flex-col items-center justify-center gap-3 w-full text-center py-18 md:py-8 xl:hidden">
-      <img src="{{ asset('/images/brand-logo.png') }}" alt="BandHub logo" class="w-[94px]">
-      <p class="text-4xl text-white font-extrabold">Band <span class="font-light">Hub</span></p>
+      <a href="{{ path('landing') }}" class="flex flex-col items-center gap-3">
+        <img src="{{ asset('/images/brand-logo.png') }}" alt="BandHub logo" class="w-[94px]">
+        <p class="text-4xl text-white font-extrabold">Band <span class="font-light">Hub</span></p>
+      </a>
       <h1 class="text-white text-xl ">Make it simple</h1>
     </header>
 
@@ -18,8 +20,10 @@
       <div class="px-6 w-full xl:rounded-2xl xl:shadow-2xl xl:bg-white xl:grid xl:!grid-cols-[215px_450px] md:gap-5 md:overflow-hidden md:p-0">
 
         <div class="login-box-image hidden xl:flex gap-2 flex-col justify-center items-center ">
-          <img src="{{ asset('/images/brand-logo.png') }}" alt="BandHub logo" class="w-[94px]">
-          <p class="text-4xl text-white font-extrabold">Band <span class="font-light">Hub</span></p>
+          <a href="{{ path('landing') }}" class="flex flex-col items-center gap-2">
+            <img src="{{ asset('/images/brand-logo.png') }}" alt="BandHub logo" class="w-[94px]">
+            <p class="text-4xl text-white font-extrabold">Band <span class="font-light">Hub</span></p>
+          </a>
           <p class="text-2xl text-white">Make it simple</p>
         </div>
 

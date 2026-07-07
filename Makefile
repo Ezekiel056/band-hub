@@ -1,3 +1,6 @@
+docker-config:
+	docker compose --env-file app/.env.local config
+
 docker-up:
 	docker compose --env-file app/.env.local up -d
 

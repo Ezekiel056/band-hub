@@ -43,12 +43,11 @@ services:
   mongodb:
     image: mongo:latest
     container_name: ${COMPOSE_PROJECT_NAME}_mongodb
-    ports:
-      - 27017:27017
     environment:
       MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER}
       MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
-
+    expose:
+      - 27017
     volumes:
       - ./database/mongodb:/data/db
     healthcheck:
@@ -89,7 +88,7 @@ services:
     container_name: ${COMPOSE_PROJECT_NAME}_dbgate
     restart: always
     ports:
-      - 8082:3000
+      - "${DBGATE_PORT:-8082}:3000"
     volumes:
       - dbgate-data:/root/.dbgate
     environment:

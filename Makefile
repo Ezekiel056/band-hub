@@ -19,6 +19,12 @@ logs:
 migration:
 	docker compose --env-file app/.env.local exec php bash -c "php bin/console make:migration"
 
+entity:
+	docker compose --env-file app/.env.local exec php bash -c "php bin/console make:entity"
+
+test:
+	docker compose --env-file app/.env.local exec php bash -c "php bin/console make:test"
+
 migrate:
 	docker compose --env-file app/.env.local exec php bash -c "php bin/console doctrine:migrations:migrate --no-interaction"
 
@@ -30,3 +36,6 @@ fixtures:
 
 install-mongodb:
 	docker compose --env-file app/.env.local exec php composer require doctrine/mongodb-odm-bundle
+
+run-tests:
+	docker compose --env-file app/.env.local exec php bin/phpunit

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Security;
+namespace App\Tests\TestCase\Security;
 
 use App\Entity\User;
 use App\Security\UserChecker;

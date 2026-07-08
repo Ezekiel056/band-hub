@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Controller\App;
+namespace App\Tests\WebTestCase\Controller\App;
 
 use App\DataFixtures\AppFixtures;
 use App\Entity\Band;

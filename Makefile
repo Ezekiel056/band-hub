@@ -39,3 +39,9 @@ install-mongodb:
 
 run-tests:
 	docker compose --env-file app/.env.local exec php bin/phpunit
+
+run-tests-unit:
+	docker compose --env-file app/.env.local exec php bin/phpunit tests/TestCase
+
+run-tests-fonctionnal:
+	docker compose --env-file app/.env.local exec php bin/phpunit tests/WebTestCase

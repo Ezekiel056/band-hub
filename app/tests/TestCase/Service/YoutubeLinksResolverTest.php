@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Tests\Service;
+namespace App\Tests\TestCase\Service;
 
-use PHPUnit\Framework\TestCase;
 use App\Service\YoutubeLinksResolver;
+use PHPUnit\Framework\TestCase;
 
 class YoutubeLinksResolverTest extends TestCase
 {

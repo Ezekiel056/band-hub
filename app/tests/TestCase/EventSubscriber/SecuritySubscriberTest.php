@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\EventSubscriber;
+namespace App\Tests\TestCase\EventSubscriber;
 
 use App\Entity\Band;
 use App\Entity\User;

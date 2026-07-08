@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Security\Voter;
+namespace App\Tests\TestCase\Security\Voter;
 
 use App\Entity\Band;
 use App\Entity\SetlistModel;

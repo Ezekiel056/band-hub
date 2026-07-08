@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Controller;
+namespace App\Tests\WebTestCase\Controller;
 
 use App\DataFixtures\AppFixtures;
 use App\Entity\User;

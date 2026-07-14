@@ -97,4 +97,12 @@ export default class extends Controller {
     const s = Math.floor(seconds % 60).toString().padStart(2, '0');
     return `${m}:${s}`;
   }
+
+  // Coupe la lecture quand on
+  disconnect() {
+    if (this.audio) {
+      this.audio.pause();
+    }
+  }
+
 }

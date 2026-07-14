@@ -24,7 +24,7 @@ class UserCheckerTest extends TestCase
 
         $this->checker->checkPreAuth($user);
 
-        $this->addToAssertionCount(1); // no exception thrown
+        $this->addToAssertionCount(1);
     }
 
     public function testCheckPreAuthAllowsActiveUser(): void
@@ -34,7 +34,7 @@ class UserCheckerTest extends TestCase
 
         $this->checker->checkPreAuth($user);
 
-        $this->addToAssertionCount(1); // no exception thrown
+        $this->addToAssertionCount(1);
     }
 
     public function testCheckPreAuthThrowsForInactiveUser(): void
